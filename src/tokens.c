@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 22:46:27 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/26 23:53:39 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/27 01:08:54 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token_node	*create_token_node(char *token)
 	new_node = (t_token_node *)gc_malloc(sizeof(t_token_node));
 	if (!new_node)
 		return (NULL);
-	new_node->token = ft_strdup(token);
+	new_node->token = ft_strdup(token); // THIS LEAKS BECAUSE NO GC_MALLOCCCCC
 	if (!new_node->token)
 	{
 		free(new_node);

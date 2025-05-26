@@ -1,0 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   garbage_collector.h                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 00:00:00 by fredchar          #+#    #+#             */
+/*   Updated: 2025/05/26 23:49:55 by fredchar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GARBAGE_COLLECTOR_H
+# define GARBAGE_COLLECTOR_H
+
+# include <stdlib.h>
+
+/**
+ * Structure for tracking allocated memory
+ */
+typedef struct s_garbage_node
+{
+	void					*ptr;
+	struct s_garbage_node	*next;
+}	t_garbage_node;
+
+/**
+ * Allocate memory and track it for automatic cleanup
+ * @param size Size of memory to allocate
+ * @return Pointer to allocated memory or NULL on failure
+ */
+void	*gc_malloc(size_t size);
+
+/**
+ * Free a specific pointer from the garbage collection list
+ * @param ptr Pointer to free
+ * @return 1 if freed, 0 if not found
+ */
+int		gc_free(void *ptr);
+
+/**
+ * Free all allocated memory in the garbage collection list
+ */
+void	gc_free_all(void);
+
+#endif

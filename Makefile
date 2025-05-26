@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/05/26 17:47:07 by fredchar         ###   ########.fr        #
+#    Updated: 2025/05/26 23:48:03 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ RED := \033[0;31m
 NC := \033[0m # No Color
 
 SRCS :=			$(SRCD)/main.c \
-				$(SRCD)/execute.c \
-				$(SRCD)/utils.c \
+				$(SRCD)/tokens.c \
+				$(SRCD)/garbage.c \
 
 OBJS := $(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 
@@ -46,7 +46,7 @@ $(OBJD):
 	mkdir -p $(OBJD)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	$(CC) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
 	@printf "$(GREEN)Executable $(NAME) built successfully!$(NC)\n"
 
 clean:

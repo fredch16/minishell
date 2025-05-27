@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:39:48 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/26 23:50:41 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:49:43 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ void	*gc_malloc(size_t size)
 	new_node->next = gc_list;
 	gc_list = new_node;
 	return (ptr);
+}
+
+int	gc_track(void *ptr)
+{
+	t_garbage_node	*new_node;
+
+	if (!ptr)
+		return (0);
+	new_node = malloc(sizeof(t_garbage_node));
+	if (!new_node)
+		return (0);
+	new_node->ptr = ptr;
+	new_node->next = gc_list;
+	gc_list = new_node;
+	return (1);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 00:00:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/26 23:49:55 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:43:11 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,13 @@ int		gc_free(void *ptr);
  * Free all allocated memory in the garbage collection list
  */
 void	gc_free_all(void);
+
+
+/**
+ * Track an externally allocated pointer in the garbage collection list
+ * @param ptr Pointer to track
+ * @return 1 on success, 0 on failure
+ */
+int	gc_track(void *ptr);
 
 #endif

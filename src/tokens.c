@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 22:46:27 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/27 01:08:54 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:42:39 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_token_list	*init_token_list(void)
  * @param token String content for the token
  * @return Pointer to the newly created node or NULL if allocation fails
  */
+
 t_token_node	*create_token_node(char *token)
 {
 	t_token_node	*new_node;
@@ -42,6 +43,7 @@ t_token_node	*create_token_node(char *token)
 	if (!new_node)
 		return (NULL);
 	new_node->token = ft_strdup(token); // THIS LEAKS BECAUSE NO GC_MALLOCCCCC
+	gc_track(new_node->token);
 	if (!new_node->token)
 	{
 		free(new_node);
@@ -77,6 +79,7 @@ void	add_token_to_list(t_token_list *list, t_token_node *node)
  * Free all resources allocated for the token list
  * @param list The token list to free
  */
+
 void	free_token_list(t_token_list *list)
 {
 	t_token_node	*current;

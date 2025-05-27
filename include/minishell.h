@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:47:25 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/26 23:54:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:24:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,31 @@ typedef enum e_redir_type
 	REDIR_HEREDOC          /* << */
 }	t_redir_type;
 
+typedef enum e_cmd_type
+{
+	BUILTIN,
+	STDCMD
+}	t_cmd_type;
+
+typedef enum e_token_type
+{
+	TK_WORD = 1,
+	TK_PIPE,
+	TK_INFILE,
+	TK_OUTFILE,
+	TK_REDIR_IN,
+	TK_REDIR_OUT,
+	TK_REDIR_APPEND,
+	TK_REDIR_HEREDOC,
+	TK_BUILTIN,
+	TK_D_QUOTES,
+	TK_S_QUOTES
+}	t_token_type;
+
 typedef struct s_token_node
 {
 	char				*token;
+	t_token_type		type;
 	struct s_token_node	*next;
 }	t_token_node;
 
@@ -45,13 +67,14 @@ typedef struct s_token_list
 {
 	t_token_node	*head;
 	t_token_node	*tail;
+	char			*input;
 	size_t			size;
 }	t_token_list;
 
 typedef struct s_file_node
 {
 	t_redir_type		redir_type;
-	char				*file_name;
+	char				*filename;
 	struct s_file_node	*next;
 }	t_file_node;
 
@@ -64,9 +87,9 @@ typedef struct s_file_list
 
 typedef struct s_cmd_node
 {
-	int					cmd_type;
+	t_cmd_type			cmd_type;
 	char				**cmd;
-	t_file_list			*file_list;
+	t_file_list			*files;
 	struct s_cmd_node	*next;
 }	t_cmd_node;
 

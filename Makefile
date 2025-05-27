@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/05/26 23:48:03 by fredchar         ###   ########.fr        #
+#    Updated: 2025/05/27 14:26:05 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ NC := \033[0m # No Color
 SRCS :=			$(SRCD)/main.c \
 				$(SRCD)/tokens.c \
 				$(SRCD)/garbage.c \
+				$(SRCD)/debug.c \
 
 OBJS := $(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 

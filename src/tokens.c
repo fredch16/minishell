@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 22:46:27 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/27 13:42:39 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:53:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,16 @@ void	free_token_list(t_token_list *list)
 }
 
 /**
+ * Iterates through the token list and determines what type of token it is
+ * @param token_list The list already filled with char tokens
+ */
+
+void	assign_token_types(t_token_list *token_list)
+{
+
+}
+
+/**
  * Tokenize the input line into a linked list of tokens
  * @param token_list The list to populate with tokens
  * @param line The input line to tokenize
@@ -111,6 +121,8 @@ int	tokenise(t_token_list *token_list, char *line)
 	int		i;
 	t_token_node *new_node;
 
+	token_list->input = ft_strdup(line);
+	gc_track(token_list->input);
 	if (!token_list || !line)
 		return (-1);
 	tokens = ft_split(line, ' ');
@@ -131,6 +143,7 @@ int	tokenise(t_token_list *token_list, char *line)
 		add_token_to_list(token_list, new_node);
 		i++;
 	}
+	assign_token_types(token_list);
 	// Free the array of strings but not the individual strings
 	// as those are now copied into our token nodes
 	i = 0;
@@ -138,25 +151,4 @@ int	tokenise(t_token_list *token_list, char *line)
 		free(tokens[i++]);
 	free(tokens);
 	return (0);
-}
-
-/**
- * Print all tokens in the token list (for debugging)
- * @param list The token list to print
- */
-void	print_tokens(t_token_list *list)
-{
-	t_token_node	*current;
-	int				i;
-
-	if (!list)
-		return ;
-	current = list->head;
-	i = 0;
-	while (current)
-	{
-		printf("Token %d: '%s'\n", i++, current->token);
-		current = current->next;
-	}
-	printf("Total tokens: %zu\n", list->size);
 }

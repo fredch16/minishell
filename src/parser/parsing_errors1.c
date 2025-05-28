@@ -6,39 +6,36 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:52:31 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/28 02:10:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:52:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-bool handle_error(t_tokenizer_state *state)
+bool	handle_unclosed(t_tokenizer_state *state)
 {
-	char c = state->input[state->pos];
 	// Check for unclosed quotes at end of input
 	if (state->quote_state != UNQUOTED && state->pos >= state->len - 1)
 	{
 		if (state->quote_state == SINGLE_QUOTED)
+		{
 			printf("minishell: syntax error: unclosed single quote\n");
+			return (true);
+		}
 		else if (state->quote_state == DOUBLE_QUOTED)
+		{
 			printf("minishell: syntax error: unclosed double quote\n");
-		return false;
+			return (true);
+		}
 	}
-	// Handle unexpected characters
-	if (c == '\0')
-	{
-		printf("minishell: unexpected null character at position %zu\n", state->pos);
-		return false;
-	}
-	// For any other unexpected character, treat as part of a word
-	// This is more forgiving and matches bash behavior
-	printf("minishell: warning: unexpected character '%c' at position %zu, treating as literal\n", 
-		c, state->pos);
-	// Try to extract it as a single character word token
-	char single_char[2] = {c, '\0'};
-	add_token(state->token_list, single_char, TK_WORD);
-	state->pos++;
-	return true; // Continue processing
+	return (false);
+}
+
+bool handle_error(t_tokenizer_state *state)
+{
+	if (handle_unclosed(state) == true)
+		return (true);
+	return (false);
 }
 
 /* ALTERNATIVE: More strict error handling */

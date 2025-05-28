@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 22:46:27 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/28 00:24:39 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:56:01 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ t_token_list *tokenize_input(char *input)
 		if (extract_word_token(&state))
 			continue;
 		// If we get here, there's an unexpected character
-		handle_error(&state);
 	}
+	if (handle_error(&state) == true)
+		return (NULL);
 	
 	return state.token_list;
 }

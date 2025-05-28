@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:47:25 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/27 14:24:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:44:04 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stddef.h>
 # include "libft/libft.h"
 # include "garbage_collector.h"
+# include <stdbool.h>
 
 // remember ECHo and echo is the same, same for all builtins
 
@@ -26,6 +27,7 @@
 struct s_cmd_node;
 struct s_file_node;
 struct s_token_node;
+
 
 typedef enum e_redir_type
 {
@@ -44,6 +46,7 @@ typedef enum e_cmd_type
 typedef enum e_token_type
 {
 	TK_WORD = 1,
+	TK_CMD,
 	TK_PIPE,
 	TK_INFILE,
 	TK_OUTFILE,
@@ -100,12 +103,34 @@ typedef struct s_cmd_list
 	size_t		size;
 }	t_cmd_list;
 
+//TEMP-----------------------------------------------
+
+typedef enum e_quote_state
+{
+    UNQUOTED,
+    SINGLE_QUOTED,
+    DOUBLE_QUOTED
+} t_quote_state;
+
+typedef struct s_tokenizer_state
+{
+    char            *input;
+    size_t          pos;
+    size_t          len;
+    t_quote_state   quote_state;
+    t_token_list    *token_list;
+} t_tokenizer_state;
+
+t_token_list *tokenize_input(char *input);
+
+// END OF TEMP---------------------------------------
+
 /* Token functions */
-t_token_list	*init_token_list(void);
-t_token_node	*create_token_node(char *token);
-void			add_token_to_list(t_token_list *list, t_token_node *node);
-void			free_token_list(t_token_list *list);
-int				tokenise(t_token_list *token_list, char *line);
+// t_token_list	*init_token_list(void);
+// t_token_node	*create_token_node(char *token);
+// void			add_token_to_list(t_token_list *list, t_token_node *node);
+// void			free_token_list(t_token_list *list);
+// int				tokenise(t_token_list *token_list, char *line);
 void			print_tokens(t_token_list *list);
 
 #endif

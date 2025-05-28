@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/27 14:25:38 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:41:19 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int	main(void)
 			gc_free_all();
 			break;
 		}
-		token_list = init_token_list();
-		if (token_list && tokenise(token_list, line) == 0)
+		token_list = tokenize_input(line);
+		// if (token_list && tokenise(token_list, line) == 0)
+		if (token_list)
 			print_tokens(token_list);
 		free(line);
 		gc_free_all();  // Clear all allocated memory after each command

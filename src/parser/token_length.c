@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:36:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/29 18:00:17 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:59:33 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_single_char_len(char c)
 {
-	return (ft_strchr("|<>()", c) != NULL);
+	return (ft_strchr("|<>", c) != NULL);
 }
 
 static int	get_quote_len(char *cmd_line)
@@ -36,7 +36,7 @@ static int	get_quote_len(char *cmd_line)
 
 static int	get_double_char_len(char *cmd_line)
 {
-	const char	*symbols[] = {"&&", "||", "<<", ">>", NULL};
+	const char	*symbols[] = {"<<", ">>", NULL};
 	int			len;
 
 	len = 0;

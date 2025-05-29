@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/05/29 16:01:13 by fredchar         ###   ########.fr        #
+#    Updated: 2025/05/29 19:34:39 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,7 @@ NC := \033[0m # No Color
 
 SRCS := $(SRCD)/main.c \
 		$(SRCD)/parser/tokens.c \
-		$(SRCD)/parser/quotes1.c \
-		$(SRCD)/parser/token_post_processing.c \
 		$(SRCD)/parser/token_linked_list.c \
-		$(SRCD)/parser/parsing_errors1.c \
 		$(SRCD)/parser/parsing_utils1.c \
 		$(SRCD)/parser/token_types.c \
 		$(SRCD)/parser/token_length.c \

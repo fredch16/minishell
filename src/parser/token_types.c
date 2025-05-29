@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:53:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/29 17:56:47 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:45:30 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,27 @@ t_token_type	token_type_two_symbols(char *content)
 	return (TK_CMD);
 }
 
+t_token_type	token_type_builtin(char *content, int token_length)
+{
+	const char	*builtins[] = {"echo", "cd", "pwd", "export", "unset",
+		"env", "exit", NULL};
+	int			i;
+
+	i = 0;
+	while (builtins[i])
+	{
+		if (ft_strncmp(content, builtins[i], token_length) == 0)
+			return (TK_BUILTIN);
+		i++;
+	}
+	return (TK_CMD);
+}
+
 t_token_type	set_type(char *content, int token_length)
 {
 	t_token_type	type;
 
-	type = TK_CMD;
+	type = token_type_builtin(content, token_length);
 	if (token_length == 1)
 		type = token_type_one_symbol(content);
 	else if (token_length == 2)

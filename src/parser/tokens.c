@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 22:46:27 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/29 17:57:23 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:33:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ t_token_list *tokenize_input(char *input)
 		token_add_back(token_list, token);
 		input += token->length;
 	}
-	// if (handle_error(&state) == true)
-	// 	return (NULL);
 	
 	return (token_list);
 }

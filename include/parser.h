@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:49:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/29 17:16:05 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:01:41 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			token_add_back(t_token_list *token_list, t_token_node *new_token);
 
 // token_length.c
 
-size_t			set_token_length(t_tokenizer_state *state);
+int			set_token_length(char *cmd_line);
 
 // token_types.c
 

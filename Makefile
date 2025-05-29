@@ -26,11 +26,11 @@ RED := \033[0;31m
 NC := \033[0m # No Color
 
 SRCS := $(SRCD)/main.c \
-		$(SRCD)/parser/tokens.c \
-		$(SRCD)/parser/token_linked_list.c \
-		$(SRCD)/parser/parsing_utils1.c \
-		$(SRCD)/parser/token_types.c \
-		$(SRCD)/parser/token_length.c \
+		$(SRCD)/lexical_analysis/_lexical_analysis.c \
+		$(SRCD)/lexical_analysis/token_linked_list.c \
+		$(SRCD)/lexical_analysis/parsing_utils1.c \
+		$(SRCD)/lexical_analysis/token_types.c \
+		$(SRCD)/lexical_analysis/token_length.c \
 		$(SRCD)/garbage.c \
 		$(SRCD)/debug.c \
 

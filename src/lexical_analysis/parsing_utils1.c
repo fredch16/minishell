@@ -12,23 +12,44 @@
 
 #include "../../include/parser.h"
 
-void	skip_whitespace(t_tokenizer_state *state)
-{
-	while (state->pos < state->len
-		&& is_whitespace(state->input[state->pos]))
-		state->pos++;
-}
 
+/**
+ * @brief Checks if a character is a whitespace
+ *
+ * Determines if the given character is a space, tab, or newline.
+ *
+ * @param c The character to check
+ * @return true if the character is a whitespace character, false otherwise
+ */
 bool	is_whitespace(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n');
 }
 
+/**
+ * @brief Checks if a character is a shell operator
+ *
+ * Determines if the given character is a pipe ('|') or a redirection
+ * operator ('<', '>')
+ *
+ * @param c The character to check
+ * @return true if the character is an operator, false otherwise
+ */
 bool	is_operator_char(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
 }
 
+/**
+ * @brief Checks if a token string is a shell builtin command
+ *
+ * Compares the given token against a list of known shell builtins
+ * (echo, cd, pwd, export, unset, env, exit) to determine if it's
+ * a builtin command.
+ *
+ * @param token The token string to check
+ * @return true if the token is a builtin command, false otherwise
+ */
 bool	is_builtin(char *token)
 {
 	static char	*builtins[] = {"echo", "cd", "pwd", "export",

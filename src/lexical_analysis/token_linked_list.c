@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/29 17:27:17 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:08:37 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_token_list *init_token_list(char *input)
 		return NULL;
 	list->head = NULL;
 	list->tail = NULL;
-	list->input = strdup(input); // Store copy of original input
+	list->input = ft_strdup(input); // Store copy of original input
 	gc_track(list->input);
 	if (!list->input)
 	{

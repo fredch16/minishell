@@ -6,42 +6,28 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:49:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/29 18:01:41 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:03:29 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "minishell.h"
+# include "struct.h"
+# include <stdbool.h>
 
 // BTW ALL OF THESE ARE IN ROOT/SRC/PARSER/
 
 // parsing_utils1.c
 
-void			skip_whitespace(t_tokenizer_state *state);
 bool			is_whitespace(char c);
 bool			is_operator_char(char c);
 bool			is_builtin(char *token);
 
-// parsing_errors.c
-
-bool			handle_error(t_tokenizer_state *state);
-bool 			handle_error_strict(t_tokenizer_state *state);
-
-// tokens.c
+// _lexical_analysis.c
 
 bool			add_token(t_token_list *list, char *token_str, t_token_type type);
-
-// quotes1.c
-
-size_t			find_quote_start(t_tokenizer_state *state, char quote_char);
-bool			handle_quote_transition(t_tokenizer_state *state, char c, bool *has_quotes, t_token_type *quote_type);
-
-// token_extracts.c
-
-bool			try_extract_operator(t_tokenizer_state *state);
-bool			extract_word_token(t_tokenizer_state *state);
+void			tokenize_input(t_token_list *token_list, char *input);
 
 // token_post_processing.c
 

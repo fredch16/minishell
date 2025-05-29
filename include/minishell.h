@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:47:25 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/28 00:44:04 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:03:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ typedef enum e_token_type
 
 typedef struct s_token_node
 {
-	char				*token;
-	t_token_type		type;
+	char			*content;
+	t_token_type	type;
+	size_t			length;
 	struct s_token_node	*next;
 }	t_token_node;
 
@@ -107,18 +108,19 @@ typedef struct s_cmd_list
 
 typedef enum e_quote_state
 {
-    UNQUOTED,
-    SINGLE_QUOTED,
-    DOUBLE_QUOTED
+	UNQUOTED,
+	SINGLE_QUOTED,
+	DOUBLE_QUOTED
 } t_quote_state;
 
 typedef struct s_tokenizer_state
 {
-    char            *input;
-    size_t          pos;
-    size_t          len;
-    t_quote_state   quote_state;
-    t_token_list    *token_list;
+	char			*input;
+	size_t			pos;
+	size_t			len;
+	char			quote_type;
+	t_quote_state	quote_state;
+	t_token_list	*token_list;
 } t_tokenizer_state;
 
 t_token_list *tokenize_input(char *input);

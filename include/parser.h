@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:49:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/28 18:53:38 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:16:05 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,15 @@ t_token_type	determine_token_type(char *token, bool has_quotes, t_token_type quo
 t_token_list	*init_token_list(char *input);
 bool			add_token(t_token_list *list, char *token_str, t_token_type type);
 void			free_token_list(t_token_list *list);
+t_token_node	*new_token(void);
+void			token_add_back(t_token_list *token_list, t_token_node *new_token);
+
+// token_length.c
+
+size_t			set_token_length(t_tokenizer_state *state);
+
+// token_types.c
+
+t_token_type	set_type(char *content, int token_length);
 
 #endif

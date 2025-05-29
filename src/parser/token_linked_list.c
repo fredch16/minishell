@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/28 02:07:00 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:27:17 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,36 +32,31 @@ t_token_list *init_token_list(char *input)
 	return (list);
 }
 
-bool add_token(t_token_list *list, char *token_str, t_token_type type)
+t_token_node	*new_token(void)
 {
-	t_token_node *new_node;
-	
-	if (!list || !token_str)
-		return false;
-	new_node = gc_malloc(sizeof(t_token_node));
-	if (!new_node)
-		return false;
-	new_node->token = strdup(token_str);
-	gc_track(new_node->token);
-	if (!new_node->token)
+	t_token_node	*new_token;
+
+	new_token = (t_token_node *)ft_calloc(1, sizeof(t_token_node));
+	if (new_token == NULL)
+		return (perror("New token failed to malloc\n"), NULL);
+	gc_track(new_token);
+	return (new_token);
+}
+
+void	token_add_back(t_token_list *token_list, t_token_node *new_token)
+{
+	if (token_list->head == NULL)
 	{
-		gc_free(new_node);
-		return false;
-	}
-	new_node->type = type;
-	new_node->next = NULL;
-	if (list->head == NULL)
-	{
-		list->head = new_node;
-		list->tail = new_node;
+		token_list->head = new_token;
+		token_list->tail = new_token;
+		token_list->size = 1;
 	}
 	else
 	{
-		list->tail->next = new_node;
-		list->tail = new_node;
+		token_list->tail->next = new_token;
+		token_list->tail = new_token;
+		token_list->size++;
 	}
-	list->size++;
-	return true;
 }
 
 /* UTILITY: Free token list */
@@ -76,7 +71,7 @@ void free_token_list(t_token_list *list)
 	while (current)
 	{
 		next = current->next;
-		gc_free(current->token);
+		gc_free(current->content);
 		gc_free(current);
 		current = next;
 	}

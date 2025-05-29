@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:52:31 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/28 18:52:15 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:57:14 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	handle_unclosed(t_tokenizer_state *state)
 {
 	// Check for unclosed quotes at end of input
-	if (state->quote_state != UNQUOTED && state->pos >= state->len - 1)
+	if (state->quote_state != UNQUOTED)
 	{
 		if (state->quote_state == SINGLE_QUOTED)
 		{

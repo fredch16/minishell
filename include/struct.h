@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:19:26 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:53:17 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,22 @@ typedef	struct s_mini
 	t_token_list	*token_list;
 	t_env_list		*env_list;
 }	t_mini;
+
+/**
+ * Structure for tracking allocated memory
+ */
+typedef enum e_gc_type
+{
+	GC_PARSE,
+	GC_ENV,
+	GC_OTHER
+}	t_gc_type;
+
+typedef struct s_garbage_node
+{
+	void					*ptr;
+	t_gc_type				type;
+	struct s_garbage_node	*next;
+}	t_garbage_node;
 
 #endif

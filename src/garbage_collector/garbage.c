@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:39:48 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:21:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:52:10 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	t_garbage_node *gc_list = NULL;
  * @param size Size of memory to allocate
  * @return Pointer to allocated memory or NULL on failure
  */
-void	*gc_malloc(size_t size)
+void	*gc_malloc(size_t size, t_gc_type type)
 {
 	void			*ptr;
 	t_garbage_node	*new_node;
@@ -35,11 +35,12 @@ void	*gc_malloc(size_t size)
 	}
 	new_node->ptr = ptr;
 	new_node->next = gc_list;
+	new_node->type = type;
 	gc_list = new_node;
 	return (ptr);
 }
 
-int	gc_track(void *ptr)
+int	gc_track(void *ptr, t_gc_type type)
 {
 	t_garbage_node	*new_node;
 
@@ -50,6 +51,7 @@ int	gc_track(void *ptr)
 		return (0);
 	new_node->ptr = ptr;
 	new_node->next = gc_list;
+	new_node->type = type;
 	gc_list = new_node;
 	return (1);
 }
@@ -106,4 +108,31 @@ void	gc_free_all(void)
 		free(tmp);
 	}
 	gc_list = NULL;  // Ensure we reset the list to empty
+}
+
+void	gc_free_by_type(t_gc_type type)
+{
+	t_garbage_node	*current = gc_list;
+	t_garbage_node	*prev = NULL;
+	t_garbage_node	*tmp;
+
+	while (current)
+	{
+		if (current->type == type)
+		{
+			tmp = current;
+			if (prev)
+				prev->next = current->next;
+			else
+				gc_list = current->next;
+			free(tmp->ptr);
+			free(tmp);
+			current = (prev) ? prev->next : gc_list;
+		}
+		else
+		{
+			prev = current;
+			current = current->next;
+		}
+	}
 }

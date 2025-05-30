@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/05/30 17:21:35 by fredchar         ###   ########.fr        #
+#    Updated: 2025/05/30 18:08:09 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,11 @@ SRCS := $(SRCD)/main.c \
 		$(SRCD)/lexical_analysis/parsing_utils1.c \
 		$(SRCD)/lexical_analysis/token_types.c \
 		$(SRCD)/lexical_analysis/token_length.c \
+		$(SRCD)/expansion/_expansion.c \
+		$(SRCD)/expansion/quote_state.c \
+		$(SRCD)/expansion/env_variable.c \
+		$(SRCD)/expansion/dollar_out_quote.c \
+		$(SRCD)/expansion/command_expansion.c \
 		$(SRCD)/env_list/init_env.c \
 		$(SRCD)/env_list/env_ops.c \
 		$(SRCD)/garbage_collector/garbage.c \

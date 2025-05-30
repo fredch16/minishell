@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 00:00:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/29 23:12:15 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 19:00:42 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,17 @@
 # define GARBAGE_COLLECTOR_H
 
 # include <stdlib.h>
+# include "minishell.h"
 
-/**
- * Structure for tracking allocated memory
- */
-typedef struct s_garbage_node
-{
-	void					*ptr;
-	struct s_garbage_node	*next;
-}	t_garbage_node;
+typedef enum e_gc_type t_gc_type;
+
 
 /**
  * Allocate memory and track it for automatic cleanup
  * @param size Size of memory to allocate
  * @return Pointer to allocated memory or NULL on failure
  */
-void	*gc_malloc(size_t size);
+void	*gc_malloc(size_t size, t_gc_type type);
 
 /**
  * Free a specific pointer from the garbage collection list
@@ -47,8 +42,12 @@ void	gc_free_all(void);
 /**
  * Track an externally allocated pointer in the garbage collection list
  * @param ptr Pointer to track
+ * @param type Type of gc node
  * @return 1 on success, 0 on failure
  */
-int	gc_track(void *ptr);
+int	gc_track(void *ptr, t_gc_type type);
+
+
+void	gc_free_by_type(t_gc_type type);
 
 #endif

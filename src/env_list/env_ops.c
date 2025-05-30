@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:25:20 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:21:13 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:57:57 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	set_env_var(t_env_list *list, char *variable, char *value)
 			if (!new_value)
 				return (0);
 				
-			gc_track(new_value);
+			gc_track(new_value, GC_ENV);
 			if (existing->value)
 				gc_free(existing->value);
 			existing->value = new_value;

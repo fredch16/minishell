@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 00:08:37 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:59:31 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ t_token_list *init_token_list(char *input)
 {
 	t_token_list *list;
 	
-	list = gc_malloc(sizeof(t_token_list));
+	list = gc_malloc(sizeof(t_token_list), GC_PARSE);
 	if (!list)
 		return NULL;
 	list->head = NULL;
 	list->tail = NULL;
 	list->input = ft_strdup(input); // Store copy of original input
-	gc_track(list->input);
+	gc_track(list->input, GC_PARSE);
 	if (!list->input)
 	{
 		free(list);
@@ -39,7 +39,7 @@ t_token_node	*new_token(void)
 	new_token = (t_token_node *)ft_calloc(1, sizeof(t_token_node));
 	if (new_token == NULL)
 		return (perror("New token failed to malloc\n"), NULL);
-	gc_track(new_token);
+	gc_track(new_token, GC_PARSE);
 	return (new_token);
 }
 

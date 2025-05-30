@@ -6,15 +6,14 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:49:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 00:03:29 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:04:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "struct.h"
-# include <stdbool.h>
+# include "minishell.h"
 
 // BTW ALL OF THESE ARE IN ROOT/SRC/PARSER/
 
@@ -24,10 +23,10 @@ bool			is_whitespace(char c);
 bool			is_operator_char(char c);
 bool			is_builtin(char *token);
 
-// _lexical_analysis.c
+
+// tokens.c
 
 bool			add_token(t_token_list *list, char *token_str, t_token_type type);
-void			tokenize_input(t_token_list *token_list, char *input);
 
 // token_post_processing.c
 
@@ -48,5 +47,9 @@ int			set_token_length(char *cmd_line);
 // token_types.c
 
 t_token_type	set_type(char *content, int token_length);
+
+// _lexical_analysis.c
+
+void tokenize_input(t_token_list *token_list, char *input);
 
 #endif

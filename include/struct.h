@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 00:01:46 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:55:46 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,20 @@ typedef struct s_file_list
 	t_file_node	*tail;
 	size_t		size;
 }	t_file_list;
+
+typedef	struct s_env_node
+{
+	struct s_env_node	*next;
+	char				*variable;
+	char				*value;
+}	t_env_node;
+
+typedef struct s_env_list
+{
+	t_env_node	*head;
+	t_env_node	*tail;
+	size_t		size;
+}	t_env_list;
 
 typedef struct s_cmd_node
 {

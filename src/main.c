@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 00:13:57 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:09:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,21 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	token_list = gc_malloc(sizeof(t_token_list));
-	token_list->env = env;
+
+	/* Example of env list usage in main */
+	t_env_list *env_list = env_array_to_list(env);
+	if (!env_list)
+		return (1);
+
+	// Set a new variable
+	set_env_var(env_list, "MINISHELL", "1");
+
+	// // Get a value
+	// char *home = get_env_value(env_list, "HOME");
+	// if (home)
+	// 	printf("HOME=%s\n", home);
+
+	return (0);
 	while (1)
 	{
 		line = readline("minishell$> ");

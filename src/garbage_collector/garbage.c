@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:39:48 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/27 13:49:43 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:21:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/garbage_collector.h"
+#include "../../include/minishell.h"
 
 static	t_garbage_node *gc_list = NULL;
 

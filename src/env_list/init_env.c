@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:41:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:00:17 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:20:59 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 /**
  * Initialize an empty environment variable list

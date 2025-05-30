@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:25:20 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:06:57 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:21:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 /**
  * Look up an environment variable in the list

@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/05/30 17:00:56 by fredchar         ###   ########.fr        #
+#    Updated: 2025/05/30 17:21:35 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,9 @@ SRCS := $(SRCD)/main.c \
 		$(SRCD)/lexical_analysis/parsing_utils1.c \
 		$(SRCD)/lexical_analysis/token_types.c \
 		$(SRCD)/lexical_analysis/token_length.c \
-		$(SRCD)/init_env.c \
-		$(SRCD)/env_ops.c \
-		$(SRCD)/garbage.c \
+		$(SRCD)/env_list/init_env.c \
+		$(SRCD)/env_list/env_ops.c \
+		$(SRCD)/garbage_collector/garbage.c \
 		$(SRCD)/debug.c \
 
 # Convert src paths to obj paths correctly

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 16:55:46 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:19:26 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <string.h>  /* For strdup */
 # include "libft/libft.h"
 # include "garbage_collector.h"
+
+typedef struct s_env_list t_env_list;
 
 typedef enum e_redir_type
 {
@@ -60,8 +62,8 @@ typedef struct s_token_list
 {
 	t_token_node	*head;
 	t_token_node	*tail;
+	t_env_list		*env;
 	char			*input;
-	char			**env;
 	size_t			size;
 
 }	t_token_list;
@@ -115,5 +117,12 @@ typedef enum e_quote_state
 	SINGLE_QUOTED,
 	DOUBLE_QUOTED
 } t_quote_state;
+
+typedef	struct s_mini
+{
+	t_cmd_list		*cmd_list;
+	t_token_list	*token_list;
+	t_env_list		*env_list;
+}	t_mini;
 
 #endif

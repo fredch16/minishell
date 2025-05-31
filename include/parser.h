@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:49:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:04:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/31 17:12:02 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "minishell.h"
 
 // BTW ALL OF THESE ARE IN ROOT/SRC/PARSER/
+
+// _lexical_analysis.c
+
+void tokenize_input(t_token_list *token_list, char *input);
 
 // parsing_utils1.c
 
@@ -47,9 +51,5 @@ int			set_token_length(char *cmd_line);
 // token_types.c
 
 t_token_type	set_type(char *content, int token_length);
-
-// _lexical_analysis.c
-
-void tokenize_input(t_token_list *token_list, char *input);
 
 #endif

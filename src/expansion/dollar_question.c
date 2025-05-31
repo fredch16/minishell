@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_out_quote.c                                 :+:      :+:    :+:   */
+/*   dollar_question.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 01:31:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/31 16:58:36 by fredchar         ###   ########.fr       */
+/*   Created: 2025/05/31 16:57:42 by fredchar          #+#    #+#             */
+/*   Updated: 2025/05/31 17:15:37 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*expand_dollar_noquote(t_token_list *token_list, char *content)
+char	*expand_dollar_qmark(t_token_list *token_list, char *content)
 {
 	int				i;
 	t_quote_state	quote_state;
 	char			*new_content;
-	char			*varname;
-	char			*var_expansion;
+	char			*expansion;
 
 	i = 0;
 	quote_state = UNQUOTED;
@@ -27,26 +26,12 @@ char	*expand_dollar_noquote(t_token_list *token_list, char *content)
 	while (content[i])
 	{
 		quote_state = update_quote_state(quote_state, content[i]);
-		if (content[i] == '$' && content[i + 1] != '?' && quote_state != SINGLE_QUOTED)
+		if (content[i] == '$' && content[i + 1] == '?' && quote_state != SINGLE_QUOTED)
 		{
-			varname = extract_var(&content[i]);
-			if (varname)
-			{
-				var_expansion = get_env_value(token_list->env, varname);
-				if (var_expansion)
-				{
-					new_content = ft_strjoin(new_content, var_expansion);
-					gc_track(new_content, GC_PARSE);
-				}
-				i += ft_strlen(varname) + 1;
-				continue;
-			}
-			else
-			{
-				new_content = ft_charjoin(new_content, '$');
-				gc_track(new_content, GC_PARSE);
-				i++;
-			}
+			expansion = ft_itoa(token_list->exit_code);
+			gc_track(expansion, GC_PARSE);
+			new_content = ft_strjoin(new_content, expansion);
+			i += 2;
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 18:53:17 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/31 17:02:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_token_list
 	t_token_node	*tail;
 	t_env_list		*env;
 	char			*input;
+	int				exit_code;
 	size_t			size;
 
 }	t_token_list;
@@ -123,6 +124,7 @@ typedef	struct s_mini
 	t_cmd_list		*cmd_list;
 	t_token_list	*token_list;
 	t_env_list		*env_list;
+	int				exit_code;
 }	t_mini;
 
 /**

@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:31:34 by apregitz         ###   ########.fr       */
+/*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
+/*   Updated: 2025/05/30 16:26:19 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
 # include <stdio.h>
-# include <string.h>
 # include <stdlib.h>
-# include <stddef.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
+# include <unistd.h>
+# include <string.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "libft/libft.h"
-# include "garbage_collector.h"
-# include "struct.h"
-# include "parser.h"
-# include "expansion.h"
-# include "env_list.h"
-# include "execution.h"
 
-// remember ECHo and echo is the same, same for all builtins
-
-void			print_tokens(t_token_list *list);
-
+typedef struct s_exec_data
+{
+	int		fd[2];
+	int		input_file;
+	int		output_file;
+	int		ac;
+	int		i;
+	char	**av;
+	char	**ep;
+}			t_exec_data;
 
 #endif

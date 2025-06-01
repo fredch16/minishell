@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:57:42 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/31 17:15:37 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 14:09:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*expand_dollar_qmark(t_token_list *token_list, char *content)
 		quote_state = update_quote_state(quote_state, content[i]);
 		if (content[i] == '$' && content[i + 1] == '?' && quote_state != SINGLE_QUOTED)
 		{
+			printf("found a dollar qmark\n");
 			expansion = ft_itoa(token_list->exit_code);
 			gc_track(expansion, GC_PARSE);
 			new_content = ft_strjoin(new_content, expansion);
@@ -40,5 +41,6 @@ char	*expand_dollar_qmark(t_token_list *token_list, char *content)
 			i++;
 		}
 	}
+	printf("%sReturning dqmark of |%s|\n%s", COLOR_RED, new_content, COLOR_RESET);
 	return (new_content);
 }

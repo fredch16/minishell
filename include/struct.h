@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 16:58:08 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:42:22 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,10 @@ typedef struct s_cmd_list
 	t_cmd_node	*head;
 	t_cmd_node	*tail;
 	size_t		size;
+	t_env_list		*env;
+	char			*input;
+	int				exit_code;
+	int				error_code;
 }	t_cmd_list;
 
 typedef enum e_quote_state

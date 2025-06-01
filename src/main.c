@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 17:04:35 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:44:42 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int ac, char **av, char **env)
 		if (handle_error(&mini))
 			continue;
 		print_tokens(mini.token_list);
+		mini.cmd_list = init_cmd_list(&mini, line);
 		free(line);
 		gc_free_by_type(GC_PARSE);
 	}

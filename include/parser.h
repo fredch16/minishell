@@ -1,12 +1,12 @@
-// /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 23:49:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/31 17:12:02 by fredchar         ###   ########.fr       */
+/*   Created: 2025/06/01 21:37:00 by fredchar          #+#    #+#             */
+/*   Updated: 2025/06/01 22:00:51 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,16 @@
 
 # include "minishell.h"
 
-// BTW ALL OF THESE ARE IN ROOT/SRC/PARSER/
+// cmd_linked_list.c
 
-// _lexical_analysis.c
+t_cmd_list *init_cmd_list(t_mini *mini, char *input);
+t_cmd_node	*new_cmd(void);
+void	cmd_add_back(t_cmd_list *cmd_list, t_cmd_node *new_cmd);
 
-void tokenize_input(t_token_list *token_list, char *input);
+// file_linked_list.c
 
-// parsing_utils1.c
-
-bool			is_whitespace(char c);
-bool			is_operator_char(char c);
-bool			is_builtin(char *token);
-
-
-// tokens.c
-
-bool			add_token(t_token_list *list, char *token_str, t_token_type type);
-
-// token_post_processing.c
-
-t_token_type	determine_token_type(char *token, bool has_quotes, t_token_type quote_type);
-
-// token_linked_list.c
-
-t_token_list	*init_token_list(t_mini *mini, char *input);
-bool			add_token(t_token_list *list, char *token_str, t_token_type type);
-void			free_token_list(t_token_list *list);
-t_token_node	*new_token(void);
-void			token_add_back(t_token_list *token_list, t_token_node *new_token);
-
-// token_length.c
-
-int			set_token_length(char *cmd_line);
-
-// token_types.c
-
-t_token_type	set_type(char *content, int token_length);
+t_file_list *init_file_list(t_mini *mini, char *input);
+t_file_node	*new_file(void);
+void	cmd_file_back(t_file_list *cmd_list, t_file_node *new_cmd);
 
 #endif

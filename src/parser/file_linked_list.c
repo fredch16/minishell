@@ -12,12 +12,10 @@
 
 #include "../../include/minishell.h"
 
-t_file_list *init_file_list(t_mini *mini, char *input)
+t_file_list *init_file_list(void)
 {
 	t_file_list *list;
-	
-	(void)input;
-	(void)mini;
+
 	list = gc_malloc(sizeof(t_file_list), GC_PARSE);
 	if (!list)
 		return NULL;

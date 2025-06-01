@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 21:42:22 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:06:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef enum e_redir_type
 	REDIR_IN,         /* < */
 	REDIR_OUT,            /* > */
 	REDIR_APPEND,         /* >> */
-	REDIR_HEREDOC          /* << */
+	REDIR_HEREDOC,          /* << */
+	REDIR_ERROR
 }	t_redir_type;
 
 typedef enum e_cmd_type

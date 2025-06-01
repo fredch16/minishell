@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:09:07 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 17:39:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/02 00:22:05 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	expansion(t_token_list *token_list)
 	while (current && !token_list->error_code)
 	{
 		expand_token(token_list, current);
+		// maybe reidentify builtints??
+		if (current->type == TK_S_QUOTES)
+			current->type = TK_CMD;
 		current = current->next;
 	}
 }

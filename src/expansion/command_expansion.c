@@ -6,13 +6,13 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:22:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 14:13:57 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:08:43 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	expand_command_token(t_token_list *token_list, t_token_node *current)
+void	expand_token(t_token_list *token_list, t_token_node *current)
 {
 	// char	*old_content;
 

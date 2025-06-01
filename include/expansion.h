@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:10:54 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 13:54:48 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:08:55 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	expansion(t_token_list *token_list);
 
 // command_expansion.c
 
-void	expand_command_token(t_token_list *token_list, t_token_node *current);
+void	expand_token(t_token_list *token_list, t_token_node *current);
 
 // dollar_out_quote.c
 

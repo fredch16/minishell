@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:09:07 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 18:28:37 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:09:12 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,8 @@ void	expansion(t_token_list *token_list)
 	current = token_list->head;
 	while (current)
 	{
-		if (current->type == TK_CMD)
-		{
-			expand_command_token(token_list, current);
-		}
-		// if (current->type == TK_S_QUOTES)
-		// 	expand_squote_token(token_list, current);
+		expand_token(token_list, current);
+		// remove quotes and handle them if needed
 		current = current->next;
 	}
 }

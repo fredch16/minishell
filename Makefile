@@ -1,65 +1,62 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile2                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/05/26 23:48:03 by fredchar         ###   ########.fr        #
+#    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
+#    Updated: 2025/05/27 13:46:58 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := minishell
-CC := gcc
-CFLAGS := -Wall -Wextra -Werror -g
-INCD := include
-SRCD := src
-OBJD := obj
-LIBFT_DIR := $(INCD)/libft
-LIBFT := $(LIBFT_DIR)/libft.a
+NAME = push_swap
 
-# Colors
-GREEN := \033[0;32m
-YELLOW := \033[0;33m
-RED := \033[0;31m
-NC := \033[0m # No Color
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g
+LDFLAGS = -fsanitize=address,undefined
+LIBFT = inc/libft/libft.a
 
-SRCS :=			$(SRCD)/main.c \
-				$(SRCD)/tokens.c \
-				$(SRCD)/garbage.c \
+SRC_DIR = src
+OBJ_DIR = obj
 
-OBJS := $(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
+VPATH = $(SRC_DIR):$(SRC_DIR)/pipex
+
+INCLUDES = -Iinc
+
+MAIN_SRCS = main.c
+
+EXECUTION_SRCS =  child.c \
+                here_doc.c \
+                init.c \
+                pipex.c \
+                utils.c
+
+SRCS := $(MAIN_SRCS) $(PIPEX_SRCS)
+
+OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
 $(LIBFT):
-	@printf "$(YELLOW)Building libft library...$(NC)\n"
-	@$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C inc/libft
 
-$(OBJD)/%.o: $(SRCD)/%.c|  $(OBJD)
-	@printf "$(YELLOW)Compiling $<...$(NC)\n"
-	@$(CC) $(CFLAGS) -I $(INCD) -c $< -o $@
-	@printf "$(GREEN)Compiled $< successfully!$(NC)\n"
+$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
+	$(CC) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
-$(OBJD):
-	mkdir -p $(OBJD)
+$(OBJ_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) $(LDFLAGS) $(INCLUDES) -c $< -o $@
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
-	@printf "$(GREEN)Executable $(NAME) built successfully!$(NC)\n"
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-	@printf "$(RED)Cleaning object files...$(NC)\n"
-	rm -rf $(OBJD)
-	@printf "$(GREEN)Object files cleaned!$(NC)\n"
-	@$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C libft clean
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@printf "$(RED)Cleaning library and executable...$(NC)\n"
+	$(MAKE) -C libft fclean
 	rm -f $(NAME)
-	@printf "$(GREEN)Executable cleaned!$(NC)\n"
-	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

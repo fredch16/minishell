@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/31 17:02:38 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:04:35 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	mini.exit_code = 0;
+	mini.error_code = 0;
 	// mini.token_list = gc_malloc(sizeof(t_token_list));
 
 	/* Example of env list usage in main */
@@ -39,13 +40,13 @@ int	main(int ac, char **av, char **env)
 			gc_free_all();
 			break;
 		}
-		mini.token_list = init_token_list(line);
-		mini.token_list->exit_code = mini.exit_code;
-		mini.token_list->env = mini.env_list;
+		mini.token_list = init_token_list(&mini, line);
 		tokenize_input(mini.token_list, line);
 		print_tokens(mini.token_list);
 		printf("\n%s=== EXPANSION STAGE ===%s\n", COLOR_BLUE, COLOR_RESET);
 		expansion(mini.token_list);
+		if (handle_error(&mini))
+			continue;
 		print_tokens(mini.token_list);
 		free(line);
 		gc_free_by_type(GC_PARSE);

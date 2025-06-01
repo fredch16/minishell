@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/05/31 17:12:18 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/01 17:37:06 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,10 @@ SRCS := $(SRCD)/main.c \
 		$(SRCD)/expansion/_expansion.c \
 		$(SRCD)/expansion/quote_state.c \
 		$(SRCD)/expansion/env_variable.c \
-		$(SRCD)/expansion/dollar_out_quote.c \
-		$(SRCD)/expansion/command_expansion.c \
+		$(SRCD)/expansion/dollar_vars.c \
 		$(SRCD)/expansion/dollar_question.c \
+		$(SRCD)/expansion/remove_quotes.c \
+		$(SRCD)/utilities/error.c \
 		$(SRCD)/env_list/init_env.c \
 		$(SRCD)/env_list/env_ops.c \
 		$(SRCD)/garbage_collector/garbage.c \

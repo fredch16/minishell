@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
@@ -38,7 +38,7 @@ t_token_type	determine_token_type(char *token, bool has_quotes, t_token_type quo
 
 // token_linked_list.c
 
-t_token_list	*init_token_list(char *input);
+t_token_list	*init_token_list(t_mini *mini, char *input);
 bool			add_token(t_token_list *list, char *token_str, t_token_type type);
 void			free_token_list(t_token_list *list);
 t_token_node	*new_token(void);

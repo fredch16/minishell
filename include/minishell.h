@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:11:50 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:08:05 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include "expansion.h"
 # include "debug.h"
 # include "env_list.h"
+# include "defines.h"
+# include "utilities.h"
 
 // remember ECHo and echo is the same, same for all builtins
 

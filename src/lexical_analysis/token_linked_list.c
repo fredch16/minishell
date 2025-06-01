@@ -6,13 +6,13 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 18:59:31 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:59:32 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-t_token_list *init_token_list(char *input)
+t_token_list *init_token_list(t_mini *mini, char *input)
 {
 	t_token_list *list;
 	
@@ -29,6 +29,9 @@ t_token_list *init_token_list(char *input)
 		return NULL;
 	}
 	list->size = 0;
+	list->exit_code = mini->exit_code;
+	list->env = mini->env_list;
+	list->error_code = mini->error_code;
 	return (list);
 }
 

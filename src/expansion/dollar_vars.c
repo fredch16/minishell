@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_out_quote.c                                 :+:      :+:    :+:   */
+/*   dollar_vars.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:31:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/31 16:58:36 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:02:17 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*expand_dollar_noquote(t_token_list *token_list, char *content)
+char	*expand_dollar_vars(t_token_list *token_list, char *content)
 {
 	int				i;
 	t_quote_state	quote_state;
@@ -55,5 +55,7 @@ char	*expand_dollar_noquote(t_token_list *token_list, char *content)
 			i++;
 		}
 	}
+	if (quote_state != UNQUOTED)
+		token_list->error_code = EC_UNCLOSEQ;
 	return (new_content);
 }

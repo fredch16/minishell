@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:31:44 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 12:03:32 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:38:13 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	setup_exec(t_cmd_node *cmd_node, t_mini *mini)
 {
 	pid_t	pid;
 
-	if (pipe(cmd_node->fd) == -1)
+	if (cmd_node->next || pipe(cmd_node->fd) == -1)
 		ft_error(1, "pipe");
 	pid = fork();
 	if (pid == -1)	

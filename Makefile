@@ -6,28 +6,27 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/02 12:44:46 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/02 15:44:15 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME :=			minishell
+NAME =			minishell
 
-CC :=			cc
-CFLAGS :=		-Wall -Wextra -Werror -g
-LDFLAGS :=		-fsanitize=address,undefined
-LIBFT :=		src/libft/libft.a
+CC =			cc
+CFLAGS =		-Wall -Wextra -Werror -g
+LDFLAGS =		-fsanitize=address,undefined
+LIBFT =		src/libft/libft.a
 
-SRC_DIR :=		src
-OBJ_DIR :=		obj
+SRC_DIR =		src
+OBJ_DIR =		obj
 
-VPATH :=		$(SRC_DIR):\
-				$(SRC_DIR)/execution
+VPATH =		$(SRC_DIR):$(SRC_DIR)/execution
 
-INCLUDES :=		-Iinc
+INCLUDES =		-Iinclude
 
-MAIN_SRCS :=	main.c
+MAIN_SRCS =	main.c
 
-EXEC_SRCS :=	error.c \
+EXEC_SRCS =	error.c \
 				exec_cmd.c \
 				execution.c \
 				fd_collector.c \
@@ -38,8 +37,7 @@ EXEC_SRCS :=	error.c \
 				redirctions.c \
 				setup_child.c
 
-SRCS :=			$(MAIN_SRCS) \
-				$(EXEC_SRCS)
+SRCS :=			$(MAIN_SRCS) $(EXEC_SRCS)
 
 OBJS :=			$(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:31:34 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:05:08 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# include "libft/libft.h"
+# include "../src/libft/libft.h"
 # include "garbage_collector.h"
 # include "struct.h"
 # include "parser.h"

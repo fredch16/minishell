@@ -94,7 +94,7 @@ void print_cmd_list(t_cmd_list *cmd_list)
 
         /* Print command type */
         if (curr_cmd->cmd_type == STDCMD)
-            printf("Type: %sPIPE%s\n", COLOR_MAGENTA, COLOR_RESET);
+            printf("Type: %sStandard Command%s\n", COLOR_MAGENTA, COLOR_RESET);
         else if (curr_cmd->cmd_type == BUILTIN)
             printf("Type: %sBUILTIN%s\n", COLOR_YELLOW, COLOR_RESET);
         else

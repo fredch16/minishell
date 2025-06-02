@@ -6,11 +6,49 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 17:05:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 17:08:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:15:39 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	tk_err(t_token_list *token_list, int error_code)
+{
+	token_list->error_code = error_code;
+}
+
+int check_syntax_errors(t_token_list *token_list)
+{
+	t_token_node *current = token_list->head;
+
+	if (!current)
+		return (0);  // Empty input is fine
+
+	if (current->type == TK_PIPE)
+		return (tk_err(token_list, EC_PIPE_AT_START), EC_PIPE_AT_START);
+
+	while (current)
+	{
+		if (current->type == TK_PIPE)
+		{
+			if (!current->next || current->next->type == TK_PIPE)
+				return (tk_err(token_list, EC_SYNTAX_PIPE), EC_SYNTAX_PIPE);
+		}
+		else if (is_redirect(current))
+		{
+			if (!current->next || current->next->type != TK_CMD)
+				return (tk_err(token_list, EC_SYNTAX_REDIR), EC_SYNTAX_REDIR);
+		}
+		current = current->next;
+	}
+
+	// Check for trailing pipe
+	current = token_list->tail;
+	if (current && current->type == TK_PIPE)
+		return (tk_err(token_list, EC_PIPE_AT_END), EC_PIPE_AT_END);
+	return (0);  // no syntax errors found
+}
+
 
 int	handle_error(t_mini *mini)
 {
@@ -18,5 +56,13 @@ int	handle_error(t_mini *mini)
 		return (0);
 	else if (mini->token_list->error_code == EC_UNCLOSEQ)
 		return(printf("Error: %s\n", ERR_UNCLOSED_QUOTE), gc_free_by_type(GC_PARSE), -1);
+	else if (mini->token_list->error_code == EC_PIPE_AT_START)
+		return(printf("Error: %s\n", ERR_PIPE_AT_START), gc_free_by_type(GC_PARSE), -1);
+	else if (mini->token_list->error_code == EC_SYNTAX_PIPE)
+		return(printf("Error: %s\n", ERR_SYNTAX_PIPE), gc_free_by_type(GC_PARSE), -1);
+	else if (mini->token_list->error_code == EC_SYNTAX_REDIR)
+		return(printf("Error: %s\n", ERR_SYNTAX_REDIR), gc_free_by_type(GC_PARSE), -1);
+	else if (mini->token_list->error_code == EC_PIPE_AT_END)
+		return(printf("Error: %s\n", ERR_PIPE_AT_END), gc_free_by_type(GC_PARSE), -1);
 	return (0);
 }

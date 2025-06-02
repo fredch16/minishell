@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 16:07:22 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:36:42 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	while (1)
 	{
-		line = readline("minishell$> ");
+		line = readline("minishell $> ");
 		if (!line)  // Handle Ctrl+D (EOF)
 			break;
 		if (line[0] != '\0')

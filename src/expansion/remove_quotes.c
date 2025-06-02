@@ -6,28 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 17:23:43 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 15:54:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:22:42 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-/**
- * Determines if a character toggles the current quote state.
- *
- * @param quote_state The current quote state (UNQUOTED, SINGLE_QUOTED, DOUBLE_QUOTED)
- * @param c The character to check
- * @return True if c starts or ends the current quote context, false otherwise.
- */
-bool	is_quote_toggle(t_quote_state quote_state, char c)
-{
-	if (quote_state == UNQUOTED)
-		return (c == '\'' || c == '"');
-	if (quote_state == SINGLE_QUOTED)
-		return (c == '\'');
-	if (quote_state == DOUBLE_QUOTED)
-		return (c == '"');
-	return (false);
-}
 
 char	*remove_quotes(char *content)
 {

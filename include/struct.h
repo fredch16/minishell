@@ -6,16 +6,15 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:37:43 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/02 09:09:10 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include <stddef.h>  /* For size_t */
-# include <string.h>  /* For strdup */
-# include "libft/libft.h"
+# include <stddef.h>
+# include <string.h>
 # include "garbage_collector.h"
 
 typedef struct s_env_list t_env_list;
@@ -49,6 +48,13 @@ typedef enum e_token_type
 	TK_BUILTIN,
 	TK_S_QUOTES
 }						t_token_type;
+
+typedef struct s_exec_data
+{
+	int					input_file;
+	int					output_file;
+	char				**ep;
+}						t_exec_data;
 
 typedef struct s_token_node
 {
@@ -99,6 +105,8 @@ typedef struct s_env_list
 typedef struct s_cmd_node
 {
 	t_cmd_type			cmd_type;
+	int					fd[2];
+	char				*path;
 	char				**cmd;
 	t_file_list			*files;
 	struct s_cmd_node	*next;
@@ -118,11 +126,24 @@ typedef enum e_quote_state
 	DOUBLE_QUOTED
 } 						t_quote_state;
 
+typedef struct s_fd_node
+{
+	int					fd;
+	struct s_fd_node	*next;
+}						t_fd_node;
+
+typedef struct s_fd_list
+{
+	t_fd_node			*head;
+	t_fd_node			*tail;
+	size_t				size;
+}						t_fd_list;
+
 typedef	struct s_mini
 {	
-	t_cmd_list			*cmd_list;
-	t_token_list		*token_list;
-	t_env_list			*env_list;
+	t_cmd_list			cmd_list;
+	t_token_list		token_list;
+	t_env_list			env_list;
 	t_exec_data			exec_data;
 }						t_mini;
 

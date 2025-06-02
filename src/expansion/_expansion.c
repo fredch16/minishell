@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:09:07 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 00:22:05 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:57:26 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 
 void	expand_token(t_token_list *token_list, t_token_node *current)
 {
+	printf("expanding token: |%s|\n", current->content);
 	current->content = expand_dollar_vars(token_list, current->content);
 	if (token_list->error_code)
 		return ;
+	printf("expanding token: |%s|\n", current->content);
 	current->content = expand_dollar_qmark(token_list, current->content);
+	printf("expanding token: |%s|\n", current->content);
 	current->content = remove_quotes(current->content);
 }
 

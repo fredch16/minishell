@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 00:43:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:07:22 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main(int ac, char **av, char **env)
 		}
 		mini.token_list = init_token_list(&mini, line);
 		tokenize_input(mini.token_list, line);
-		// print_tokens(mini.token_list);
-		// printf("\n%s=== EXPANSION STAGE ===%s\n", COLOR_BLUE, COLOR_RESET);
+		print_tokens(mini.token_list);
+		printf("\n%s=== EXPANSION STAGE ===%s\n", COLOR_BLUE, COLOR_RESET);
 		expansion(mini.token_list);
 		if (handle_error(&mini))
 			continue;

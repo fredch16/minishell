@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:37:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 15:33:47 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:41:14 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_quote_state update_quote_state(t_quote_state state, char curr)
 	{
 		if (curr == '\'')
 		{
-			// printf("Found |%c|: Updating State to SINGLE QOUTED\n", curr);
+			printf("Found |%c|: Updating State to SINGLE QOUTED\n", curr);
 			return (SINGLE_QUOTED);
 		}
 		else if (curr == '"')
 		{
-			// printf("Found |%c|: Updating State to DOUBLE QUOTED\n", curr);
+			printf("Found |%c|: Updating State to DOUBLE QUOTED\n", curr);
 			return (DOUBLE_QUOTED);
 		}
 	}
@@ -31,7 +31,7 @@ t_quote_state update_quote_state(t_quote_state state, char curr)
 	{
 		if (curr == '\'')
 		{
-			// printf("Found |%c|: Updating State to UNQOUTED\n", curr);
+			printf("Found |%c|: Updating State to UNQOUTED\n", curr);
 			return (UNQUOTED);
 		}
 	}
@@ -39,7 +39,7 @@ t_quote_state update_quote_state(t_quote_state state, char curr)
 	{
 		if (curr == '"')
 		{
-			// printf("Found |%c|: Updating State to UNQOUTED\n", curr);
+			printf("Found |%c|: Updating State to UNQOUTED\n", curr);
 			return (UNQUOTED);
 		}
 	}

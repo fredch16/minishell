@@ -1,0 +1,6 @@
+minishell
+obj/*
+obj
+include/debug.h
+src/debug.c
+suppressions.sub

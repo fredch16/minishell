@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:36:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/29 18:59:33 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:25:55 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,23 @@ static int	get_quote_len(char *cmd_line)
 	char	quote_type;
 
 	quote_type = cmd_line[0];
-	len = 1;
-	while (cmd_line[len] != '\0' && cmd_line[len] != quote_type)
-		len++;
-	if (cmd_line[len] == quote_type)
-		len++;
-	while (!is_whitespace(cmd_line[len]) && !get_single_char_len(cmd_line[len])
-		&& cmd_line[len] != '\0')
-		len++;
+	len = 0;
+	while(cmd_line[len] != '\0')
+	{
+		if (cmd_line[len] == '"' || cmd_line[len] == '\'')
+		{
+			quote_type = cmd_line[len++];
+			while (cmd_line[len] != '\0' && cmd_line[len] != quote_type)
+				len++;
+			if (cmd_line[len] == quote_type)
+				len++;
+		}
+		else if (is_whitespace(cmd_line[len]) || get_single_char_len(cmd_line[len]))
+			break ;
+		else
+			len++;
+
+	}
 	return (len);
 }
 

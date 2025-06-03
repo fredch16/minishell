@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 15:58:06 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 11:48:22 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:11:33 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_command_path(t_cmd_node *cmd_node, t_mini *mini)
 
 	if (ft_strchr(cmd_node->cmd[0], '/'))
 		return (check_absolute_path(cmd_node->cmd[0]));
-	path_env = get_env_value(&mini->env_list, "PATH");
+	path_env = get_env_value(mini->env_list, "PATH");
 	if (!path_env)
 		return (NULL);
 	bin_paths = ft_split(path_env, ':');

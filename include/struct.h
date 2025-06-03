@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 17:52:13 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:41:58 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_file_node
 {
 	t_redir_type		redir_type;
 	char				*filename;
+	char				*heredoc_lim;
 	struct s_file_node	*next;
 }						t_file_node;
 

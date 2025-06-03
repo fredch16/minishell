@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 17:55:59 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:14:02 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,10 @@ void	    setup_child_input(t_mini *mini);
 
 // execution.c
 int        	execution(t_mini *mini);
+
+void        setup_child_output(t_mini *mini);
+void        close_if_not_std(int fd, int std_fd);
+int         execute_pipeline(t_mini *mini);
+void        free_2d_array(char **array);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:57:48 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/04 00:42:10 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef enum e_gc_type
 {
 	GC_PARSE,
 	GC_ENV,
+	GC_EXEC,
 	GC_OTHER
 }	t_gc_type;
 

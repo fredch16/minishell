@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 00:31:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 00:42:54 by fredchar         ###   ########.fr       */
+/*   Created: 2025/06/04 00:39:12 by fredchar          #+#    #+#             */
+/*   Updated: 2025/06/04 00:42:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINTS_H
-# define BUILTINS_H
-# include "minishell.h"
+#include "../../include/minishell.h"
 
-int	echo_builtin(char **args);
-int	builtin_pwd(void);
+int	builtin_pwd(void)
+{
+	char	*cwd;
 
-#endif
+	cwd = getcwd(NULL, 0);
+	if (cwd == NULL)
+		return (-1);
+	gc_track(cwd, GC_EXEC);
+	ft_putstr_fd(cwd, 1);
+	ft_putstr_fd("\n", 1);
+	return (0);
+}

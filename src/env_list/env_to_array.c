@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 22:45:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:47:42 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:50:29 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 /**
  * Cleanup array in case of allocation failure

@@ -3,36 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_linked_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 21:50:59 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:24:05 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+// t_cmd_list *init_cmd_list(t_mini *mini, char *input)
+// {
+// 	t_cmd_list *list;
+	
+// 	(void)input;
+// 	list = gc_malloc(sizeof(t_cmd_list), GC_PARSE);
+// 	if (!list)
+// 		return NULL;
+// 	list->head = NULL;
+// 	list->tail = NULL;
+// 	// list->input = ft_strdup(input); // Store copy of original input
+// 	// gc_track(list->input, GC_PARSE);
+// 	// if (!list->input)
+// 	// {
+// 	// 	free(list);
+// 	// 	return NULL;
+// 	// }
+// 	list->size = 0;
+// 	list->exit_code = mini->exit_code;
+// 	list->env = mini->env_list;
+// 	list->error_code = mini->error_code;
+// 	return (list);
+// }
 
 t_cmd_list *init_cmd_list(t_mini *mini, char *input)
 {
 	t_cmd_list *list;
 	
 	(void)input;
+	(void)mini;
 	list = gc_malloc(sizeof(t_cmd_list), GC_PARSE);
 	if (!list)
 		return NULL;
 	list->head = NULL;
 	list->tail = NULL;
-	// list->input = ft_strdup(input); // Store copy of original input
-	// gc_track(list->input, GC_PARSE);
-	// if (!list->input)
-	// {
-	// 	free(list);
-	// 	return NULL;
-	// }
 	list->size = 0;
-	list->exit_code = mini->exit_code;
-	list->env = mini->env_list;
-	list->error_code = mini->error_code;
+	// list->exit_code = mini->exit_code;
+	// list->env = mini->env_list;
+	// list->error_code = mini->error_code;
 	return (list);
 }
 

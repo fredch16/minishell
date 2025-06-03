@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 22:39:10 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 23:06:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:40:07 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ t_redir_type	get_redir_type(t_token_node *token)
 	return (REDIR_ERROR);
 }
 
-void	add_redirection(t_file_list *file_list, t_token_node *redir_token, t_token_node *file_token)
+void	add_redirection(t_file_list *file_list, t_token_node *redir_token,
+	t_token_node *file_token)
 {
 	t_file_node	*file;
 
 	file = new_file();
-	// do some exiting bullshit
 	if (!file)
 		return ;
 	file->redir_type = get_redir_type(redir_token);

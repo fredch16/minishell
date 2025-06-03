@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 00:07:26 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 00:48:58 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:38:30 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	add_arg_to_cmd(t_cmd_node *current_cmd, t_token_node *token)
 {
-	int	i;
+	int		i;
 	char	**new_arr;
 
 	i = 0;

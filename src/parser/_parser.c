@@ -6,12 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 21:35:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 17:21:26 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:37:42 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
 
 int	build_cmd_list(t_token_list *token_list, t_cmd_list *cmd_list)
 {

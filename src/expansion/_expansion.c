@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:09:07 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 17:21:48 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:42:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	expand_token(t_token_list *token_list, t_token_node *current)
 	if (token_list->error_code)
 		return ;
 	current->content = expand_dollar_qmark(token_list, current->content);
-	current->content = remove_quotes(current->content);
+	current->content = remove_quotes(token_list, current->content);
 }
 
 void	expansion(t_token_list *token_list)
 {
-	t_token_node *current;
+	t_token_node	*current;
 
 	if (!token_list || !token_list->head)
 	{
@@ -35,7 +35,6 @@ void	expansion(t_token_list *token_list)
 	while (current && !token_list->error_code)
 	{
 		expand_token(token_list, current);
-		// maybe reidentify builtints??
 		if (current->type == TK_S_QUOTES)
 			current->type = TK_CMD;
 		current = current->next;

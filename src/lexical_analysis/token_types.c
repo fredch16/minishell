@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:53:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 00:41:29 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:37:23 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_token_type	set_type(char *content, int token_length)
 	t_token_type	type;
 
 	type = TK_CMD;
-	// type = token_type_builtin(content, token_length);
 	if (token_length == 1)
 		type = token_type_one_symbol(content);
 	else if (token_length == 2)

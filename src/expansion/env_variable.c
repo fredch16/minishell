@@ -6,14 +6,14 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 15:23:06 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 18:55:57 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:44:47 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 //extract var NOT INCLUDING THE DOLLAR, JUST THE NAME
-char	*extract_var(char *content)
+char	*extract_var(t_token_list *tlist, char *content)
 {
 	int		i;
 	char	*variable;
@@ -28,7 +28,7 @@ char	*extract_var(char *content)
 		i++;
 	variable = (char *)gc_malloc(sizeof(char) * (i + 1), GC_PARSE);
 	if (!variable)
-		return (NULL);
+		return (tk_err(tlist, EC_MALLOC), NULL);
 	ft_strlcpy(variable, content, i + 1);
 	return (variable);
 }

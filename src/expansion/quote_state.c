@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:37:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 17:26:24 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:05:47 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Determines if a character toggles the current quote state.
  *
- * @param quote_state The current quote state (UNQUOTED, SINGLE_QUOTED, DOUBLE_QUOTED)
+ * @param quote_state The current quote state (UNQUOTED, SINGLE, DOUBLE)
  * @param c The character to check
  * @return True if c starts or ends the current quote context, false otherwise.
  */
@@ -30,7 +30,7 @@ bool	is_quote_toggle(t_quote_state quote_state, char c)
 	return (false);
 }
 
-t_quote_state update_quote_state(t_quote_state state, char curr)
+t_quote_state	update_quote_state(t_quote_state state, char curr)
 {
 	if (state == UNQUOTED)
 	{
@@ -52,7 +52,7 @@ t_quote_state update_quote_state(t_quote_state state, char curr)
 	return (state);
 }
 
-t_quote_state update_quote_state_debug(t_quote_state state, char curr)
+t_quote_state	update_quote_state_debug(t_quote_state state, char curr)
 {
 	if (state == UNQUOTED)
 	{

@@ -6,13 +6,13 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:39:48 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 18:52:10 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:32:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static	t_garbage_node *gc_list = NULL;
+static t_garbage_node	*g_gc_list = NULL;
 
 /**
  * Allocate memory and track it for automatic cleanup
@@ -34,9 +34,9 @@ void	*gc_malloc(size_t size, t_gc_type type)
 		return (NULL);
 	}
 	new_node->ptr = ptr;
-	new_node->next = gc_list;
+	new_node->next = g_gc_list;
 	new_node->type = type;
-	gc_list = new_node;
+	g_gc_list = new_node;
 	return (ptr);
 }
 
@@ -50,9 +50,9 @@ int	gc_track(void *ptr, t_gc_type type)
 	if (!new_node)
 		return (0);
 	new_node->ptr = ptr;
-	new_node->next = gc_list;
+	new_node->next = g_gc_list;
 	new_node->type = type;
-	gc_list = new_node;
+	g_gc_list = new_node;
 	return (1);
 }
 
@@ -66,26 +66,22 @@ int	gc_free(void *ptr)
 	t_garbage_node	*current;
 	t_garbage_node	*prev;
 
-	if (!ptr || !gc_list)
+	if (!ptr || !g_gc_list)
 		return (0);
-	if (gc_list->ptr == ptr)
+	if (g_gc_list->ptr == ptr)
 	{
-		current = gc_list;
-		gc_list = gc_list->next;
-		free(current->ptr);
-		free(current);
-		return (1);
+		current = g_gc_list;
+		g_gc_list = g_gc_list->next;
+		return (free(current->ptr), free(current), 1);
 	}
-	prev = gc_list;
-	current = gc_list->next;
+	prev = g_gc_list;
+	current = g_gc_list->next;
 	while (current)
 	{
 		if (current->ptr == ptr)
 		{
 			prev->next = current->next;
-			free(current->ptr);
-			free(current);
-			return (1);
+			return (free(current->ptr), free(current), 1);
 		}
 		prev = current;
 		current = current->next;
@@ -100,39 +96,68 @@ void	gc_free_all(void)
 {
 	t_garbage_node	*tmp;
 
-	while (gc_list)
+	while (g_gc_list)
 	{
-		tmp = gc_list;
-		gc_list = gc_list->next;
+		tmp = g_gc_list;
+		g_gc_list = g_gc_list->next;
 		free(tmp->ptr);
 		free(tmp);
 	}
-	gc_list = NULL;  // Ensure we reset the list to empty
+	g_gc_list = NULL;
 }
 
+/**
+ * Free a garbage node and update pointers
+ * @param prev Previous node in the list or NULL if at head
+ * @param node Node to free
+ * @return Next node to process
+ */
+t_garbage_node	*free_gc_node(t_garbage_node *prev, t_garbage_node *node)
+{
+	t_garbage_node	*next;
+
+	if (prev)
+		prev->next = node->next;
+	else
+		g_gc_list = node->next;
+	if (prev)
+		next = prev->next;
+	else
+		next = g_gc_list;
+	free(node->ptr);
+	free(node);
+	return (next);
+}
+
+/**
+ * Skip to the next node in the list
+ * @param prev Pointer to update with current node
+ * @param current Current node to advance from
+ * @return Next node to process
+ */
+static t_garbage_node	*skip_gc_node(t_garbage_node **prev,
+									t_garbage_node *current)
+{
+	*prev = current;
+	return (current->next);
+}
+
+/**
+ * Free all garbage collection nodes of specified type
+ * @param type Type of memory to free
+ */
 void	gc_free_by_type(t_gc_type type)
 {
-	t_garbage_node	*current = gc_list;
-	t_garbage_node	*prev = NULL;
-	t_garbage_node	*tmp;
+	t_garbage_node	*current;
+	t_garbage_node	*prev;
 
+	current = g_gc_list;
+	prev = NULL;
 	while (current)
 	{
 		if (current->type == type)
-		{
-			tmp = current;
-			if (prev)
-				prev->next = current->next;
-			else
-				gc_list = current->next;
-			free(tmp->ptr);
-			free(tmp);
-			current = (prev) ? prev->next : gc_list;
-		}
+			current = free_gc_node(prev, current);
 		else
-		{
-			prev = current;
-			current = current->next;
-		}
+			current = skip_gc_node(&prev, current);
 	}
 }

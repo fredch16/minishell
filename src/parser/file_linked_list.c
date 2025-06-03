@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_linked_list.c                                  :+:      :+:    :+:   */
+/*   file_linked_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 21:50:59 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:39:12 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_file_list *init_file_list(void)
+t_file_list	*init_file_list(void)
 {
-	t_file_list *list;
+	t_file_list	*list;
 
 	list = gc_malloc(sizeof(t_file_list), GC_PARSE);
 	if (!list)
-		return NULL;
+		return (NULL);
 	list->head = NULL;
 	list->tail = NULL;
 	list->size = 0;

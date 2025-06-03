@@ -6,27 +6,29 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 16:59:32 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:37:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-t_token_list *init_token_list(t_mini *mini, char *input)
+t_token_list	*init_token_list(t_mini *mini, char *input)
 {
-	t_token_list *list;
-	
+	t_token_list	*list;
+
 	list = gc_malloc(sizeof(t_token_list), GC_PARSE);
 	if (!list)
-		return NULL;
+		return (NULL);
 	list->head = NULL;
 	list->tail = NULL;
-	list->input = ft_strdup(input); // Store copy of original input
+	list->input = ft_strdup(input);
+	if (!list->input)
+		return (tk_err(mini->token_list, EC_MALLOC), NULL);
 	gc_track(list->input, GC_PARSE);
 	if (!list->input)
 	{
 		free(list);
-		return NULL;
+		return (NULL);
 	}
 	list->size = 0;
 	list->exit_code = mini->exit_code;
@@ -63,13 +65,13 @@ void	token_add_back(t_token_list *token_list, t_token_node *new_token)
 }
 
 /* UTILITY: Free token list */
-void free_token_list(t_token_list *list)
+void	free_token_list(t_token_list *list)
 {
-	t_token_node *current, *next;
-	
+	t_token_node	*current;
+	t_token_node	*next;
+
 	if (!list)
-		return;
-	
+		return ;
 	current = list->head;
 	while (current)
 	{
@@ -78,7 +80,6 @@ void free_token_list(t_token_list *list)
 		gc_free(current);
 		current = next;
 	}
-	
 	gc_free(list->input);
 	gc_free(list);
 }

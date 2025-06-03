@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:10:54 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 17:26:58 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:44:40 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	exit_error(char *msg);
 
 // env_variable.c
 
-char	*extract_var(char *content);
+char	*extract_var(t_token_list *tlist, char *content);
 
 // dollar_question.c
 
@@ -42,6 +42,6 @@ char	*expand_dollar_qmark(t_token_list *token_list, char *content);
 
 // remove_quotes.c
 
-char	*remove_quotes(char *content);
+char	*remove_quotes(t_token_list *tlist, char *content);
 
 #endif

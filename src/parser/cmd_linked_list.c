@@ -6,29 +6,22 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 21:50:59 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:38:14 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_cmd_list *init_cmd_list(t_mini *mini, char *input)
+t_cmd_list	*init_cmd_list(t_mini *mini, char *input)
 {
-	t_cmd_list *list;
-	
+	t_cmd_list	*list;
+
 	(void)input;
 	list = gc_malloc(sizeof(t_cmd_list), GC_PARSE);
 	if (!list)
-		return NULL;
+		return (NULL);
 	list->head = NULL;
 	list->tail = NULL;
-	// list->input = ft_strdup(input); // Store copy of original input
-	// gc_track(list->input, GC_PARSE);
-	// if (!list->input)
-	// {
-	// 	free(list);
-	// 	return NULL;
-	// }
 	list->size = 0;
 	list->exit_code = mini->exit_code;
 	list->env = mini->env_list;

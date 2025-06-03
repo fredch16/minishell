@@ -6,12 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:48:01 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 00:41:39 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:33:29 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
-
 
 /**
  * @brief Checks if a character is a whitespace

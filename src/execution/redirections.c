@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:20:04 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 08:28:17 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:15:36 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	process_redirection(t_file_node *file_node, t_mini *mini)
 	if (file_node->redir_type == REDIR_APPEND)
 		return (handle_append_redir(file_node, mini));
 	if (file_node->redir_type == REDIR_HEREDOC)
-		return (handle_heredoc_redir(file_node, mini));
+		return (handle_heredoc_redir(file_node->filename, mini));
 	return (0);
 }
 

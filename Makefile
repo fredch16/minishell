@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/02 18:03:35 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/03 07:19:19 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJD =		obj
 
 INC =		-Iinclude
 
-SRCS := $(SRCD)/main.c \
+SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/lexical_analysis/_lexical_analysis.c \
 			$(SRCD)/lexical_analysis/token_linked_list.c \
 			$(SRCD)/lexical_analysis/parsing_utils1.c \
@@ -52,7 +52,7 @@ SRCS := $(SRCD)/main.c \
 			$(SRCD)/execution/here_doc.c \
 			$(SRCD)/execution/init.c \
 			$(SRCD)/execution/redirection_cases.c \
-			$(SRCD)/execution/redirctions.c \
+			$(SRCD)/execution/redirections.c \
 			$(SRCD)/execution/setup_child.c
 
 OBJS :=		$(addprefix $(OBJD)/, $(SRCS:.c=.o))
@@ -63,9 +63,10 @@ $(LIBFT):
 	make -C include/libft
 
 $(NAME): $(OBJD) $(OBJS) $(LIBFT)
-	$(CC) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT) $(LDFLAGS) -lreadline -o $(NAME)
 
 $(OBJD)/%.o: %.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(INC) -c $< -o $@
 
 $(OBJD):

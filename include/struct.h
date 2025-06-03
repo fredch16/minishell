@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 17:21:07 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:57:48 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 # include "libft/libft.h"
 # include "garbage_collector.h"
 
-typedef struct s_env_list t_env_list;
+typedef struct s_env_list	t_env_list;
 
 typedef enum e_redir_type
 {
-	REDIR_IN,         /* < */
-	REDIR_OUT,            /* > */
-	REDIR_APPEND,         /* >> */
-	REDIR_HEREDOC,          /* << */
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC,
 	REDIR_ERROR
 }	t_redir_type;
 
@@ -53,9 +53,9 @@ typedef enum e_token_type
 
 typedef struct s_token_node
 {
-	char			*content;
-	t_token_type	type;
-	size_t			length;
+	char				*content;
+	t_token_type		type;
+	size_t				length;
 	struct s_token_node	*next;
 }	t_token_node;
 
@@ -85,7 +85,7 @@ typedef struct s_file_list
 	size_t		size;
 }	t_file_list;
 
-typedef	struct s_env_node
+typedef struct s_env_node
 {
 	struct s_env_node	*next;
 	char				*variable;
@@ -109,9 +109,9 @@ typedef struct s_cmd_node
 
 typedef struct s_cmd_list
 {
-	t_cmd_node	*head;
-	t_cmd_node	*tail;
-	size_t		size;
+	t_cmd_node		*head;
+	t_cmd_node		*tail;
+	size_t			size;
 	t_env_list		*env;
 	char			*input;
 	int				exit_code;
@@ -123,9 +123,9 @@ typedef enum e_quote_state
 	UNQUOTED,
 	SINGLE_QUOTED,
 	DOUBLE_QUOTED
-} t_quote_state;
+}	t_quote_state;
 
-typedef	struct s_mini
+typedef struct s_mini
 {
 	t_cmd_list		*cmd_list;
 	t_token_list	*token_list;

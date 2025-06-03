@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 17:36:42 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:52:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	mini.exit_code = 0;
 	mini.error_code = 0;
-	// mini.token_list = gc_malloc(sizeof(t_token_list));
-
-	/* Example of env list usage in main */
 	mini.env_list = env_array_to_list(env);
 	if (!mini.env_list)
 		return (1);

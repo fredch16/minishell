@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 21:36:51 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:55:43 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@
 // remember ECHo and echo is the same, same for all builtins
 
 void			print_tokens(t_token_list *list);
-
 
 #endif

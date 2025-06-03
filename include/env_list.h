@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:11:01 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 17:11:32 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:52:55 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ char		*get_env_value(t_env_list *list, char *variable);
 int			set_env_var(t_env_list *list, char *variable, char *value);
 int			unset_env_var(t_env_list *list, char *variable);
 void		print_env(t_env_list *list);
-
 
 #endif

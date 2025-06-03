@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 00:00:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 19:00:42 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:54:19 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <stdlib.h>
 # include "minishell.h"
 
-typedef enum e_gc_type t_gc_type;
-
+typedef enum e_gc_type	t_gc_type;
 
 /**
  * Allocate memory and track it for automatic cleanup
@@ -38,15 +37,13 @@ int		gc_free(void *ptr);
  */
 void	gc_free_all(void);
 
-
 /**
  * Track an externally allocated pointer in the garbage collection list
  * @param ptr Pointer to track
  * @param type Type of gc node
  * @return 1 on success, 0 on failure
  */
-int	gc_track(void *ptr, t_gc_type type);
-
+int		gc_track(void *ptr, t_gc_type type);
 
 void	gc_free_by_type(t_gc_type type);
 

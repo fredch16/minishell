@@ -3,88 +3,82 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/06/02 00:22:43 by fredchar         ###   ########.fr        #
+#    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
+#    Updated: 2025/06/02 18:03:35 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := minishell
-CC := gcc
-CFLAGS := -Wall -Wextra -Werror -g
-INCD := include
-SRCD := src
-OBJD := obj
-LIBFT_DIR := $(INCD)/libft
-LIBFT := $(LIBFT_DIR)/libft.a
+NAME =		minishell
 
-# Colors
-GREEN := \033[0;32m
-YELLOW := \033[0;33m
-RED := \033[0;31m
-NC := \033[0m # No Color
+CC =		cc
+CFLAGS =	-Wall -Wextra -Werror -g
+LDFLAGS =	-fsanitize=address,undefined
+LIBFT =		include/libft/libft.a
+
+SRCD =		src
+OBJD =		obj
+
+INC =		-Iinclude
 
 SRCS := $(SRCD)/main.c \
-		$(SRCD)/lexical_analysis/_lexical_analysis.c \
-		$(SRCD)/lexical_analysis/token_linked_list.c \
-		$(SRCD)/lexical_analysis/parsing_utils1.c \
-		$(SRCD)/lexical_analysis/token_types.c \
-		$(SRCD)/lexical_analysis/token_length.c \
-		$(SRCD)/expansion/_expansion.c \
-		$(SRCD)/expansion/quote_state.c \
-		$(SRCD)/expansion/env_variable.c \
-		$(SRCD)/expansion/dollar_vars.c \
-		$(SRCD)/expansion/dollar_question.c \
-		$(SRCD)/expansion/remove_quotes.c \
-		$(SRCD)/parser/_parser.c \
-		$(SRCD)/parser/commands.c \
-		$(SRCD)/parser/redirections.c \
-		$(SRCD)/parser/cmd_linked_list.c \
-		$(SRCD)/parser/file_linked_list.c \
-		$(SRCD)/utilities/error.c \
-		$(SRCD)/env_list/init_env.c \
-		$(SRCD)/env_list/env_ops.c \
-		$(SRCD)/garbage_collector/garbage.c \
-		$(SRCD)/debug.c \
+			$(SRCD)/lexical_analysis/_lexical_analysis.c \
+			$(SRCD)/lexical_analysis/token_linked_list.c \
+			$(SRCD)/lexical_analysis/parsing_utils1.c \
+			$(SRCD)/lexical_analysis/token_types.c \
+			$(SRCD)/lexical_analysis/token_length.c \
+			$(SRCD)/expansion/_expansion.c \
+			$(SRCD)/expansion/quote_state.c \
+			$(SRCD)/expansion/env_variable.c \
+			$(SRCD)/expansion/dollar_vars.c \
+			$(SRCD)/expansion/dollar_question.c \
+			$(SRCD)/expansion/remove_quotes.c \
+			$(SRCD)/parser/_parser.c \
+			$(SRCD)/parser/commands.c \
+			$(SRCD)/parser/redirections.c \
+			$(SRCD)/parser/cmd_linked_list.c \
+			$(SRCD)/parser/file_linked_list.c \
+			$(SRCD)/utilities/error.c \
+			$(SRCD)/env_list/init_env.c \
+			$(SRCD)/env_list/env_ops.c \
+			$(SRCD)/garbage_collector/garbage.c \
+			$(SRCD)/debug.c \
+			$(SRCD)/execution/error.c \
+			$(SRCD)/execution/exec_cmd.c \
+			$(SRCD)/execution/execution.c \
+			$(SRCD)/execution/fd_collector.c \
+			$(SRCD)/execution/get_path.c \
+			$(SRCD)/execution/here_doc.c \
+			$(SRCD)/execution/init.c \
+			$(SRCD)/execution/redirection_cases.c \
+			$(SRCD)/execution/redirctions.c \
+			$(SRCD)/execution/setup_child.c
 
-# Convert src paths to obj paths correctly
-OBJS := $(patsubst $(SRCD)/%.c,$(OBJD)/%.o,$(SRCS))
+OBJS :=		$(addprefix $(OBJD)/, $(SRCS:.c=.o))
 
-# Get all directories where object files will be stored
-OBJ_DIRS := $(sort $(dir $(OBJS)))
-
-all: mkdir_obj $(NAME)
-
-mkdir_obj:
-	@mkdir -p $(OBJ_DIRS)
+all: $(NAME)
 
 $(LIBFT):
-	@printf "$(YELLOW)Building libft library...$(NC)\n"
-	@$(MAKE) -C $(LIBFT_DIR)
+	make -C include/libft
 
-# Create object file directories before compiling
-$(OBJD)/%.o: $(SRCD)/%.c
-	@printf "$(YELLOW)Compiling $<...$(NC)\n"
-	@$(CC) $(CFLAGS) -I $(INCD) -c $< -o $@
-	@printf "$(GREEN)Compiled $< successfully!$(NC)\n"
+$(NAME): $(OBJD) $(OBJS) $(LIBFT)
+	$(CC) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
-	@printf "$(GREEN)Executable $(NAME) built successfully!$(NC)\n"
+$(OBJD)/%.o: %.c
+	$(CC) $(CFLAGS) $(LDFLAGS) $(INC) -c $< -o $@
+
+$(OBJD):
+	mkdir -p $(OBJD)
 
 clean:
-	@printf "$(RED)Cleaning object files...$(NC)\n"
-	@rm -rf $(OBJD)
-	@printf "$(GREEN)Object files cleaned!$(NC)\n"
-	@$(MAKE) -C $(LIBFT_DIR) clean
+	make -C include/libft clean
+	rm -rf $(OBJD)
 
 fclean: clean
-	@printf "$(RED)Cleaning library and executable...$(NC)\n"
-	@rm -f $(NAME)
-	@printf "$(GREEN)Executable cleaned!$(NC)\n"
-	@$(MAKE) -C $(LIBFT_DIR) fclean
+	make -C include/libft fclean
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re mkdir_obj
+.PHONY: all clean fclean re

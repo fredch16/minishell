@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:33:55 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 19:11:16 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:59:12 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ char	*ft_charjoin(char const *s1, char const s2)
 {
 	size_t	len;
 	char	*result;
-	
+
 	if (!s1)
 		s1 = "";
-		
 	len = ft_strlen(s1);
-	result = (char *)malloc(sizeof(char) * (len + 2)); // +1 for s2, +1 for null
+	result = (char *)malloc(sizeof(char) * (len + 2));
 	if (!result)
 		return (NULL);
 	ft_strlcpy(result, s1, len + 1);

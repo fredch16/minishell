@@ -6,13 +6,17 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/02 17:56:30 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:11:29 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <unistd.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <errno.h>
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>

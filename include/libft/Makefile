@@ -67,6 +67,7 @@ SRCS :=			ft_isalnum.c \
 				get_next_line_utils.c \
 				ft_free_char.c \
 				ft_strs_len.c \
+				ft_free_2d_arr.c
 
 BONUS_SRCS :=	ft_lstnew.c \
 				ft_lstadd_front.c \
@@ -76,7 +77,7 @@ BONUS_SRCS :=	ft_lstnew.c \
 				ft_lstclear.c \
 				ft_lstiter.c \
 				ft_lstmap.c \
-				ft_lstsize.c \
+				ft_lstsize.c
 
 OBJS := $(SRCS:%.c=$(OBJD)/%.o)
 BONUS_OBJS := $(BONUS_SRCS:%.c=$(OBJD)/%.o)

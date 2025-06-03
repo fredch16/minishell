@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:04:28 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 14:38:23 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:59:59 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char			**ft_split(char const *s, char c);
 
 void			ft_free_char2(char **tofree);
 void			ft_free_char3(char ***tofree);
+void			free_2d_array(char **array);
 
 // functions in functions
 

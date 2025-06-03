@@ -6,11 +6,17 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:49:28 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/01 16:50:02 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:06:59 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void    close_if_not_std(int fd, int std_fd)
+{
+    if (fd != std_fd)
+        close(fd);
+}
 
 void	setup_child_input(t_mini *mini)
 {

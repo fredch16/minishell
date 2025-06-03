@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/27 16:31:00 by fredchar          #+#    #+#              #
-#    Updated: 2025/06/03 22:50:39 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/04 00:32:14 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS := $(SRCD)/main.c \
 		$(SRCD)/env_list/env_to_array.c \
 		$(SRCD)/env_list/env_ops.c \
 		$(SRCD)/garbage_collector/garbage.c \
+		$(SRCD)/builtins/echo.c \
 		$(SRCD)/debug.c \
 
 # Convert src paths to obj paths correctly

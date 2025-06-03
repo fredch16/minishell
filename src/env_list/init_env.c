@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:41:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 18:58:34 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:44:57 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 /**
  * Initialize an empty environment variable list
@@ -79,7 +79,6 @@ int	parse_env_string(char *env_str, char **variable, char **value)
 
 	if (!env_str || !variable || !value)
 		return (0);
-	
 	equals_pos = ft_strchr(env_str, '=');
 	if (!equals_pos)
 	{
@@ -87,11 +86,9 @@ int	parse_env_string(char *env_str, char **variable, char **value)
 		*value = NULL;
 		return (*variable != NULL);
 	}
-	
 	*variable = ft_substr(env_str, 0, equals_pos - env_str);
 	if (!*variable)
 		return (0);
-		
 	*value = ft_strdup(equals_pos + 1);
 	if (!*value)
 	{
@@ -99,7 +96,6 @@ int	parse_env_string(char *env_str, char **variable, char **value)
 		*variable = NULL;
 		return (0);
 	}
-	
 	return (1);
 }
 
@@ -111,8 +107,7 @@ int	parse_env_string(char *env_str, char **variable, char **value)
 void	add_env_node(t_env_list *list, t_env_node *node)
 {
 	if (!list || !node)
-		return;
-		
+		return ;
 	if (!list->head)
 	{
 		list->head = node;
@@ -141,11 +136,9 @@ t_env_list	*env_array_to_list(char **env)
 
 	if (!env)
 		return (NULL);
-	
 	list = init_env_list();
 	if (!list)
 		return (NULL);
-	
 	i = 0;
 	while (env[i])
 	{
@@ -159,71 +152,5 @@ t_env_list	*env_array_to_list(char **env)
 		}
 		i++;
 	}
-	
 	return (list);
-}
-
-/**
- * Convert environment linked list to array of strings
- * @param list Environment list to convert
- * @return NULL-terminated array of environment strings or NULL on failure
- */
-char	**env_list_to_array(t_env_list *list)
-{
-	char		**env_array;
-	t_env_node	*current;
-	int			i;
-	char		*temp;
-
-	if (!list)
-		return (NULL);
-	
-	env_array = (char **)gc_malloc(sizeof(char *) * (list->size + 1), GC_ENV);
-	if (!env_array)
-		return (NULL);
-	
-	current = list->head;
-	i = 0;
-	while (current)
-	{
-		if (current->value)
-		{
-			temp = ft_strjoin(current->variable, "=");
-			if (!temp)
-			{
-				while (--i >= 0)
-					gc_free(env_array[i]);
-				gc_free(env_array);
-				return (NULL);
-			}
-			gc_track(temp, GC_ENV);
-			
-			env_array[i] = ft_strjoin(temp, current->value);
-			gc_free(temp);
-			if (!env_array[i])
-			{
-				while (--i >= 0)
-					gc_free(env_array[i]);
-				gc_free(env_array);
-				return (NULL);
-			}
-			gc_track(env_array[i], GC_ENV);
-		}
-		else
-		{
-			env_array[i] = ft_strdup(current->variable);
-			if (!env_array[i])
-			{
-				while (--i >= 0)
-					gc_free(env_array[i]);
-				gc_free(env_array);
-				return (NULL);
-			}
-			gc_track(env_array[i], GC_ENV);
-		}
-		current = current->next;
-		i++;
-	}
-	env_array[i] = NULL;
-	return (env_array);
 }

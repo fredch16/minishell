@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 11:52:47 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/03 08:45:56 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	write_heredoc_line(int fd, char *line)
 	write(fd, "\n", 1);
 }
 
-static int	is_delimiter(char *line, char *delimiter)
+static int	is_lim(char *line, char *delimiter)
 {
 	int	len;
 
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
-	return (ft_strcmp(line, delimiter) == 0);
+	return (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0);
 }
 static void	read_heredoc_lines(char *delimiter, int write_fd)
 {
@@ -37,7 +37,7 @@ static void	read_heredoc_lines(char *delimiter, int write_fd)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			break ;
-		if (is_delimiter(line, delimiter))
+		if (is_lim(line, delimiter))
 		{
 			free(line);
 			break ;

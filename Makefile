@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/04 09:38:26 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/04 09:53:05 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,11 @@ $(OBJ_DIRS):
 	mkdir -p $(OBJ_DIRS)
 
 $(OBJD)/%.o: $(SRCD)/%.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@$(eval TOTAL := $(words $(SRCS)))
+	@$(eval PROGRESS := $(shell echo $$(($(PROGRESS)+1))))
+	@$(eval PERCENT := $(shell echo $$(($(PROGRESS)*100/$(TOTAL)))))
+	@$(call progress_bar,$(PERCENT))
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 debug:
 	@$(MAKE) fclean all CFLAGS="$(CFLAGS) -D DEBUG=1"
@@ -102,3 +106,24 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+RED     := $(shell tput setaf 1)
+GREEN   := $(shell tput setaf 2)
+YELLOW  := $(shell tput setaf 3)
+BLUE    := $(shell tput setaf 4)
+MAGENTA := $(shell tput setaf 5)
+CYAN    := $(shell tput setaf 6)
+WHITE   := $(shell tput setaf 7)
+RESET   := $(shell tput sgr0)
+
+define progress_bar
+	@printf "$(CYAN)["; \
+	for i in $(shell seq 1 50); do \
+		if [ $$i -le $$(($(1)*50/100)) ]; then \
+			printf "$(GREEN)█$(RESET)"; \
+		else \
+			printf "$(WHITE)░$(RESET)"; \
+		fi; \
+	done; \
+	printf "$(CYAN)] %3d%%$(RESET)\r" $(1);
+endef

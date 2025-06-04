@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/04 05:08:23 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/04 06:59:27 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,12 @@ NAME :=		minishell
 
 CC :=		cc
 CFLAGS :=	-Wall -Wextra -Werror -g
-LDFLAGS :=	-fsanitize=address,undefined
-LIBFT :=		include/libft/libft.a
+LDFLAGS :=	-lreadline
+LIBFT :=	include/libft/libft.a
 
-INC :=		-Iinclude
+INC :=		-Iinclude -Iinclude/libft
 SRCD :=		src
-OBJD := 		obj
+OBJD :=		obj
 
 SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/lexical_analysis/_lexical_analysis.c \
@@ -45,35 +45,57 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/garbage_collector/garbage.c \
 			$(SRCD)/builtins/echo.c \
 			$(SRCD)/builtins/pwd.c \
-			$(SRCD)/debug.c \
+			$(SRCD)/execution/execution.c \
+			$(SRCD)/execution/exec_cmd.c \
+			$(SRCD)/execution/pipes.c \
+			$(SRCD)/execution/exec_pipes.c \
+			$(SRCD)/execution/pipes_utils.c \
+			$(SRCD)/execution/execute_commands.c \
+			$(SRCD)/execution/get_path.c \
+			$(SRCD)/execution/init.c \
+			$(SRCD)/execution/redirections.c \
+			$(SRCD)/execution/redirection_cases.c \
+			$(SRCD)/execution/setup_child.c \
+			$(SRCD)/execution/fd_collector.c \
+			$(SRCD)/execution/here_doc.c \
+			$(SRCD)/execution/error.c \
+			$(SRCD)/debug.c
 
-OBJS :=		$(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 
-all: mkdir_obj $(NAME)
+# Create object subdirectories
+OBJ_DIRS :=	$(OBJD) \
+			$(OBJD)/lexical_analysis \
+			$(OBJD)/expansion \
+			$(OBJD)/parser \
+			$(OBJD)/utilities \
+			$(OBJD)/env_list \
+			$(OBJD)/garbage_collector \
+			$(OBJD)/builtins \
+			$(OBJD)/execution
 
-mkdir_obj:
-	@mkdir -p $(OBJ_DIRS)
+all: $(NAME)
+
+$(NAME): $(OBJ_DIRS) $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C src/libft
+	$(MAKE) -C include/libft
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
-	$(CC) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
+$(OBJ_DIRS):
+	mkdir -p $(OBJ_DIRS)
 
-$(OBJ_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) $(LDFLAGS) $(INC) -c $< -o $@
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+$(OBJD)/%.o: $(SRCD)/%.c
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
-	make -C src/libft clean
-	rm -rf $(OBJ_DIR)
+	$(MAKE) -C include/libft clean
+	rm -rf $(OBJD)
 
 fclean: clean
-	make -C src/libft fclean
+	$(MAKE) -C include/libft fclean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re mkdir_obj
+.PHONY: all clean fclean re

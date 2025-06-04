@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/04 15:22:24 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/04 15:23:23 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ $(LIBFT):
 
 $(OBJ_DIRS):
 	@mkdir -p $(OBJ_DIRS)
+	@echo "Compiling minishell"
 
 $(OBJD)/%.o: $(SRCD)/%.c
 	@$(eval TOTAL := $(words $(SRCS)))

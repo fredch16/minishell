@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 00:31:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 00:42:54 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/04 05:56:09 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINTS_H
+#ifndef BUILTINS_H
 # define BUILTINS_H
+
 # include "minishell.h"
 
 int	echo_builtin(char **args);

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 00:39:12 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 00:42:13 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:33:32 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	builtin_pwd(void)
 
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
-		return (-1);
+		return (1);
 	gc_track(cwd, GC_EXEC);
 	ft_putstr_fd(cwd, 1);
 	ft_putstr_fd("\n", 1);

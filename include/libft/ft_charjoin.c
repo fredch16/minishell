@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:33:55 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/30 14:39:10 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:21:33 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_charjoin(char const *s1, char const s2)
 	int		totallen;
 	char	*new;
 
+	if (!s2)
+		return (ft_strdup((char *)s1));
 	totallen = ft_strlen((char *)s1) + 1;
 	if (totallen == 0)
 		return (ft_strdup(""));

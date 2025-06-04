@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 10:58:17 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:42:05 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	execute_builtin(t_cmd_node *cmd, t_mini *mini)
 	else if (ft_strcmp(cmd->cmd[0], "unset") == 0)
 		exit_code = 1;
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
-		print_env(mini->env_list);
+		env_builtin(mini->env_list);
 	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)
 	{
 		gc_free_all();

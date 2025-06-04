@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 00:31:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 15:22:10 by fredchar         ###   ########.fr       */
+/*   Created: 2025/06/04 14:36:18 by fredchar          #+#    #+#             */
+/*   Updated: 2025/06/04 15:21:55 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "../../include/minishell.h"
 
-# include "minishell.h"
-
-int	echo_builtin(char **args);
-int	builtin_pwd(void);
-int	env_builtin(t_env_list *env_list);
-
-#endif
+int	env_builtin(t_env_list *env_list)
+{
+	print_env(env_list);
+	return (0);
+}

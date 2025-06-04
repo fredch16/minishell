@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 06:25:34 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:45:07 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			execution(t_mini *mini);
 int			execute_pipeline(t_mini *mini);
 
 //pipes.c
-int     	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int *params);
+int     	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index);
 
 // pipeline_utils.c
 int			**create_pipes(int pipe_count);

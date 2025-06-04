@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:31:44 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 06:06:49 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 09:59:08 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	exec_cmd(t_cmd_node *cmd_node, t_mini *mini)
 	if (handle_redirections(cmd_node, mini) == -1)
 		ft_error(1, NULL);
 	cmd_path = get_command_path(cmd_node, mini);
+	if (DEBUG)
+	{
+		ft_putstr_fd("Executing command: ", STDERR_FILENO);
+		ft_putstr_fd(cmd_path, STDERR_FILENO);
+		ft_putchar_fd('\n', STDERR_FILENO);
+	}
 	if (!cmd_path)
 		ft_error(127, "Command not found");
 	execve(cmd_path, cmd_node->cmd, mini->exec_data.ep);

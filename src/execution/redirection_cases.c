@@ -6,11 +6,17 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:11:05 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 11:50:05 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 06:56:29 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
+
+void	close_if_not_std(int fd, int std_fd)
+{
+	if (fd != std_fd && fd != -1)
+		close(fd);
+}
 
 int	handle_heredoc_redir(char *delimiter, t_mini *mini)
 {

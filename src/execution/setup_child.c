@@ -6,11 +6,11 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:49:28 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/01 16:50:02 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 06:10:34 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	setup_child_input(t_mini *mini)
 {

@@ -6,11 +6,11 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 15:58:06 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 11:48:22 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 06:53:22 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 static char	*check_absolute_path(char *command)
 {
@@ -61,13 +61,13 @@ char	*get_command_path(t_cmd_node *cmd_node, t_mini *mini)
 
 	if (ft_strchr(cmd_node->cmd[0], '/'))
 		return (check_absolute_path(cmd_node->cmd[0]));
-	path_env = get_env_value(&mini->env_list, "PATH");
+	path_env = get_env_value(mini->env_list, "PATH");
 	if (!path_env)
 		return (NULL);
 	bin_paths = ft_split(path_env, ':');
 	if (!bin_paths)
 		return (NULL);
 	result = search_in_paths(cmd_node->cmd[0], bin_paths);
-	free_2d_array(bin_paths);
+	// free_2d_array(bin_paths);
 	return (result);
 }

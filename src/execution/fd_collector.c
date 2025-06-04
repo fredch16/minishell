@@ -6,11 +6,11 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 08:52:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 10:31:30 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 06:10:01 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 t_fd_list	*get_fd_list(void)
 {

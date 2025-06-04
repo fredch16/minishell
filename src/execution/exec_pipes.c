@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:24:21 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 11:58:55 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:26:44 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	execute_pipeline(t_mini *mini)
 	pids = malloc(sizeof(pid_t) * mini->cmd_list->size);
 	if (!pids)
 		return (cleanup_pipeline(pipes, NULL, mini->cmd_list->size - 1, 1));
+	gc_track(pids, GC_EXEC);
 	cmd = mini->cmd_list->head;
 	i = 0;
 	while (cmd)

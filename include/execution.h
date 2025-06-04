@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/02 12:02:34 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 06:25:34 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,34 @@ int     	handle_redirections(t_cmd_node *cmd_node, t_mini *mini);
 
 // setup_child.c
 void	    setup_child_input(t_mini *mini);
+void	    setup_child_output(t_mini *mini);
+
+// pipeline.c
+int			execute_pipeline(t_mini *mini);
+
+// execute_commands.c  
+void		execute_builtin(t_cmd_node *cmd, t_mini *mini);
+void		execute_external(t_cmd_node *cmd, t_mini *mini);
+int			wait_for_children(pid_t *pids, int cmd_count);
+
+// execution.c
+int			execution(t_mini *mini);
+
+// pipeline.c
+int			execute_pipeline(t_mini *mini);
+
+//pipes.c
+int     	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int *params);
+
+// pipeline_utils.c
+int			**create_pipes(int pipe_count);
+void		close_all_pipes(int **pipes, int pipe_count);
+int			cleanup_pipeline(int **pipes, pid_t *pids, int pipe_count, int ret_val);
+int			finalize_pipeline(int **pipes, pid_t *pids, t_mini *mini, int pipe_count);
+
+// // execute_commands.c  
+// void		execute_builtin(t_cmd_node *cmd, t_mini *mini);
+// void		execute_external(t_cmd_node *cmd, t_mini *mini);
+// int			wait_for_children(pid_t *pids, int cmd_count);
 
 #endif

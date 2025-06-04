@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/04 12:06:01 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/04 14:25:19 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,13 +76,13 @@ OBJ_DIRS :=	$(OBJD) \
 all: $(NAME)
 
 $(NAME): $(OBJ_DIRS) $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C include/libft
+	@$(MAKE) -C include/libft
 
 $(OBJ_DIRS):
-	mkdir -p $(OBJ_DIRS)
+	@mkdir -p $(OBJ_DIRS)
 
 $(OBJD)/%.o: $(SRCD)/%.c
 	@$(eval TOTAL := $(words $(SRCS)))
@@ -91,16 +91,17 @@ $(OBJD)/%.o: $(SRCD)/%.c
 	@$(call progress_bar,$(PERCENT))
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-debug:
+# debug rule 
+d:
 	@$(MAKE) fclean all CFLAGS="$(CFLAGS) -D DEBUG=1"
 
 clean:
-	$(MAKE) -C include/libft clean
-	rm -rf $(OBJD)
+	@$(MAKE) -C include/libft clean
+	@rm -rf $(OBJD)
 
 fclean: clean
-	$(MAKE) -C include/libft fclean
-	rm -f $(NAME)
+	@$(MAKE) -C include/libft fclean
+	@rm -f $(NAME)
 
 re: fclean all
 

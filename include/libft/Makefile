@@ -85,30 +85,23 @@ BONUS_OBJS := $(BONUS_SRCS:%.c=$(OBJD)/%.o)
 all: $(NAME)
 
 $(OBJD)/%.o: %.c | $(OBJD)
-	@printf "$(YELLOW)Compiling $<...$(NC)\n"
 	@$(CC) $(CFLAGS) -I $(INCD) -c $< -o $@
-	@printf "$(GREEN)Compiled $< successfully!$(NC)\n"
 
 $(OBJD):
-	mkdir -p $(OBJD)
+	@mkdir -p $(OBJD)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-	@printf "$(GREEN)Library $(NAME) built successfully!$(NC)\n"
+	@ar rcs $(NAME) $(OBJS)
 
 clean:
-	@printf "$(RED)Cleaning object files...$(NC)\n"
-	rm -rf $(OBJD)
-	@printf "$(GREEN)Object files cleaned!$(NC)\n"
+	@rm -rf $(OBJD)
 
 fclean: clean
-	@printf "$(RED)Cleaning library ...$(NC)\n"
-	rm -f $(NAME)
-	@printf "$(GREEN)Library cleaned!$(NC)\n"
+	@rm -f $(NAME)
 
 re: fclean all
 
 bonus: $(OBJS) $(BONUS_OBJS)
-	ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 .PHONY: all clean fclean re bonus

@@ -4,3 +4,5 @@ obj
 include/debug.h
 src/debug.c
 suppressions.sub
+.DS_Store
+.vscode

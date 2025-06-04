@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:24:21 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 07:14:18 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:58:55 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,29 @@ int	execute_pipeline(t_mini *mini)
 	t_cmd_node	*cmd;
 	int			**pipes;
 	pid_t		*pids;
-	int			params[2];
+	int			i;
 
-	params[1] = mini->cmd_list->size - 1;
 	pipes = NULL;
-	if (params[1] > 0)
+	if (mini->cmd_list->size > 1)
 	{
-		pipes = create_pipes(params[1]);
+		pipes = create_pipes(mini->cmd_list->size - 1);
 		if (!pipes)
 			return (1);
 	}
 	pids = malloc(sizeof(pid_t) * mini->cmd_list->size);
 	if (!pids)
-		return (cleanup_pipeline(pipes, NULL, params[1], 1));
+		return (cleanup_pipeline(pipes, NULL, mini->cmd_list->size - 1, 1));
 	cmd = mini->cmd_list->head;
-	params[0] = 0;
+	i = 0;
 	while (cmd)
 	{
-		pids[params[0]] = fork_and_exec(cmd, mini, pipes, params);
-		if (pids[params[0]] == -1)
-			return (cleanup_pipeline(pipes, pids, params[1], 1));
+		pids[i] = fork_and_exec(cmd, mini, pipes, i);
+		if (pids[i] == -1)
+			return (cleanup_pipeline(pipes, pids, mini->cmd_list->size - 1, 1));
 		cmd = cmd->next;
-		params[0]++;
+		i++;
 	}
-	return (finalize_pipeline(pipes, pids, mini, params[1]));
+	return (finalize_pipeline(pipes, pids, mini, mini->cmd_list->size - 1));
 }
 
 // int	execute_pipeline(t_mini *mini)

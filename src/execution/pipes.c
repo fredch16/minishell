@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 05:34:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 06:52:04 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:43:59 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	setup_child_pipes(int **pipes, int cmd_index, int pipe_count, t_mini
 	setup_child_output(mini);
 }
 
-int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int *params)
+int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index)
 {
 	pid_t	pid;
 
@@ -53,7 +53,7 @@ int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int *params)
 		return (-1);
 	if (pid == 0)
 	{
-		setup_child_pipes(pipes, params[0], params[1], mini);
+		setup_child_pipes(pipes, index, mini->cmd_list->size - 1, mini);
 		if (handle_redirections(cmd, mini) == -1)
 			ft_error(1, "Redirection failed");
 		if (cmd->cmd_type == BUILTIN)

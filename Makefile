@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/04 14:25:19 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/04 14:46:40 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ $(LIBFT):
 
 $(OBJ_DIRS):
 	@mkdir -p $(OBJ_DIRS)
+	@echo "Compiling minishell"
 
 $(OBJD)/%.o: $(SRCD)/%.c
 	@$(eval TOTAL := $(words $(SRCS)))

@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/04 09:53:05 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/04 12:06:01 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,6 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/execution/redirections.c \
 			$(SRCD)/execution/redirection_cases.c \
 			$(SRCD)/execution/setup_child.c \
-			$(SRCD)/execution/fd_collector.c \
 			$(SRCD)/execution/here_doc.c \
 			$(SRCD)/execution/error.c \
 			$(SRCD)/debug.c

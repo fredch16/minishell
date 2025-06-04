@@ -6,13 +6,17 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 05:14:45 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 06:09:02 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <errno.h>
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
@@ -35,6 +39,7 @@
 # include "utilities.h"
 # include "parser.h"
 # include "execution.h"
+# include "builtins.h"
 // remember ECHo and echo is the same, same for all builtins
 
 void			print_tokens(t_token_list *list);

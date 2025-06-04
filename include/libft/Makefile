@@ -40,8 +40,8 @@ SRCS :=			ft_isalnum.c \
 				ft_memchr.c \
 				ft_memmove.c \
 				ft_strlcat.c \
-				ft_strncmp.c \
 				ft_strcmp.c \
+				ft_strncmp.c \
 				ft_strnstr.c \
 				ft_strlcpy.c \
 				ft_strjoin.c \

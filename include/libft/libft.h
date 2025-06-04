@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:04:28 by fredchar          #+#    #+#             */
-<<<<<<< HEAD:include/libft/libft.h
-/*   Updated: 2025/06/04 00:29:59 by fredchar         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/30 14:38:23 by fredchar         ###   ########.fr       */
->>>>>>> execution:src/libft/libft.h
+/*   Updated: 2025/06/04 05:54:39 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +45,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 int				ft_strncmp(const char *s1, const char *s2, unsigned int n);
-<<<<<<< HEAD:include/libft/libft.h
 int				ft_strcmp(const char *s1, const char *s2);
-=======
->>>>>>> execution:src/libft/libft.h
 int				ft_atoi(char *str);
 unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size);
 unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize);

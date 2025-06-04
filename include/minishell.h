@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 06:09:02 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 09:27:28 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@
 # include "execution.h"
 # include "builtins.h"
 // remember ECHo and echo is the same, same for all builtins
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 void			print_tokens(t_token_list *list);
 

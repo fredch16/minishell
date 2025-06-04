@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 05:37:19 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 09:33:02 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,24 @@ int	main(int ac, char **av, char **env)
 		}
 		mini.token_list = init_token_list(&mini, line);
 		tokenize_input(mini.token_list, line);
-		print_tokens(mini.token_list);
-		printf("\n%s=== EXPANSION STAGE ===%s\n", COLOR_BLUE, COLOR_RESET);
+		if (DEBUG)
+		{
+			print_tokens(mini.token_list);
+			printf("\n%s=== EXPANSION STAGE ===%s\n", COLOR_BLUE, COLOR_RESET);
+		}
 		expansion(mini.token_list);
 		if (handle_error(&mini))
 			continue;
-		// print_tokens(mini.token_list);
+		if (DEBUG)
+			print_tokens(mini.token_list);	
 		mini.cmd_list = init_cmd_list(&mini, line);
 		if (build_cmd_list(mini.token_list, mini.cmd_list))
 		{
 			handle_error(&mini);
 			continue;
 		}
-		print_cmd_list(mini.cmd_list);
+		if (DEBUG)
+			print_cmd_list(mini.cmd_list);
 		mini.exit_code = execution(&mini);
 		free(line);
 		gc_free_by_type(GC_PARSE);

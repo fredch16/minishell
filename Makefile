@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/04 06:59:27 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/04 09:38:26 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,9 @@ $(OBJ_DIRS):
 
 $(OBJD)/%.o: $(SRCD)/%.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+debug:
+	@$(MAKE) fclean all CFLAGS="$(CFLAGS) -D DEBUG=1"
 
 clean:
 	$(MAKE) -C include/libft clean

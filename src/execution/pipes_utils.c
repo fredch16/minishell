@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:04:46 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 06:04:48 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:33:36 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ int	finalize_pipeline(int **pipes, pid_t *pids, t_mini *mini, int pipe_count)
 	if (pipes)
 		close_all_pipes(pipes, pipe_count);
 	exit_code = wait_for_children(pids, mini->cmd_list->size);
-	free(pids);
+	// free(pids);
 	return (exit_code);
 }

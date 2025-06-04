@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 00:42:10 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/04 05:14:43 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef enum e_cmd_type
 {
 	BUILTIN,
 	STDCMD
-}	t_cmd_type;
+}						t_cmd_type;
 
 typedef enum e_token_type
 {
@@ -49,7 +49,14 @@ typedef enum e_token_type
 	TK_D_QUOTES,
 	TK_BUILTIN,
 	TK_S_QUOTES
-}	t_token_type;
+}						t_token_type;
+
+typedef struct s_exec_data
+{
+	int					input_file;
+	int					output_file;
+	char				**ep;
+}						t_exec_data;
 
 typedef struct s_token_node
 {
@@ -151,5 +158,18 @@ typedef struct s_garbage_node
 	t_gc_type				type;
 	struct s_garbage_node	*next;
 }	t_garbage_node;
+
+typedef struct s_fd_node
+{
+	int					fd;
+	struct s_fd_node	*next;
+}						t_fd_node;
+
+typedef struct s_fd_list
+{
+	t_fd_node			*head;
+	t_fd_node			*tail;
+	size_t				size;
+}						t_fd_list;
 
 #endif

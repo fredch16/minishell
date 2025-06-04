@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 00:00:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:54:19 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/04 05:14:46 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

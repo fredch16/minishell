@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 05:14:43 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/04 06:54:38 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_file_node
 {
 	t_redir_type		redir_type;
 	char				*filename;
+	char 				*lim;
 	struct s_file_node	*next;
 }	t_file_node;
 
@@ -110,6 +111,7 @@ typedef struct s_cmd_node
 {
 	t_cmd_type			cmd_type;
 	char				**cmd;
+	int					fd[2];
 	t_file_list			*files;
 	struct s_cmd_node	*next;
 }	t_cmd_node;
@@ -137,6 +139,7 @@ typedef struct s_mini
 	t_cmd_list		*cmd_list;
 	t_token_list	*token_list;
 	t_env_list		*env_list;
+	t_exec_data		exec_data;
 	int				exit_code;
 	int				error_code;
 }	t_mini;

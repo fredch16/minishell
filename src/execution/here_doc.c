@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 06:10:08 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/05 07:10:14 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	is_delimiter(char *line, char *delimiter)
 		line[len - 1] = '\0';
 	return (ft_strcmp(line, delimiter) == 0);
 }
+
 static void	read_heredoc_lines(char *delimiter, int write_fd)
 {
 	char	*line;

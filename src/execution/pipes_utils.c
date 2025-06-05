@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:04:46 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 15:33:36 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/05 06:49:01 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	**create_pipes(int pipe_count)
 	int	**pipes;
 	int	i;
 
+	if (pipe_count <= 0)
+		return (NULL);
 	pipes = malloc(sizeof(int *) * pipe_count);
 	if (!pipes)
 		return (NULL);
@@ -27,9 +29,12 @@ int	**create_pipes(int pipe_count)
 		if (!pipes[i] || pipe(pipes[i]) == -1)
 		{
 			while (--i >= 0)
+			{
+				close(pipes[i][0]);
+				close(pipes[i][1]);
 				free(pipes[i]);
-			free(pipes);
-			return (NULL);
+			}
+			return (free(pipes), NULL);
 		}
 		i++;
 	}
@@ -40,7 +45,7 @@ void	close_all_pipes(int **pipes, int pipe_count)
 {
 	int	i;
 
-	if (!pipes)
+	if (!pipes || pipe_count <= 0)
 		return ;
 	i = 0;
 	while (i < pipe_count)
@@ -66,9 +71,9 @@ int	finalize_pipeline(int **pipes, pid_t *pids, t_mini *mini, int pipe_count)
 {
 	int	exit_code;
 
+	(void)pipe_count;
 	if (pipes)
-		close_all_pipes(pipes, pipe_count);
+		free(pipes);
 	exit_code = wait_for_children(pids, mini->cmd_list->size);
-	// free(pids);
 	return (exit_code);
 }

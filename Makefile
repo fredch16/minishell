@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
+#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/05 09:50:57 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/05 15:17:50 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/builtins/echo.c \
 			$(SRCD)/builtins/pwd.c \
 			$(SRCD)/builtins/env.c \
+			$(SRCD)/builtins/unset.c \
+			$(SRCD)/builtins/export.c \
 			$(SRCD)/execution/execution.c \
 			$(SRCD)/execution/pipes.c \
 			$(SRCD)/execution/exec_pipes.c \

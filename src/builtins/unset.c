@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 00:31:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/05 15:18:25 by fredchar         ###   ########.fr       */
+/*   Created: 2025/06/05 14:00:33 by fredchar          #+#    #+#             */
+/*   Updated: 2025/06/05 15:06:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "../../include/minishell.h"
 
-# include "minishell.h"
+int	unset_builtin(t_env_list *env_list, char **args)
+{
+	int	i;
 
-int	echo_builtin(char **args);
-int	builtin_pwd(void);
-int	env_builtin(t_env_list *env_list);
-int	unset_builtin(t_env_list *env_list, char **args);
-int	export_builtin(t_env_list *env_list, char **args);
-#endif
+	i = 1;
+	while (args[i])
+	{
+		printf("Unsetting |%s|\n", args[i]);
+		unset_env_var(env_list, args[i++]);
+	}
+	return (0);
+}

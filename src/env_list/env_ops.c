@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:25:20 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/01 14:02:05 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:51:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_env_value(t_env_list *list, char *variable)
  * @param list Environment list
  * @param variable Variable name
  * @param value Variable value (can be NULL)
- * @return 1 on success, 0 on failure
+ * @return 0 on success, -1 on failure
  */
 int	set_env_var(t_env_list *list, char *variable, char *value)
 {
@@ -65,7 +65,7 @@ int	set_env_var(t_env_list *list, char *variable, char *value)
 	char		*new_value;
 	
 	if (!list || !variable)
-		return (0);
+		return (-1);
 		
 	existing = find_env_var(list, variable);
 	if (existing)
@@ -75,7 +75,7 @@ int	set_env_var(t_env_list *list, char *variable, char *value)
 		{
 			new_value = ft_strdup(value);
 			if (!new_value)
-				return (0);
+				return (-1);
 				
 			gc_track(new_value, GC_ENV);
 			if (existing->value)
@@ -88,17 +88,17 @@ int	set_env_var(t_env_list *list, char *variable, char *value)
 				gc_free(existing->value);
 			existing->value = NULL;
 		}
-		return (1);
+		return (0);
 	}
 	else
 	{
 		// Add new variable
 		new_node = create_env_node(variable, value);
 		if (!new_node)
-			return (0);
+			return (-1);
 			
 		add_env_node(list, new_node);
-		return (1);
+		return (0);
 	}
 }
 

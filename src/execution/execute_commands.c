@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 08:09:40 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:18:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	execute_builtin(t_cmd_node *cmd, t_mini *mini)
 	else if (ft_strcmp(cmd->cmd[0], "cd") == 0)
 		exit_code = 1;
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)
-		exit_code = 1;
+		exit_code = export_builtin(mini->env_list, cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "unset") == 0)
-		exit_code = 1;
+		exit_code = unset_builtin(mini->env_list, cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
 		env_builtin(mini->env_list);
 	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)

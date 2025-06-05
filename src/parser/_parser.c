@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   _parser.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 21:35:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:37:42 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/05 06:35:19 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static void	finalize_command(t_cmd_node *cmd)
+{
+	if (!cmd || !cmd->cmd || !cmd->cmd[0])
+		return;
+	if (is_builtin(cmd->cmd[0]))
+		cmd->cmd_type = BUILTIN;
+	else
+		cmd->cmd_type = STDCMD;
+}
 
 int	build_cmd_list(t_token_list *token_list, t_cmd_list *cmd_list)
 {
@@ -27,6 +37,7 @@ int	build_cmd_list(t_token_list *token_list, t_cmd_list *cmd_list)
 	{
 		if (current_token->type == TK_PIPE)
 		{
+			finalize_command(current_cmd);
 			current_cmd->files = file_list;
 			cmd_add_back(cmd_list, current_cmd);
 			current_cmd = new_cmd();
@@ -46,10 +57,7 @@ int	build_cmd_list(t_token_list *token_list, t_cmd_list *cmd_list)
 			add_arg_to_cmd(current_cmd, current_token);
 		current_token = current_token->next;
 	}
-	current_cmd->cmd_type = STDCMD;
-	if (is_builtin(current_cmd->cmd[0]))
-		current_cmd->cmd_type = BUILTIN;
+	finalize_command(current_cmd);
 	current_cmd->files = file_list;
-	cmd_add_back(cmd_list, current_cmd);
-	return (0);
+	return (cmd_add_back(cmd_list, current_cmd), 0);
 }

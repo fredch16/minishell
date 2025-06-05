@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/05 16:19:46 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/05 19:31:04 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/builtins/env.c \
 			$(SRCD)/builtins/unset.c \
 			$(SRCD)/builtins/export.c \
+			$(SRCD)/builtins/cd.c \
 			$(SRCD)/execution/_execution.c \
 			$(SRCD)/execution/pipes.c \
 			$(SRCD)/execution/exec_pipes.c \

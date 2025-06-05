@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 11:45:07 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/05 08:08:14 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	    exec_cmd(t_cmd_node *cmd_node, t_mini *mini);
 void	    setup_exec(t_cmd_node *cmd_node, t_mini *mini);
 
 // error.c
-void	    ft_error(int error_code, char *error_msg);
+void	    ft_error(int error_code, char *error_msg, int mode);
 
 // init.c
 void	    init_exec_data(t_mini *mini);

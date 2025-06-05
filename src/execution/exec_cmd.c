@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:31:44 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 07:09:01 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/05 08:08:51 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	exec_cmd(t_cmd_node *cmd_node, t_mini *mini)
 	setup_child_input(mini);
 	setup_child_output(mini);
 	if (handle_redirections(cmd_node, mini) == -1)
-		ft_error(1, NULL);
+		ft_error(1, NULL, 0);
 	cmd_path = get_command_path(cmd_node, mini);
 	if (DEBUG)
 	{
@@ -28,9 +28,9 @@ void	exec_cmd(t_cmd_node *cmd_node, t_mini *mini)
 		ft_putchar_fd('\n', STDERR_FILENO);
 	}
 	if (!cmd_path)
-		ft_error(127, "Command not found");
+		ft_error(127, "Command not found", 0);
 	execve(cmd_path, cmd_node->cmd, mini->exec_data.ep);
-	ft_error(127, "execve");
+	ft_error(127, "execve", 0);
 }
 
 void	setup_exec(t_cmd_node *cmd_node, t_mini *mini)
@@ -38,10 +38,10 @@ void	setup_exec(t_cmd_node *cmd_node, t_mini *mini)
 	pid_t	pid;
 
 	if (cmd_node->next && pipe(cmd_node->fd) == -1)
-		ft_error(1, "pipe");
+		ft_error(1, "pipe", 0);
 	pid = fork();
 	if (pid == -1)
-		ft_error(1, "fork");
+		ft_error(1, "fork", 0);
 	if (pid == 0)
 		exec_cmd(cmd_node, mini);
 }

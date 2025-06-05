@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 15:58:06 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 07:10:07 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/05 08:09:53 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*search_in_paths(char *command, char **bin_paths)
 			return (result);
 		i++;
 	}
-	return (ft_error(127, NULL), NULL);
+	return (ft_error(127, NULL, 0), NULL);
 }
 
 char	*get_command_path(t_cmd_node *cmd_node, t_mini *mini)

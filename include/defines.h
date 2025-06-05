@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:25:34 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 21:35:34 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/05 08:16:33 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,9 @@
 # define EC_SYNTAX_REDIR 743
 # define EC_PIPE_AT_END 744
 # define EC_MALLOC 999
+
+// error function mode codes
+# define EC_GC 0b0001
+# define EC_FD 0b0010
 
 #endif

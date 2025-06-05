@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 05:34:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 06:36:05 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/05 08:09:18 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	setup_child_pipes(int **pipes, int cmd_index, int pipe_count)
 	if (cmd_index > 0)
 	{
 		if (dup2(pipes[cmd_index - 1][0], STDIN_FILENO) == -1)
-			ft_error(1, "dup2 input failed");
+			ft_error(1, "dup2 input failed", 0);
 	}
 	if (cmd_index < pipe_count)
 	{
 		if (dup2(pipes[cmd_index][1], STDOUT_FILENO) == -1)
-			ft_error(1, "dup2 output failed");
+			ft_error(1, "dup2 output failed", 0);
 	}
 	i = 0;
 	while (i < pipe_count)
@@ -48,12 +48,12 @@ int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index)
 	{
 		setup_child_pipes(pipes, index, pipe_count);
 		if (handle_redirections(cmd, mini) == -1)
-			ft_error(1, "Redirection failed");
+			ft_error(1, "Redirection failed", 0);
 		if (cmd->cmd_type == BUILTIN)
 			execute_builtin(cmd, mini);
 		else
 			execute_external(cmd, mini);
-		ft_error(127, "Command execution failed");
+		ft_error(127, "Command execution failed", 0);
 	}
 	return (pid);
 }

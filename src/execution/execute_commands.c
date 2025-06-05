@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/04 14:42:05 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/05 08:09:40 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	execute_external(t_cmd_node *cmd, t_mini *mini)
 
 	cmd_path = get_command_path(cmd, mini);
 	if (!cmd_path)
-		ft_error(127, "Command not found");
+		ft_error(127, "Command not found", 0);
 	env_array = env_list_to_array(mini->env_list);
 	if (!env_array)
-		ft_error(1, "Failed to convert environment");
+		ft_error(1, "Failed to convert environment", 0);
 	if (DEBUG)
 	{
 		ft_putstr_fd("\n\nExecuting command: ", STDERR_FILENO);
@@ -56,7 +56,7 @@ void	execute_external(t_cmd_node *cmd, t_mini *mini)
 		ft_putstr_fd("\n\n\n", STDERR_FILENO);
 	}
 	execve(cmd_path, cmd->cmd, env_array);
-	ft_error(127, "execve failed");
+	ft_error(127, "execve failed", 0);
 }
 
 int	wait_for_children(pid_t *pids, int cmd_count)

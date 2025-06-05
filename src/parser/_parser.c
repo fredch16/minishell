@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _parser.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 21:35:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/05 06:35:19 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/05 20:16:07 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 static void	finalize_command(t_cmd_node *cmd)
 {
+	int	i;
+
+	i = 0;
 	if (!cmd || !cmd->cmd || !cmd->cmd[0])
 		return;
+	while (cmd->cmd[0][i])
+	{
+		cmd->cmd[0][i] = ft_tolower(cmd->cmd[0][i]);
+		i++;
+	}
 	if (is_builtin(cmd->cmd[0]))
 		cmd->cmd_type = BUILTIN;
 	else

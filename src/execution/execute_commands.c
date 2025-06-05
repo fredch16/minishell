@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 19:51:52 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:59:45 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	execute_builtin(t_cmd_node *cmd, t_mini *mini)
 	else if (ft_strcmp(cmd->cmd[0], "unset") == 0)
 		exit_code = unset_builtin(mini->env_list, cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
-		env_builtin(mini->env_list);
+		exit_code = env_builtin(mini->env_list);
 	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)
 	{
 		gc_free_all();

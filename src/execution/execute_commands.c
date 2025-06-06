@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 19:59:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:37:23 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_builtin(t_cmd_node *cmd, t_mini *mini)
 	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		exit_code = echo_builtin(cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
-		exit_code = builtin_pwd();
+		exit_code = pwd_builtin();
 	else if (ft_strcmp(cmd->cmd[0], "cd") == 0)
 		exit_code = cd_builtin(mini->env_list, cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)

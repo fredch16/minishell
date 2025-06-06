@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 19:12:31 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/05 19:50:42 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/06 02:17:53 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ int	cd_builtin(t_env_list *env_list, char **args)
 	if (!cwd)
 		return (ft_putendl_fd("minishell: cd failed", STDERR_FILENO), 1);
 	gc_track(cwd, GC_EXEC);
-	set_env_var(env_list, "PWD", cwd);
-	return (0);
+	return (set_env_var(env_list, "PWD", cwd), 0);
 }

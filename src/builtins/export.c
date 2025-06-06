@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/05 17:43:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/06 02:18:31 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	trust_but_verify(char *arg)
 	{
 		ft_printf("export: not valid in this context: %c\n", arg[i]);
 		return (-1);
-
 	}
 	while (arg[i] && arg[i] != '=')
 		i++;
@@ -35,15 +34,16 @@ int	trust_but_verify(char *arg)
 	return (-1);
 }
 
+// in theory this should actually print them in alphabetical order 
+// with a prefix if no argument is set
 int	export_builtin(t_env_list *env_list, char **args)
 {
 	char	*var;
 	char	*val;
 	int		i;
 	int		posequals;
-	
+
 	i = 1;
-	// in theory this should actually print them in alphabetical order with a prefix
 	if (!args[i])
 		print_env(env_list);
 	while (args[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:24:21 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/06 10:01:13 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:01:19 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ int	execute_pipeline(t_mini *mini)
 		close(pipes[pipe_count - 1][1]);
 	}
 	if (pipe_count == 0)
+	{
+		wait_for_children(pids, 1);
 		return (mini->exit_code);
+	}
 	return (finalize_pipeline(pipes, pids, mini, pipe_count));
 }	

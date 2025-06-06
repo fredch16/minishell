@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 05:34:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 17:40:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:01:10 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,44 @@ static void	setup_child_pipes(int **pipes, int cmd_index, int pipe_count)
 	}
 }
 
+int	execute_builtin_parent(t_cmd_node *cmd, t_mini *mini)
+{
+	int	exit_code = 0;
+	
+	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
+		exit_code = echo_builtin(cmd->cmd);
+	else if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
+		exit_code = builtin_pwd();
+	else if (ft_strcmp(cmd->cmd[0], "export") == 0)
+		exit_code = export_builtin(mini->env_list, cmd->cmd);
+	else if (ft_strcmp(cmd->cmd[0], "unset") == 0)
+		exit_code = unset_builtin(mini->env_list, cmd->cmd);
+	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
+		exit_code = env_builtin(mini->env_list);
+	else if (ft_strcmp(cmd->cmd[0], "cd") == 0)
+		exit_code = 1;
+	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)
+	{
+		printf("exit\n");
+		gc_free_all();
+		exit(0);
+	}
+	return (exit_code);
+}
+
 int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index)
 {
 	pid_t	pid;
 	int		pipe_count;
 
 	pipe_count = mini->cmd_list->size - 1;
+	if (cmd->cmd_type == BUILTIN && pipe_count == 0)
+	{
+		if (handle_redirections(cmd, mini) == -1)
+			return (-1);
+		mini->exit_code = execute_builtin_parent(cmd, mini);
+		return (0);
+	}
 	pid = fork();
 	if (pid == -1)
 		return (-1);

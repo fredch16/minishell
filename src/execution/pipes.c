@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 05:34:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/06 10:01:10 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:34:47 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	execute_builtin_parent(t_cmd_node *cmd, t_mini *mini)
 	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		exit_code = echo_builtin(cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
-		exit_code = builtin_pwd();
+		exit_code = pwd_builtin();
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)
 		exit_code = export_builtin(mini->env_list, cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "unset") == 0)
@@ -50,7 +50,7 @@ int	execute_builtin_parent(t_cmd_node *cmd, t_mini *mini)
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
 		exit_code = env_builtin(mini->env_list);
 	else if (ft_strcmp(cmd->cmd[0], "cd") == 0)
-		exit_code = 1;
+		exit_code = cd_builtin(mini->env_list, cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)
 	{
 		printf("exit\n");
@@ -82,7 +82,9 @@ int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index)
 		if (handle_redirections(cmd, mini) == -1)
 			ft_error(1, "Redirection failed", 0);
 		if (cmd->cmd_type == BUILTIN)
+		{
 			execute_builtin(cmd, mini);
+		}
 		else
 			execute_external(cmd, mini);
 		ft_error(127, "Command execution failed", 0);

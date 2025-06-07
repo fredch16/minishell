@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/07 16:42:14 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:01:24 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	read_heredoc_lines(char *delimiter, int write_fd)
 	}
 }
 
-int	create_heredoc(char *delimiter)
+int	create_heredoc(char *delimiter, t_mini *mini)
 {
 	int	pipefd[2];
 

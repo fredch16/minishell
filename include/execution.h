@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/07 07:40:18 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:02:35 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_fd_list	*get_fd_list(void);
 char	    *get_command_path(t_cmd_node *cmd_node, t_mini *mini);
 
 // here_doc.c
-int	        create_heredoc(char *delimiter);
+int	        create_heredoc(char *delimiter, t_mini *mini);
 
 // redirection_cases.c
 int	        handle_heredoc_redir(char *delimiter, t_mini *mini);

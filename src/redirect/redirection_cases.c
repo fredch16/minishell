@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:11:05 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/07 07:58:57 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:03:04 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	handle_heredoc_redir(char *delimiter, t_mini *mini)
 	int	fd;
 
 	(void)mini;
-	fd = create_heredoc(delimiter);
+	fd = create_heredoc(delimiter, mini);
 	if (fd == -1)
 		ft_error(1, "open", 0);
 	if (dup2(fd, STDIN_FILENO) == -1)

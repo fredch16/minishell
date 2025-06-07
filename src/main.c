@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/05 18:52:58 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 07:46:16 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	main(int ac, char **av, char **env)
 		if (DEBUG)
 			print_cmd_list(mini.cmd_list);
 		mini.exit_code = execution(&mini);
+		reverting_stds();
 		gc_free_by_type(GC_PARSE);
 	}
 	printf("minishell is over\n");

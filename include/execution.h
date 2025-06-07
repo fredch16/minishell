@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 08:08:14 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 07:40:18 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ int			finalize_pipeline(int **pipes, pid_t *pids, t_mini *mini, int pipe_count);
 // void		execute_builtin(t_cmd_node *cmd, t_mini *mini);
 // void		execute_external(t_cmd_node *cmd, t_mini *mini);
 // int			wait_for_children(pid_t *pids, int cmd_count);
+
+int	        reverting_stds(void);
 
 #endif

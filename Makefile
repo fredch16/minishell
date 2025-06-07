@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/06 17:36:19 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/07 07:44:15 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,8 +56,9 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/execution/execute_commands.c \
 			$(SRCD)/execution/get_path.c \
 			$(SRCD)/execution/init.c \
-			$(SRCD)/execution/redirections.c \
-			$(SRCD)/execution/redirection_cases.c \
+			$(SRCD)/redirect/redirections.c \
+			$(SRCD)/redirect/reverting_stds.c \
+			$(SRCD)/redirect/redirection_cases.c \
 			$(SRCD)/execution/setup_child.c \
 			$(SRCD)/execution/here_doc.c \
 			$(SRCD)/execution/error.c \
@@ -74,7 +75,8 @@ OBJ_DIRS :=	$(OBJD) \
 			$(OBJD)/env_list \
 			$(OBJD)/garbage_collector \
 			$(OBJD)/builtins \
-			$(OBJD)/execution
+			$(OBJD)/execution \
+			$(OBJD)/redirect
 
 all: $(NAME)
 

@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 23:38:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 16:36:22 by fredchar         ###   ########.fr       */
+/*   Created: 2025/06/07 16:35:11 by fredchar          #+#    #+#             */
+/*   Updated: 2025/06/07 16:35:24 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
-# include "minishell.h"
+#include "../include/minishell.h"
 
+void	handle_sigint(int signo)
+{
+	(void)signo;
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
-void	setup_signals(void);
-void	handle_sigint(int signo);
-
-#endif
+void	setup_signals(void)
+{
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+}

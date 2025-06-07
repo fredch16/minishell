@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
+#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/07 07:44:15 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/07 16:38:05 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/execution/setup_child.c \
 			$(SRCD)/execution/here_doc.c \
 			$(SRCD)/execution/error.c \
+			$(SRCD)/signals.c \
 			$(SRCD)/debug.c
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)

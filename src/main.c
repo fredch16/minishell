@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 07:46:16 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:36:03 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+volatile sig_atomic_t g_signal_recieved = 0;
+
 
 int	main(int ac, char **av, char **env)
 {
@@ -24,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	mini.env_list = env_array_to_list(env);
 	if (!mini.env_list)
 		return (1);
+	setup_signals();
 	while (1)
 	{
 		line = readline("minishell $> ");
@@ -60,6 +64,8 @@ int	main(int ac, char **av, char **env)
 		mini.exit_code = execution(&mini);
 		reverting_stds();
 		gc_free_by_type(GC_PARSE);
+		if (g_signal_recieved == SIGINT)
+			g_signal_recieved = 0;
 	}
 	printf("minishell is over\n");
 	gc_free_all();

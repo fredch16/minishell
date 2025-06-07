@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 07:27:40 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:37:01 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # include "parser.h"
 # include "execution.h"
 # include "builtins.h"
-// remember ECHo and echo is the same, same for all builtins
+# include "signals.h"
 
 # ifndef DEBUG
 #  define DEBUG 0

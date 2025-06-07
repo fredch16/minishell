@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 16:36:03 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:18:51 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int ac, char **av, char **env)
 		if (g_signal_recieved == SIGINT)
 			g_signal_recieved = 0;
 	}
-	printf("minishell is over\n");
+	printf("exit\n");
 	gc_free_all();
 	return (0);
 }

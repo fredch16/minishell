@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/06 17:37:23 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:47:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	wait_for_children(pid_t *pids, int cmd_count)
 	int	exit_code;
 	int	i;
 
+	status = 0;
 	exit_code = 0;
 	i = 0;
 	while (i < cmd_count)

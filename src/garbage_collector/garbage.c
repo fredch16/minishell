@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:39:48 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 14:57:33 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:34:43 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,9 +160,9 @@ t_garbage_node	*free_gc_node(t_garbage_node *prev, t_garbage_node *node)
 	llist = get_gc_data();
 	next = node->next;
 	if (prev)
-		prev->next = node->next;
+		prev->next = next;
 	else
-		llist->head = node->next;
+		llist->head = next;
 	if (node == llist->tail)
 		llist->tail = prev;
 	free(node->ptr);
@@ -171,18 +171,18 @@ t_garbage_node	*free_gc_node(t_garbage_node *prev, t_garbage_node *node)
 	return (next);
 }
 
-/**
- * Skip to the next node in the list
- * @param prev Pointer to update with current node
- * @param current Current node to advance from
- * @return Next node to process
- */
-static t_garbage_node	*skip_gc_node(t_garbage_node **prev,
-									t_garbage_node *current)
-{
-	*prev = current;
-	return (current->next);
-}
+// /**
+//  * Skip to the next node in the list
+//  * @param prev Pointer to update with current node
+//  * @param current Current node to advance from
+//  * @return Next node to process
+//  */
+// static t_garbage_node	*skip_gc_node(t_garbage_node **prev,
+// 									t_garbage_node *current)
+// {
+// 	*prev = current;
+// 	return (current->next);
+// }
 
 /**
  * Free all garbage collection nodes of specified type
@@ -197,11 +197,15 @@ void	gc_free_by_type(t_gc_type type)
 	llist = get_gc_data();
 	current = llist->head;
 	prev = NULL;
+	
 	while (current)
 	{
 		if (current->type == type)
 			current = free_gc_node(prev, current);
 		else
-			current = skip_gc_node(&prev, current);
+		{
+			prev = current;
+			current = current->next;
+		}
 	}
 }

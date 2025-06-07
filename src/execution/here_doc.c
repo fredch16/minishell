@@ -6,11 +6,13 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/07 17:06:26 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:12:56 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern volatile sig_atomic_t g_signal_recieved;
 
 static void	write_heredoc_line(int fd, char *line)
 {

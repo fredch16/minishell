@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 08:08:14 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:02:35 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_fd_list	*get_fd_list(void);
 char	    *get_command_path(t_cmd_node *cmd_node, t_mini *mini);
 
 // here_doc.c
-int	        create_heredoc(char *delimiter);
+int	        create_heredoc(char *delimiter, t_mini *mini);
 
 // redirection_cases.c
 int	        handle_heredoc_redir(char *delimiter, t_mini *mini);
@@ -77,5 +77,7 @@ int			finalize_pipeline(int **pipes, pid_t *pids, t_mini *mini, int pipe_count);
 // void		execute_builtin(t_cmd_node *cmd, t_mini *mini);
 // void		execute_external(t_cmd_node *cmd, t_mini *mini);
 // int			wait_for_children(pid_t *pids, int cmd_count);
+
+int	        reverting_stds(void);
 
 #endif

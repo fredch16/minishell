@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   _execution.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:34 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 07:09:18 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:23:51 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	execution(t_mini *mini)
 
 	if (!mini->cmd_list || !mini->cmd_list->head)
 		return (0);
+	setup_parent_signals_for_execution();
 	init_exec_data(mini);
 	exit_code = execute_pipeline(mini);
 	mini->exit_code = exit_code;

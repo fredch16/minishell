@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 19:59:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:30:11 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_builtin(t_cmd_node *cmd, t_mini *mini)
 	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		exit_code = echo_builtin(cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
-		exit_code = builtin_pwd();
+		exit_code = pwd_builtin();
 	else if (ft_strcmp(cmd->cmd[0], "cd") == 0)
 		exit_code = cd_builtin(mini->env_list, cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)
@@ -64,20 +64,36 @@ int	wait_for_children(pid_t *pids, int cmd_count)
 	int	status;
 	int	exit_code;
 	int	i;
+	int	was_signaled;
 
+	status = 0;
 	exit_code = 0;
+	was_signaled = 0;
 	i = 0;
+	
 	while (i < cmd_count)
 	{
 		waitpid(pids[i], &status, 0);
+		
 		if (i == cmd_count - 1)
 		{
 			if (WIFEXITED(status))
 				exit_code = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
+			{
+				was_signaled = 1;
 				exit_code = 128 + WTERMSIG(status);
+				
+				// Special handling for SIGINT (Ctrl+C) - don't print a new prompt line
+				if (WTERMSIG(status) == SIGINT)
+					write(STDOUT_FILENO, "\n", 1);
+			}
 		}
 		i++;
 	}
+	
+	// Reset signal handlers after command execution is complete
+	reset_parent_signals();
+	
 	return (exit_code);
 }

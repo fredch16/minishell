@@ -6,13 +6,13 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 00:39:12 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/06 02:18:33 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:57:44 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	builtin_pwd(void)
+int	pwd_builtin(void)
 {
 	char	*cwd;
 

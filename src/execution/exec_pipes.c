@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:24:21 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 17:39:25 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:26:51 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,10 @@ int	execute_pipeline(t_mini *mini)
 		close(pipes[pipe_count - 1][0]);
 		close(pipes[pipe_count - 1][1]);
 	}
+	if (pipe_count == 0)
+	{
+		wait_for_children(pids, 1);
+		return (mini->exit_code);
+	}
 	return (finalize_pipeline(pipes, pids, mini, pipe_count));
-}
+}	

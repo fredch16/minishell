@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/05 07:10:14 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:12:56 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern volatile sig_atomic_t g_signal_recieved;
 
 static void	write_heredoc_line(int fd, char *line)
 {
@@ -20,22 +22,18 @@ static void	write_heredoc_line(int fd, char *line)
 
 static int	is_delimiter(char *line, char *delimiter)
 {
-	int	len;
-
-	len = ft_strlen(line);
-	if (len > 0 && line[len - 1] == '\n')
-		line[len - 1] = '\0';
+	if (!line || !delimiter)
+		return (0);
 	return (ft_strcmp(line, delimiter) == 0);
 }
 
-static void	read_heredoc_lines(char *delimiter, int write_fd)
+static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd)
 {
 	char	*line;
 
 	while (1)
 	{
-		write(STDOUT_FILENO, "heredoc> ", 9);
-		line = get_next_line(STDIN_FILENO);
+		line = readline("heredoc> ");
 		if (!line)
 			break ;
 		if (is_delimiter(line, delimiter))
@@ -43,18 +41,24 @@ static void	read_heredoc_lines(char *delimiter, int write_fd)
 			free(line);
 			break ;
 		}
+		line = expand_heredoc(mini, line);
+		if (!line)
+		{
+			// do error handling
+			break ;
+		}
 		write_heredoc_line(write_fd, line);
 		free(line);
 	}
 }
 
-int	create_heredoc(char *delimiter)
+int	create_heredoc(char *delimiter, t_mini *mini)
 {
 	int	pipefd[2];
 
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), -1);
-	read_heredoc_lines(delimiter, pipefd[1]);
+	read_heredoc_lines(mini, delimiter, pipefd[1]);
 	close(pipefd[1]);
 	return (pipefd[0]);
 }

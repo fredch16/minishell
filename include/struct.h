@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 06:54:38 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:48:23 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,13 @@ typedef struct s_garbage_node
 	t_gc_type				type;
 	struct s_garbage_node	*next;
 }	t_garbage_node;
+
+typedef struct s_garbage_list
+{
+	t_garbage_node	*head;
+	t_garbage_node	*tail;
+	size_t			size;
+}					t_garbage_list;
 
 typedef struct s_fd_node
 {

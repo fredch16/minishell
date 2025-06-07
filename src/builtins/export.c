@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/06 02:18:31 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:57:58 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int	export_builtin(t_env_list *env_list, char **args)
 			return (1);
 		var = ft_substr(args[i], 0, posequals);
 		if (!var)
-			return (ft_printf("Malloc failed\n" -1));
+			return (ft_printf("Malloc failed\n"), -1);
 		gc_track(var, GC_EXEC);
 		val = ft_strdup(args[i] + posequals + 1);
 		if (!val)
-			return (ft_printf("Malloc failed\n" -1));
+			return (ft_printf("Malloc failed\n"), -1);
 		gc_track(val, GC_EXEC);
 		set_env_var(env_list, var, val);
 		i++;

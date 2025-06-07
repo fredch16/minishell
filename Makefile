@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/07 16:38:05 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/07 17:30:09 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/redirect/redirections.c \
 			$(SRCD)/redirect/reverting_stds.c \
 			$(SRCD)/redirect/redirection_cases.c \
+			$(SRCD)/redirect/expand_heredoc.c \
 			$(SRCD)/execution/setup_child.c \
 			$(SRCD)/execution/here_doc.c \
 			$(SRCD)/execution/error.c \

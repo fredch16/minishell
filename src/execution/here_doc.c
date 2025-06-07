@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/07 17:01:24 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:06:26 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	is_delimiter(char *line, char *delimiter)
 	return (ft_strcmp(line, delimiter) == 0);
 }
 
-static void	read_heredoc_lines(char *delimiter, int write_fd)
+static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd)
 {
 	char	*line;
 
@@ -39,6 +39,12 @@ static void	read_heredoc_lines(char *delimiter, int write_fd)
 			free(line);
 			break ;
 		}
+		line = expand_heredoc(mini, line);
+		if (!line)
+		{
+			// do error handling
+			break ;
+		}
 		write_heredoc_line(write_fd, line);
 		free(line);
 	}
@@ -50,7 +56,7 @@ int	create_heredoc(char *delimiter, t_mini *mini)
 
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), -1);
-	read_heredoc_lines(delimiter, pipefd[1]);
+	read_heredoc_lines(mini, delimiter, pipefd[1]);
 	close(pipefd[1]);
 	return (pipefd[0]);
 }

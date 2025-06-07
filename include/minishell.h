@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 16:37:01 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:31:01 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # include "execution.h"
 # include "builtins.h"
 # include "signals.h"
+# include "redirects.h"
 
 # ifndef DEBUG
 #  define DEBUG 0

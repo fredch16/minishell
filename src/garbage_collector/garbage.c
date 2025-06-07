@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:39:48 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:32:36 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:57:33 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static t_garbage_node	*g_gc_list = NULL;
+t_garbage_list	*get_gc_data(void)
+{
+	static t_garbage_list	llist = {NULL, NULL, 0};
+
+	return (&llist);
+}
 
 /**
  * Allocate memory and track it for automatic cleanup
@@ -23,36 +28,57 @@ void	*gc_malloc(size_t size, t_gc_type type)
 {
 	void			*ptr;
 	t_garbage_node	*new_node;
+	t_garbage_list	*llist;
 
+	llist = get_gc_data();
 	ptr = malloc(size);
 	if (!ptr)
 		return (NULL);
 	new_node = malloc(sizeof(t_garbage_node));
 	if (!new_node)
-	{
-		free(ptr);
-		return (NULL);
-	}
+		return (free(ptr), NULL);
 	new_node->ptr = ptr;
-	new_node->next = g_gc_list;
+	new_node->next = NULL;
 	new_node->type = type;
-	g_gc_list = new_node;
+	if (!llist->head)
+	{
+		llist->head = new_node;
+		llist->tail = new_node;
+	}
+	else
+	{
+		llist->tail->next = new_node;
+		llist->tail = new_node;
+	}
+	llist->size++;
 	return (ptr);
 }
 
 int	gc_track(void *ptr, t_gc_type type)
 {
 	t_garbage_node	*new_node;
+	t_garbage_list	*llist;
 
+	llist = get_gc_data();
 	if (!ptr)
 		return (0);
 	new_node = malloc(sizeof(t_garbage_node));
 	if (!new_node)
 		return (0);
 	new_node->ptr = ptr;
-	new_node->next = g_gc_list;
+	new_node->next = NULL;
 	new_node->type = type;
-	g_gc_list = new_node;
+	if (!llist->head)
+	{
+		llist->head = new_node;
+		llist->tail = new_node;
+	}
+	else
+	{
+		llist->tail->next = new_node;
+		llist->tail = new_node;
+	}
+	llist->size++;
 	return (1);
 }
 
@@ -65,22 +91,30 @@ int	gc_free(void *ptr)
 {
 	t_garbage_node	*current;
 	t_garbage_node	*prev;
+	t_garbage_list	*llist;
 
-	if (!ptr || !g_gc_list)
+	llist = get_gc_data();
+	if (!ptr || !llist->head)
 		return (0);
-	if (g_gc_list->ptr == ptr)
+	if (llist->head->ptr == ptr)
 	{
-		current = g_gc_list;
-		g_gc_list = g_gc_list->next;
+		current = llist->head;
+		llist->head = llist->head->next;
+		if (!llist->head)
+			llist->tail = NULL;
+		llist->size--;
 		return (free(current->ptr), free(current), 1);
 	}
-	prev = g_gc_list;
-	current = g_gc_list->next;
+	prev = llist->head;
+	current = llist->head->next;
 	while (current)
 	{
 		if (current->ptr == ptr)
 		{
 			prev->next = current->next;
+			if (current == llist->tail)
+				llist->tail = prev;
+			llist->size--;
 			return (free(current->ptr), free(current), 1);
 		}
 		prev = current;
@@ -95,15 +129,21 @@ int	gc_free(void *ptr)
 void	gc_free_all(void)
 {
 	t_garbage_node	*tmp;
+	t_garbage_node	*curr;
+	t_garbage_list	*llist;
 
-	while (g_gc_list)
+	llist = get_gc_data();
+	curr = llist->head;
+	while (curr)
 	{
-		tmp = g_gc_list;
-		g_gc_list = g_gc_list->next;
+		tmp = curr;
+		curr = curr->next;
 		free(tmp->ptr);
 		free(tmp);
 	}
-	g_gc_list = NULL;
+	llist->head = NULL;
+	llist->tail = NULL;
+	llist->size = 0;
 }
 
 /**
@@ -115,17 +155,19 @@ void	gc_free_all(void)
 t_garbage_node	*free_gc_node(t_garbage_node *prev, t_garbage_node *node)
 {
 	t_garbage_node	*next;
+	t_garbage_list	*llist;
 
+	llist = get_gc_data();
+	next = node->next;
 	if (prev)
 		prev->next = node->next;
 	else
-		g_gc_list = node->next;
-	if (prev)
-		next = prev->next;
-	else
-		next = g_gc_list;
+		llist->head = node->next;
+	if (node == llist->tail)
+		llist->tail = prev;
 	free(node->ptr);
 	free(node);
+	llist->size--;
 	return (next);
 }
 
@@ -150,8 +192,10 @@ void	gc_free_by_type(t_gc_type type)
 {
 	t_garbage_node	*current;
 	t_garbage_node	*prev;
+	t_garbage_list	*llist;
 
-	current = g_gc_list;
+	llist = get_gc_data();
+	current = llist->head;
 	prev = NULL;
 	while (current)
 	{

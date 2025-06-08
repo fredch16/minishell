@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
+#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/08 07:44:46 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/08 21:51:03 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/expansion/dollar_vars.c \
 			$(SRCD)/expansion/dollar_question.c \
 			$(SRCD)/expansion/remove_quotes.c \
+			$(SRCD)/expansion/tilde.c \
 			$(SRCD)/parser/_parser.c \
 			$(SRCD)/parser/commands.c \
 			$(SRCD)/parser/redirections.c \

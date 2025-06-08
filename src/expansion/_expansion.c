@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:09:07 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 17:23:46 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:53:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	expand_token(t_token_list *token_list, t_token_node *current)
 	if (token_list->error_code)
 		return ;
 	current->content = expand_dollar_qmark(token_list, current->content);
+	current->content = expand_tilde(token_list, current->content);
 	current->content = remove_quotes(token_list, current->content);
 }
 

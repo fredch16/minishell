@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/08 14:58:51 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/09 01:44:03 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	export_builtin(t_env_list *env_list, char **args)
 	{
 		posequals = trust_but_verify(args[i]);
 		if (posequals < 0)
-			return (2);
+			return (1);
 		var = ft_substr(args[i], 0, posequals);
 		if (!var)
 			return (ft_printf("Malloc failed\n"), 2);

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 19:23:31 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/08 07:51:57 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 volatile sig_atomic_t g_signal_recieved = 0;
-
 
 int	main(int ac, char **av, char **env)
 {
@@ -31,7 +30,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		line = readline("minishell $> ");
-		if (!line)  // Handle Ctrl+D (EOF)
+		if (!line)
 			break;
 		if (line[0] != '\0')
 			add_history(line);
@@ -69,5 +68,6 @@ int	main(int ac, char **av, char **env)
 	}
 	printf("exit\n");
 	gc_free_all();
+	restore_terminal();
 	return (0);
 }

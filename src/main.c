@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/08 07:51:57 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:29:01 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **env)
 	setup_signals();
 	while (1)
 	{
-		line = readline("minishell $> ");
+		line = readline("\033[35mminishell $> \033[0m");
 		if (!line)
 			break;
 		if (line[0] != '\0')

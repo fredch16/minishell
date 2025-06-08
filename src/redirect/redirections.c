@@ -6,18 +6,18 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:20:04 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 06:48:20 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:07:52 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	process_input_redirection(t_file_node *file_node, t_mini *mini)
+static int	process_input_redirection(t_file_node *file_node, t_mini *mini, t_cmd_node *cmd_node)
 {
 	if (file_node->redir_type == REDIR_IN)
 		return (handle_input_redir(file_node, mini));
 	if (file_node->redir_type == REDIR_HEREDOC)
-		return (handle_heredoc_redir(file_node->filename, mini));
+		return (handle_heredoc_redir(file_node->filename, mini, cmd_node));
 	return (-1);
 }
 
@@ -46,7 +46,7 @@ int	handle_redirections(t_cmd_node *cmd_node, t_mini *mini)
 		{
 			if (last_input_fd != -1)
 				close(last_input_fd);
-			temp_fd = process_input_redirection(file_node, mini);
+			temp_fd = process_input_redirection(file_node, mini, cmd_node);
 			if (temp_fd == -1)
 				return (-1);
 			last_input_fd = temp_fd;

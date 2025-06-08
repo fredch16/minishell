@@ -6,18 +6,18 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:11:05 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 06:48:30 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:05:58 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Updated redirection_cases.c */
 #include "../../include/minishell.h"
 
-int	handle_heredoc_redir(char *delimiter, t_mini *mini)
+int	handle_heredoc_redir(char *delimiter, t_mini *mini, t_cmd_node *cmd_node)
 {
 	int	fd;
 
-	fd = create_heredoc(delimiter, mini);
+	fd = create_heredoc(delimiter, mini, cmd_node);
 	if (fd == -1)
 		ft_error(1, "open", 0);
 	return (fd);

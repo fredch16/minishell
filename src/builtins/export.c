@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 15:58:25 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:42:43 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	find_append(char *arg)
 		ft_printf("export: not valid in this context PLUSEQALS: %c\n", arg[i]);
 		return (-1);
 	}
-	printf("about to serach thru arg |%s|\n", arg);
 	while (arg[i] && arg[i] != '=' && !(arg[i] == '+' && arg[i + 1] == '='))
 		i++;
 	if (arg[i] == '+' && arg[i + 1] == '=')
@@ -72,10 +71,17 @@ int	export_builtin(t_env_list *env_list, char **args)
 	while (args[i])
 	{
 		posplusequals = find_append(args[i]);
-		printf("found plus equals at pos |%d|\n", posplusequals);
 		if (posplusequals > 0)
 		{
-			printf("Appending content |%s|\n", &args[i][posplusequals]);
+			var = ft_substr(args[i], 0, posplusequals);
+			if (!var)
+				return (ft_printf("Malloc failed\n"), 2);
+			gc_track(var, GC_EXEC);
+			val = ft_strdup(args[i] + posplusequals + 2);
+			if (!val)
+				return (ft_printf("Malloc failed\n"), 2);
+			gc_track(val, GC_EXEC);
+			append_env_var(env_list, var, val);
 			i++;
 			continue ;
 		}

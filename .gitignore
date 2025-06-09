@@ -7,3 +7,4 @@ suppressions.sub
 .DS_Store
 *.o
 *.a
+42_minishell_tester

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _execution.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:34 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/07 19:23:51 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:39:00 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@
 
 int	execution(t_mini *mini)
 {
-	int	exit_code;
+	// int	exit_code;
 
 	if (!mini->cmd_list || !mini->cmd_list->head)
 		return (0);
 	setup_parent_signals_for_execution();
 	init_exec_data(mini);
-	exit_code = execute_pipeline(mini);
-	mini->exit_code = exit_code;
-	return (exit_code);
+	execute_pipeline(mini);
+	return (mini->exit_code);
 }

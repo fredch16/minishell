@@ -6,24 +6,21 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:11:05 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/07 17:03:04 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:05:58 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* Updated redirection_cases.c */
 #include "../../include/minishell.h"
 
-int	handle_heredoc_redir(char *delimiter, t_mini *mini)
+int	handle_heredoc_redir(char *delimiter, t_mini *mini, t_cmd_node *cmd_node)
 {
 	int	fd;
 
-	(void)mini;
-	fd = create_heredoc(delimiter, mini);
+	fd = create_heredoc(delimiter, mini, cmd_node);
 	if (fd == -1)
 		ft_error(1, "open", 0);
-	if (dup2(fd, STDIN_FILENO) == -1)
-		ft_error(1, "dup2", 0);
-	close(fd);
-	return (0);
+	return (fd);
 }
 
 int	handle_input_redir(t_file_node *file_node, t_mini *mini)
@@ -34,10 +31,7 @@ int	handle_input_redir(t_file_node *file_node, t_mini *mini)
 	fd = open(file_node->filename, O_RDONLY);
 	if (fd == -1)
 		ft_error(1, "open", 0);
-	if (dup2(fd, STDIN_FILENO) == -1)
-		ft_error(1, "dup2", 0);
-	close(fd);
-	return (0);
+	return (fd);
 }
 
 int	handle_output_redir(t_file_node *file_node, t_mini *mini)

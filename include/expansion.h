@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:10:54 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 17:29:17 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/08 21:50:26 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,9 @@ char			*expand_dollar_qmark(t_token_list *token_list, char *content);
 // remove_quotes.c
 
 char			*remove_quotes(t_token_list *tlist, char *content);
+
+// tilde.c
+
+char			*expand_tilde(t_token_list *token_list, char *content);
 
 #endif

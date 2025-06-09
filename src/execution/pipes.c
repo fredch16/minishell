@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 05:34:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/07 18:11:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:11:58 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ static void	setup_child_pipes(int **pipes, int cmd_index, int pipe_count)
 int	execute_builtin_parent(t_cmd_node *cmd, t_mini *mini)
 {
 	int	exit_code = 0;
-	
+
+	if (!cmd || !cmd->cmd)
+		return 0;
 	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		exit_code = echo_builtin(cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "pwd") == 0)

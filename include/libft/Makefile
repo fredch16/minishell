@@ -45,6 +45,7 @@ SRCS :=			ft_isalnum.c \
 				ft_strnstr.c \
 				ft_strlcpy.c \
 				ft_strjoin.c \
+				ft_strjoin_arr.c \
 				ft_charjoin.c \
 				ft_substr.c \
 				ft_split.c \

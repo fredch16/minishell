@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 14:28:46 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:43:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,22 @@ int	main(int ac, char **av, char **env)
 		return (gc_free_all(), mini.exit_code);
 	}
 	setup_signals();
+
 	while (1)
 	{
-		line = readline("minishell $> ");
-		if (!line)  // Handle Ctrl+D (EOF)
+		// Adjusted input reading based on whether it's interactive or not
+		if (isatty(fileno(stdin)))  // interactive mode (terminal)
+		{
+			line = readline("\033[35mminishell $> \033[0m");
+		}
+		else  // non-interactive mode (tester)
+		{
+			char *temp_line;
+			temp_line = get_next_line(fileno(stdin));
+			line = ft_strtrim(temp_line, "\n");
+			free(temp_line);
+		}
+		if (!line)
 			break;
 		if (line[0] != '\0')
 			add_history(line);
@@ -85,7 +97,8 @@ int	main(int ac, char **av, char **env)
 		if (g_signal_recieved == SIGINT)
 			g_signal_recieved = 0;
 	}
-	printf("exit\n");
+	// printf("exit\n");
 	gc_free_all();
+	restore_terminal();
 	return (0);
 }

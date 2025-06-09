@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 17:31:01 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/08 07:38:28 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <termios.h>
 #define _POSIX_C_SOURCE 200809L
 
 
@@ -44,6 +45,7 @@
 # include "builtins.h"
 # include "signals.h"
 # include "redirects.h"
+# include "t_settings.h"
 
 # ifndef DEBUG
 #  define DEBUG 0

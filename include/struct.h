@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 14:48:23 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/08 07:40:52 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,14 @@ typedef enum e_quote_state
 	SINGLE_QUOTED,
 	DOUBLE_QUOTED
 }	t_quote_state;
+
+typedef struct termios t_termios;
+
+typedef struct s_t_t_settings
+{
+	t_termios		termios;
+	int				termios_saved;
+}					t_t_settings;
 
 typedef struct s_mini
 {

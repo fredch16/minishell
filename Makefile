@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/07 19:55:22 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/08 21:51:03 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/expansion/dollar_vars.c \
 			$(SRCD)/expansion/dollar_question.c \
 			$(SRCD)/expansion/remove_quotes.c \
+			$(SRCD)/expansion/tilde.c \
 			$(SRCD)/parser/_parser.c \
 			$(SRCD)/parser/commands.c \
 			$(SRCD)/parser/redirections.c \
@@ -64,7 +65,8 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/execution/here_doc.c \
 			$(SRCD)/execution/error.c \
 			$(SRCD)/signals.c \
-			$(SRCD)/debug.c
+			$(SRCD)/debug.c \
+			$(SRCD)/t_settings.c
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 

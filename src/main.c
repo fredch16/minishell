@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 19:57:16 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/10 00:27:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ int	main(int ac, char **av, char **env)
 		if (g_signal_recieved == SIGINT)
 			g_signal_recieved = 0;
 	}
-	// printf("exit\n");
+	printf("exit\n");
 	gc_free_all();
-	// restore_terminal();
+	restore_terminal();
 	return (0);
 }

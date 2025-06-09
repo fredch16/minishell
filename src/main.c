@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 14:43:15 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:39:06 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ void	handle_non_interactive(t_mini *mini, int ac, char **av)
 	handle_input(mini, line);
 }
 
+int	crease_shlvl(t_mini *mini)
+{
+	t_env_node	*node;
+	int			lvl;
+
+	node = mini->env_list->head;
+	while (node)
+	{
+		if (ft_strcmp(node->variable, "SHLVL") == 0)
+		{
+			lvl = ft_atoi(node->value);
+			node->value = ft_itoa(++lvl);
+			if (!node->next)
+				ft_error(1, "malloc", EC_FD | EC_GC);
+			gc_track(node->next, GC_ENV);
+			return (0);
+		}
+		node = node->next;
+	}
+	return (1);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char			*line;
@@ -62,6 +84,7 @@ int	main(int ac, char **av, char **env)
 	mini.env_list = env_array_to_list(env);
 	if (!mini.env_list)
 		return (1);
+	increase_shlvl(&mini);
 	if (ac > 1)
 	{
 		handle_non_interactive(&mini, ac, av);

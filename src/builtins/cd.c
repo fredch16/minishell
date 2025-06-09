@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 19:12:31 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 01:43:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:20:54 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static int	go_to_old_pwd(t_env_list *env_list)
+{
+	char	*temp1;
+	char	*temp2;
+
+	temp1 = get_env_value(env_list, "PWD");
+	temp2 = get_env_value(env_list, "OLDPWD");
+	set_env_var(env_list, "PWD", temp2);
+	set_env_var(env_list, "OLDPWD", temp1);
+	chdir(get_env_value(env_list, "PWD"));
+	return (0);
+}
 
 int	cd_builtin(t_env_list *env_list, char **args)
 {
@@ -20,6 +33,8 @@ int	cd_builtin(t_env_list *env_list, char **args)
 
 	if (ft_strs_len(args) > 2)
 		return (ft_putstr_fd("minishell: cd: too many arguments \n", 2), 1);
+	if (ft_strcmp(args[1], "-") == 0)
+		return (go_to_old_pwd(env_list));
 	oldpwd = getcwd(NULL, 0);
 	if (!oldpwd)
 		return (ft_putendl_fd("minishell: cd failed", STDERR_FILENO), 1);

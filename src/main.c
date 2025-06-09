@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 17:39:06 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:21:25 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	handle_non_interactive(t_mini *mini, int ac, char **av)
 	handle_input(mini, line);
 }
 
-int	crease_shlvl(t_mini *mini)
+int	increase_shlvl(t_mini *mini)
 {
 	t_env_node	*node;
 	int			lvl;

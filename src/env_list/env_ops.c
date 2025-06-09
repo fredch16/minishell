@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:25:20 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/05 13:51:13 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:08:41 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,43 @@ int	set_env_var(t_env_list *list, char *variable, char *value)
 			
 		add_env_node(list, new_node);
 		return (0);
+	}
+}
+
+/**
+ * Append value to an existing environment variable or set if not found
+ * @param list Environment list
+ * @param variable Variable name
+ * @param value Value to append (can be NULL)
+ * @return 0 on success, -1 on failure
+ */
+int	append_env_var(t_env_list *list, char *variable, char *value)
+{
+	t_env_node	*existing;
+	char		*new_value;
+	char		*temp;
+	
+	if (!list || !variable || !value)
+		return (-1);
+		
+	existing = find_env_var(list, variable);
+	if (existing && existing->value)
+	{
+		// Append to existing variable
+		temp = ft_strjoin(existing->value, value);
+		if (!temp)
+			return (-1);
+			
+		new_value = temp;
+		gc_track(new_value, GC_ENV);
+		gc_free(existing->value);
+		existing->value = new_value;
+		return (0);
+	}
+	else
+	{
+		// Set new variable if not found
+		return (set_env_var(list, variable, value));
 	}
 }
 

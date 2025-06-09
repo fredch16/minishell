@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 14:43:15 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:08:19 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	handle_non_interactive(t_mini *mini, int ac, char **av)
 
 	(void)ac;
 	line = ft_strjoin_arr(&av[1]);
+	gc_track(line, GC_PARSE);
 	handle_input(mini, line);
 }
 
@@ -99,6 +100,6 @@ int	main(int ac, char **av, char **env)
 	}
 	// printf("exit\n");
 	gc_free_all();
-	restore_terminal();
+	// restore_terminal();
 	return (0);
 }

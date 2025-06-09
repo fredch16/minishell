@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 17:05:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:42:43 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:26:06 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	check_syntax_errors(t_token_list *token_list)
 
 int	handle_error(t_mini *mini)
 {
+	if (mini->token_list->error_code > 735 && mini->token_list->error_code < 800)
+		mini->exit_code = 258;
 	if (!mini->token_list->error_code)
 		return (0);
 	else if (mini->token_list->error_code == EC_UNCLOSEQ)

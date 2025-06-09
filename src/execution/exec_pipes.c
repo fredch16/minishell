@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:24:21 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 07:44:18 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:08:57 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	execute_pipeline(t_mini *mini)
 	int			i;
 	int			pipe_count;
 
-	save_terminal_settings();
+	// save_terminal_settings();
 	pipe_count = mini->cmd_list->size - 1;
 	pipes = NULL;
 	if (pipe_count > 0)
@@ -56,7 +56,7 @@ int	execute_pipeline(t_mini *mini)
 	if (pipe_count == 0)
 	{
 		wait_for_children(pids, 1);
-		restore_terminal();
+		// restore_terminal();
 		return (mini->exit_code);
 	}
 	return (finalize_pipeline(pipes, pids, mini, pipe_count));

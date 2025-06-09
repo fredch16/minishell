@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:31:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:04:40 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:39:22 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ char	*expand_dollar_vars(t_token_list *token_list, char *content)
 	while (content[i])
 	{
 		quote_state = update_quote_state(quote_state, content[i]);
+		if (content[i] == '$' && (content[i + 1] == '"' || content[i + 1] == '\''))
+		{
+			i++;
+			continue ;
+		}
 		if (content[i] == '$' && content[i + 1] != '?'
 			&& quote_state != SINGLE_QUOTED)
 		{

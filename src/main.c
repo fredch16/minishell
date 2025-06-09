@@ -6,14 +6,13 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 19:23:31 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:18:48 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 volatile sig_atomic_t g_signal_recieved = 0;
-
 
 int	main(int ac, char **av, char **env)
 {
@@ -36,13 +35,15 @@ int	main(int ac, char **av, char **env)
 		if (line[0] != '\0')
 			add_history(line);
 		gc_track(line, GC_PARSE);
-		if (!ft_strncmp(line, "exit", ft_strlen(line)))
+		if (!ft_strcmp(line, "exit"))
 		{
 			gc_free_all();
 			break;
 		}
 		mini.token_list = init_token_list(&mini, line);
 		tokenize_input(mini.token_list, line);
+		if (!mini.token_list->head)
+			continue ;
 		if (DEBUG)
 		{
 			print_tokens(mini.token_list);

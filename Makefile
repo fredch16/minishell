@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/08 21:51:03 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/10 07:13:49 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME :=		minishell
 
 CC :=		cc
 CFLAGS :=	-Wall -Wextra -Werror -g
-LDFLAGS :=	-lreadline
+LDFLAGS :=	-lreadline -fsanitize=address,undefined
 LIBFT :=	include/libft/libft.a
 
 INC :=		-Iinclude -Iinclude/libft

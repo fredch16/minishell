@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/10 17:24:47 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:37:02 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cm
 				free(line);
 			break ;
 		}
-		line = expand_heredoc(mini, line, builtin);
+		line = expand_heredoc(mini, line);
 		if (!line)
 			break ;
 		if (cmd_node && cmd_node->cmd && cmd_node->cmd[0])

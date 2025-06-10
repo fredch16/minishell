@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/10 07:25:42 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/10 08:19:30 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,38 +76,50 @@ int	increase_shlvl(t_mini *mini)
 	return (1);
 }
 
+int	non_interactive(t_mini *mini)
+{
+	char	*line;	
+	char	*temp_line;
+
+	if (!isatty(STDIN_FILENO))
+	{
+		temp_line = get_next_line(fileno(stdin));
+		if (temp_line)
+		{
+			line = ft_strtrim(temp_line, "\n");
+			free(temp_line);
+			if (line && line[0] != '\0')
+			{
+				gc_track(line, GC_PARSE);
+				handle_input(mini, line);
+			}
+		}
+		gc_free_all();
+		return (1);
+	}
+	return (0);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char			*line;
 	t_mini			mini;
 
+	(void)av;
+	(void)ac;
 	mini.exit_code = 0;
 	mini.error_code = 0;
 	mini.env_list = env_array_to_list(env);
 	if (!mini.env_list)
 		return (1);
 	increase_shlvl(&mini);
-	if (ac > 1)
-	{
-		handle_non_interactive(&mini, ac, av);
-		return (gc_free_all(), mini.exit_code);
-	}
+	if (non_interactive(&mini))
+		return (mini.exit_code);
 	setup_signals();
 
 	while (1)
 	{
-		// Adjusted input reading based on whether it's interactive or not
-		if (isatty(fileno(stdin)))  // interactive mode (terminal)
-		{
-			line = readline("\033[35mminishell $> \033[0m");
-		}
-		else  // non-interactive mode (tester)
-		{
-			char *temp_line;
-			temp_line = get_next_line(fileno(stdin));
-			line = ft_strtrim(temp_line, "\n");
-			free(temp_line);
-		}
+		line = readline("\033[35mminishell $> \033[0m");
 		if (!line)
 			break;
 		if (line[0] != '\0')

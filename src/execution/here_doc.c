@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 16:12:43 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:24:47 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ static int	is_delimiter(char *line, char *delimiter)
 	return (ft_strcmp(line, delimiter) == 0);
 }
 
-static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cmd_node *cmd_node)
+static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cmd_node *cmd_node, int builtin)
 {
 	char	*line;
 
+	if (builtin)
+		setup_heredoc_signals();
+	else
+		setup_heredoc_signals_child();
 	while (1)
 	{
 		line = readline("> ");
@@ -41,7 +45,13 @@ static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cm
 			free(line);
 			break ;
 		}
-		line = expand_heredoc(mini, line);
+		if (g_signal_recieved == 3)
+		{
+			if (line)
+				free(line);
+			break ;
+		}
+		line = expand_heredoc(mini, line, builtin);
 		if (!line)
 			break ;
 		if (cmd_node && cmd_node->cmd && cmd_node->cmd[0])
@@ -49,13 +59,13 @@ static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cm
 	}
 }
 
-int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node)
+int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int builtin)
 {
 	int	pipefd[2];
 
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), -1);
-	read_heredoc_lines(mini, delimiter, pipefd[1], cmd_node);
+	read_heredoc_lines(mini, delimiter, pipefd[1], cmd_node, builtin);
 	close(pipefd[1]);
 	return (pipefd[0]);
 }

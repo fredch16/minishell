@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 05:34:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 16:11:58 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:18:31 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index)
 	pipe_count = mini->cmd_list->size - 1;
 	if (cmd->cmd_type == BUILTIN && pipe_count == 0)
 	{
-		if (handle_redirections(cmd, mini) == -1)
+		if (handle_redirections(cmd, mini, 1) == -1)
 			return (-1);
 		mini->exit_code = execute_builtin_parent(cmd, mini);
 		return (0);
@@ -82,7 +82,7 @@ int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index)
 	{
 		setup_child_signals();
 		setup_child_pipes(pipes, index, pipe_count);
-		if (handle_redirections(cmd, mini) == -1)
+		if (handle_redirections(cmd, mini, 0) == -1)
 			ft_error(1, "Redirection failed", 0);
 		execute_external(cmd, mini);
 		ft_error(127, "Command execution failed", 0);

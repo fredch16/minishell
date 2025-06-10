@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/10 08:19:30 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:26:55 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ int	main(int ac, char **av, char **env)
 	if (non_interactive(&mini))
 		return (mini.exit_code);
 	setup_signals();
-
 	while (1)
 	{
 		line = readline("\033[35mminishell $> \033[0m");

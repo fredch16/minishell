@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:20:04 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 16:07:52 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:19:29 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	process_input_redirection(t_file_node *file_node, t_mini *mini, t_cmd_node *cmd_node)
+static int	process_input_redirection(t_file_node *file_node, t_mini *mini, t_cmd_node *cmd_node, int builtins)
 {
 	if (file_node->redir_type == REDIR_IN)
 		return (handle_input_redir(file_node, mini));
 	if (file_node->redir_type == REDIR_HEREDOC)
-		return (handle_heredoc_redir(file_node->filename, mini, cmd_node));
+		return (handle_heredoc_redir(file_node->filename, mini, cmd_node, builtins));
 	return (-1);
 }
 
@@ -30,7 +30,7 @@ static int	process_output_redirection(t_file_node *file_node, t_mini *mini)
 	return (0);
 }
 
-int	handle_redirections(t_cmd_node *cmd_node, t_mini *mini)
+int	handle_redirections(t_cmd_node *cmd_node, t_mini *mini, int builtins)
 {
 	t_file_node	*file_node;
 	int			last_input_fd;
@@ -46,7 +46,7 @@ int	handle_redirections(t_cmd_node *cmd_node, t_mini *mini)
 		{
 			if (last_input_fd != -1)
 				close(last_input_fd);
-			temp_fd = process_input_redirection(file_node, mini, cmd_node);
+			temp_fd = process_input_redirection(file_node, mini, cmd_node, builtins);
 			if (temp_fd == -1)
 				return (-1);
 			last_input_fd = temp_fd;

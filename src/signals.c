@@ -26,7 +26,10 @@ void	handle_sigint(int signo)
 void	heredoc_sigint_hanlder(int signo)
 {
 	(void)signo;
-	g_signal_recieved = 1;
+	g_signal_recieved = 3;
+	rl_done = 1;
+	write(1, "\n", 1);
+	ioctl(STDERR_FILENO, TIOCSTI, "\t");;
 }
 
 /**
@@ -51,6 +54,12 @@ void	reset_parent_signals(void)
 void	setup_heredoc_signals(void)
 {
 	signal(SIGINT, heredoc_sigint_hanlder);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	setup_heredoc_signals_child(void)
+{
+	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
 }
 

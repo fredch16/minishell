@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 16:07:37 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:22:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ t_fd_list	*get_fd_list(void);
 char	    *get_command_path(t_cmd_node *cmd_node, t_mini *mini);
 
 // here_doc.c
-int	        create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node);
+int	        create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int builtins);
 
 // redirection_cases.c
-int	        handle_heredoc_redir(char *delimiter, t_mini *mini, t_cmd_node *cmd_node);
+int	        handle_heredoc_redir(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int builtins);
 int	        handle_input_redir(t_file_node *file_node, t_mini *mini);
 int	        handle_output_redir(t_file_node *file_node, t_mini *mini);
 int	        handle_append_redir(t_file_node *file_node, t_mini *mini);
 
 // redirections.c
-int     	handle_redirections(t_cmd_node *cmd_node, t_mini *mini);
+int     	handle_redirections(t_cmd_node *cmd_node, t_mini *mini, int builtins);
 
 // setup_child.c
 void	    setup_child_input(t_mini *mini);

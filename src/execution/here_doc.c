@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/11 18:06:24 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:26:21 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cm
 	char	*line;
 
 	if (builtin)
+	{
+		printf("builtin\n");
 		setup_heredoc_signals();
+	}
 	else
-		setup_heredoc_signals_child();
+		setup_heredoc_child_sig();
 	while (1)
 	{
 		line = readline("> ");
@@ -62,6 +65,7 @@ int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int buil
 	int		pipefd[2];
 	pid_t	pid;
 	int		status;
+	(void)builtin;
 
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), -1);
@@ -71,7 +75,7 @@ int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int buil
 	if (pid == 0)
 	{
 		close(pipefd[0]);
-		read_heredoc_lines(mini, delimiter, pipefd[1], cmd_node, builtin);
+		read_heredoc_lines(mini, delimiter, pipefd[1], cmd_node, 0);
 		close(pipefd[1]);
 		exit(0);
 	}

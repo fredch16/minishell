@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 21:35:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/15 14:43:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:17:22 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	finalize_command(t_cmd_node *cmd, t_file_list *file_list)
 
 	i = 0;
 	if (!cmd || !cmd->cmd || !cmd->cmd[0])
-		return;
+		return ;
 	while (cmd->cmd[0][i])
 	{
 		cmd->cmd[0][i] = ft_tolower(cmd->cmd[0][i]);
@@ -31,7 +31,7 @@ static void	finalize_command(t_cmd_node *cmd, t_file_list *file_list)
 	cmd->files = file_list;
 }
 
-static int assign_redirect(t_token_node **ct, t_token_list *tl, t_file_list *fl)
+static int	assign_redirect(t_token_node **ct, t_token_list *tl, t_file_list *fl)
 {
 	if (!(*ct)->next || (*ct)->next->type != TK_CMD)
 	{
@@ -43,14 +43,19 @@ static int assign_redirect(t_token_node **ct, t_token_list *tl, t_file_list *fl)
 	return (0);
 }
 
+static void	reset_assign(t_cmd_node **cmd, t_file_list **flist)
+{
+	*cmd = new_cmd();
+	*flist = init_file_list();
+}
+
 int	build_cmd_list(t_token_list *token_list, t_cmd_list *cmd_list)
 {
 	t_cmd_node		*current_cmd;
 	t_file_list		*file_list;
 	t_token_node	*current_token;
 
-	current_cmd = new_cmd();
-	file_list = init_file_list();
+	reset_assign(&current_cmd, &file_list);
 	current_token = token_list->head;
 	if (check_syntax_errors(token_list))
 		return (-1);
@@ -60,8 +65,7 @@ int	build_cmd_list(t_token_list *token_list, t_cmd_list *cmd_list)
 		{
 			finalize_command(current_cmd, file_list);
 			cmd_add_back(cmd_list, current_cmd);
-			current_cmd = new_cmd();
-			file_list = init_file_list();
+			reset_assign(&current_cmd, &file_list);
 		}
 		else if (is_redirect(current_token))
 			assign_redirect(&current_token, token_list, file_list);

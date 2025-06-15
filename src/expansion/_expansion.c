@@ -6,14 +6,12 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:09:07 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/08 20:53:36 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:28:27 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/expansion.h"
 #include "../../include/parser.h"
-
-
 
 void	expand_token(t_token_list *token_list, t_token_node *current)
 {

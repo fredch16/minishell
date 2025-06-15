@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:31:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/08 22:07:51 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:28:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*expand_tilde(t_token_list *token_list, char *content)
 	while (content[i])
 	{
 		quote_state = update_quote_state(quote_state, content[i]);
-		// 🌟 Tilde Expansion
 		if (content[i] == '~' && quote_state == UNQUOTED && ((i == 0 || is_whitespace(content[i - 1])) && ((content[i + 1] == '/') || is_whitespace(content[i + 1]) || !content[i + 1])))
 		{
 			home = get_env_value(token_list->env, "HOME");

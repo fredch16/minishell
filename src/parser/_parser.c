@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 21:35:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/15 15:17:22 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:23:53 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	finalize_command(t_cmd_node *cmd, t_file_list *file_list)
 	cmd->files = file_list;
 }
 
-static int	assign_redirect(t_token_node **ct, t_token_list *tl, t_file_list *fl)
+static int	assign_redirect(t_token_node **ct, t_token_list *tl,
+	t_file_list *fl)
 {
 	if (!(*ct)->next || (*ct)->next->type != TK_CMD)
 	{
@@ -69,7 +70,7 @@ int	build_cmd_list(t_token_list *token_list, t_cmd_list *cmd_list)
 		}
 		else if (is_redirect(current_token))
 			assign_redirect(&current_token, token_list, file_list);
-		else
+		else if (current_token->type == TK_CMD)
 			add_arg_to_cmd(current_cmd, current_token);
 		current_token = current_token->next;
 	}

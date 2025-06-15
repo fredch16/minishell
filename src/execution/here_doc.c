@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/15 13:41:55 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:56:16 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int buil
 	int		pipefd[2];
 	pid_t	pid;
 	int		status;
-	
+
 	(void)builtin;
 	g_signal_recieved = 0;
 	if (pipe(pipefd) == -1)
@@ -72,13 +72,14 @@ int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int buil
 	{
 		close(pipefd[0]);
 		read_heredoc_lines(mini, delimiter, pipefd[1], cmd_node);
-		exit(g_signal_recieved == SIGINT ? 130 : 0);
+		if (g_signal_recieved == SIGINT)
+			exit(130);
+		exit(0);
 	}
 	close(pipefd[1]);
 	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
-		return (close(pipefd[0]), -1);
-	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+	if (WIFSIGNALED(status) \
+	|| (WIFEXITED(status) && WEXITSTATUS(status) == 130))
 		return (close(pipefd[0]), -1);
 	return (pipefd[0]);
 }

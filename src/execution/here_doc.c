@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/12 16:26:21 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:41:55 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,32 @@ static int	is_delimiter(char *line, char *delimiter)
 	return (ft_strcmp(line, delimiter) == 0);
 }
 
-static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cmd_node *cmd_node, int builtin)
+static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cmd_node *cmd_node)
 {
 	char	*line;
+	char	*expanded_line;
 
-	if (builtin)
-	{
-		printf("builtin\n");
-		setup_heredoc_signals();
-	}
-	else
-		setup_heredoc_child_sig();
+	setup_heredoc_child_sig();
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
 			break ;
 		if (is_delimiter(line, delimiter))
-			return (free(line));
-		if (g_signal_recieved == 3)
 		{
-			if (line)
-				free(line);
+			free(line);
 			break ;
 		}
-		line = expand_heredoc(mini, line);
-		if (!line)
-			break ;
-		if (cmd_node && cmd_node->cmd && cmd_node->cmd[0])
-			write_heredoc_line(write_fd, line);
+		expanded_line = expand_heredoc(mini, line);
 		free(line);
+		if (!expanded_line)
+			break ;
+			
+		if (cmd_node && cmd_node->cmd && cmd_node->cmd[0])
+			write_heredoc_line(write_fd, expanded_line);
+		free(expanded_line);
 	}
+	close(write_fd);
 }
 
 int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int builtin)
@@ -65,8 +60,9 @@ int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int buil
 	int		pipefd[2];
 	pid_t	pid;
 	int		status;
+	
 	(void)builtin;
-
+	g_signal_recieved = 0;
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), -1);
 	pid = fork();
@@ -75,13 +71,14 @@ int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int buil
 	if (pid == 0)
 	{
 		close(pipefd[0]);
-		read_heredoc_lines(mini, delimiter, pipefd[1], cmd_node, 0);
-		close(pipefd[1]);
-		exit(0);
+		read_heredoc_lines(mini, delimiter, pipefd[1], cmd_node);
+		exit(g_signal_recieved == SIGINT ? 130 : 0);
 	}
 	close(pipefd[1]);
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
+		return (close(pipefd[0]), -1);
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 		return (close(pipefd[0]), -1);
 	return (pipefd[0]);
 }

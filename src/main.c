@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/10 17:26:55 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:39:30 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ volatile sig_atomic_t g_signal_recieved = 0;
 
 void	handle_input(t_mini *mini, char *line)
 {
+	g_signal_recieved = 0;
 	mini->token_list = init_token_list(mini, line);
 	tokenize_input(mini->token_list, line);
 	if (!mini->token_list->head)
@@ -130,8 +131,6 @@ int	main(int ac, char **av, char **env)
 			break;
 		}
 		handle_input(&mini, line);
-		if (g_signal_recieved == SIGINT)
-			g_signal_recieved = 0;
 	}
 	printf("exit\n");
 	gc_free_all();

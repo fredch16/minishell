@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:20:04 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/10 17:19:29 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:37:44 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern volatile sig_atomic_t g_signal_recieved;
 
 static int	process_input_redirection(t_file_node *file_node, t_mini *mini, t_cmd_node *cmd_node, int builtins)
 {
@@ -48,8 +50,9 @@ int	handle_redirections(t_cmd_node *cmd_node, t_mini *mini, int builtins)
 				close(last_input_fd);
 			temp_fd = process_input_redirection(file_node, mini, cmd_node, builtins);
 			if (temp_fd == -1)
-				return (-1);
-			last_input_fd = temp_fd;
+				last_input_fd = -1;
+			else
+				last_input_fd = temp_fd;
 		}
 		else
 		{
@@ -61,7 +64,7 @@ int	handle_redirections(t_cmd_node *cmd_node, t_mini *mini, int builtins)
 	if (last_input_fd != -1)
 	{
 		if (dup2(last_input_fd, STDIN_FILENO) == -1)
-			return (close(last_input_fd), ft_error(1, "dup2", 0), -1);
+			return (perror("minishell"), close(last_input_fd), -1);
 		close(last_input_fd);
 	}
 	return (0);

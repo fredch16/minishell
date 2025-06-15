@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 05:34:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/14 01:20:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:42:01 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern volatile sig_atomic_t g_signal_recieved;
 
 static void	setup_child_pipes(int **pipes, int cmd_index, int pipe_count)
 {
@@ -66,11 +68,13 @@ int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index)
 {
 	pid_t	pid;
 	int		pipe_count;
+	int		redir_result;
 
 	pipe_count = mini->cmd_list->size - 1;
 	if (cmd->cmd_type == BUILTIN && pipe_count == 0)
 	{
-		if (handle_redirections(cmd, mini, 1) == -1)
+		redir_result = handle_redirections(cmd, mini, 1);
+		if (redir_result == -1)
 			return (-1);
 		mini->exit_code = execute_builtin_parent(cmd, mini);
 		return (0);
@@ -82,9 +86,13 @@ int	fork_and_exec(t_cmd_node *cmd, t_mini *mini, int **pipes, int index)
 	{
 		setup_child_signals();
 		setup_child_pipes(pipes, index, pipe_count);
-		if (handle_redirections(cmd, mini, 0) == -1)
+		redir_result = handle_redirections(cmd, mini, 0);
+		if (redir_result == -1)
 			ft_error(1, "Redirection failed", 0);
-		execute_external(cmd, mini);
+		if (cmd->cmd_type == BUILTIN)
+			execute_builtin(cmd, mini);
+		else
+			execute_external(cmd, mini);
 		ft_error(127, "Command execution failed", 0);
 	}
 	return (pid);

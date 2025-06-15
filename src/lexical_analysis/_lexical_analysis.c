@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 22:46:27 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:33:10 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:23:31 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,11 @@ void	tokenize_input(t_token_list *token_list, char *input)
 			break ;
 		token = new_token();
 		if (!token)
-		{
-			tk_err(token_list, EC_MALLOC);
-			return ;
-		}
+			return (tk_err(token_list, EC_MALLOC));
 		token->length = set_token_length(input);
 		token->content = ft_substr(input, 0, token->length);
 		if (!token->content)
-		{
-			tk_err(token_list, EC_MALLOC);
-			return ;
-		}
+			return (tk_err(token_list, EC_MALLOC));
 		gc_track(token->content, GC_PARSE);
 		token->type = set_type(token->content, token->length);
 		token_add_back(token_list, token);

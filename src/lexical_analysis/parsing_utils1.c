@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:48:01 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/05 15:15:02 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:24:23 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,9 @@ bool	is_builtin(char *token)
 		i++;
 	}
 	return (false);
+}
+
+int	get_single_char_len(char c)
+{
+	return (ft_strchr("|<>", c) != NULL);
 }

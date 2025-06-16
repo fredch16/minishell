@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/15 15:56:16 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:34:42 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,31 @@
 
 extern volatile sig_atomic_t g_signal_recieved;
 
-static void	write_heredoc_line(int fd, char *line)
+t_hd_line	*create_hd_line(void)
 {
-	write(fd, line, ft_strlen(line));
-	write(fd, "\n", 1);
+	t_hd_line	*new;
+
+	new = malloc(sizeof(t_hd_line));
+	if (!new)
+		return (NULL);
+	new->line = NULL;
+	new->next = NULL;
+	return (new);
+}
+
+t_hd_node	*create_hd_node(char *lim)
+{
+	t_hd_node	*new;
+
+	new = malloc(sizeof(t_hd_node));
+	if (!new)
+		return (NULL);
+	new->lines = create_hd_line();
+	if (!new->lines)
+		return (NULL);
+	new->lim = lim;
+	new->next = NULL;
+	return (new);
 }
 
 static int	is_delimiter(char *line, char *delimiter)
@@ -27,59 +48,47 @@ static int	is_delimiter(char *line, char *delimiter)
 	return (ft_strcmp(line, delimiter) == 0);
 }
 
-static void	read_heredoc_lines(t_mini *mini, char *delimiter, int write_fd, t_cmd_node *cmd_node)
+static void	read_heredoc_lines(t_mini *mini, t_cmd_node *cmd_node, t_hd_node *hd_node)
 {
-	char	*line;
-	char	*expanded_line;
+	char		*line;
+	t_hd_line	*hd_line;
 
-	setup_heredoc_child_sig();
+	hd_line = hd_node->lines;
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
 			break ;
-		if (is_delimiter(line, delimiter))
+		if (is_delimiter(line, hd_node->lim))
 		{
 			free(line);
 			break ;
 		}
-		expanded_line = expand_heredoc(mini, line);
+		hd_line = expand_heredoc(mini, line);
 		free(line);
-		if (!expanded_line)
+		if (!hd_line)
 			break ;
-			
-		if (cmd_node && cmd_node->cmd && cmd_node->cmd[0])
-			write_heredoc_line(write_fd, expanded_line);
-		free(expanded_line);
+		hd_line->next = create_hd_line();
+		hd_line = hd_line->next;
 	}
-	close(write_fd);
 }
 
-int	create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int builtin)
+int	create_heredoc(char *lim, t_mini *mini, t_cmd_node *cmd_node)
 {
-	int		pipefd[2];
-	pid_t	pid;
-	int		status;
-
-	(void)builtin;
-	g_signal_recieved = 0;
-	if (pipe(pipefd) == -1)
-		return (perror("pipe"), -1);
-	pid = fork();
-	if (pid == -1)
-		return (close(pipefd[0]), close(pipefd[1]), perror("fork"), -1);
-	if (pid == 0)
+	if (!cmd_node->io_data.hd_list.head)
 	{
-		close(pipefd[0]);
-		read_heredoc_lines(mini, delimiter, pipefd[1], cmd_node);
-		if (g_signal_recieved == SIGINT)
-			exit(130);
-		exit(0);
+		cmd_node->io_data.hd_list.head = create_hd_node(lim);
+		if (!cmd_node->io_data.hd_list.head)
+			return (1);
+		cmd_node->io_data.hd_list.tail = cmd_node->io_data.hd_list.head;
 	}
-	close(pipefd[1]);
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status) \
-	|| (WIFEXITED(status) && WEXITSTATUS(status) == 130))
-		return (close(pipefd[0]), -1);
-	return (pipefd[0]);
+	else
+	{
+		cmd_node->io_data.hd_list.tail->next = create_hd_node(lim);
+		if (!cmd_node->io_data.hd_list.tail->next)
+			return (1);
+		cmd_node->io_data.hd_list.tail = cmd_node->io_data.hd_list.tail->next;
+	}
+	read_heredoc_lines(mini, cmd_node, cmd_node->io_data.hd_list.tail);
+	return (0);
 }

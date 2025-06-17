@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 02:29:50 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:39:50 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,27 @@ typedef struct s_file_list
 	size_t		size;
 }	t_file_list;
 
+typedef struct s_hd_line
+{
+	char				*line;
+	struct s_hd_line	*next;
+}						t_hd_line;
+
+typedef struct s_hd_node
+{
+	t_file_node			*file_node;
+	struct s_hd_node	*next;
+	t_hd_line			*lines;
+	char				*lim;
+}						t_hd_node;
+
+typedef struct s_hd_list
+{
+	t_hd_node			*head;
+	t_hd_node			*tail;
+	size_t				size;
+}						t_hd_list;
+
 typedef struct s_env_node
 {
 	struct s_env_node	*next;
@@ -112,6 +133,7 @@ typedef struct s_cmd_node
 	t_cmd_type			cmd_type;
 	char				**cmd;
 	int					fd[2];
+	t_hd_list			hd_list;
 	t_file_list			*files;
 	struct s_cmd_node	*next;
 }	t_cmd_node;

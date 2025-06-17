@@ -36,6 +36,7 @@ int	execution(t_mini *mini)
 		return (0);
 	setup_parent_signals_for_execution();
 	init_exec_data(mini);
+	create_heredoc_list(mini);
 	execute_pipeline(mini);
 	return (mini->exit_code);
 }

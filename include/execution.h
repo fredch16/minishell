@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/10 17:22:15 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:17:29 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	    *get_command_path(t_cmd_node *cmd_node, t_mini *mini);
 
 // here_doc.c
 int	        create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int builtins);
+int     	create_heredoc_list(t_mini *mini);
 
 // redirection_cases.c
 int	        handle_heredoc_redir(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int builtins);

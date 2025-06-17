@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/16 12:34:42 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:38:37 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,43 @@ static void	read_heredoc_lines(t_mini *mini, t_cmd_node *cmd_node, t_hd_node *hd
 	}
 }
 
-int	create_heredoc(char *lim, t_mini *mini, t_cmd_node *cmd_node)
+int	create_heredoc(char *lim, t_mini *mini, t_cmd_node *cmd_node, t_file_node *file_node)
 {
-	if (!cmd_node->io_data.hd_list.head)
+	if (!cmd_node->hd_list.head)
 	{
-		cmd_node->io_data.hd_list.head = create_hd_node(lim);
-		if (!cmd_node->io_data.hd_list.head)
+		cmd_node->hd_list.head = create_hd_node(lim);
+		if (!cmd_node->hd_list.head)
 			return (1);
-		cmd_node->io_data.hd_list.tail = cmd_node->io_data.hd_list.head;
+			cmd_node->hd_list.tail = cmd_node->hd_list.head;
 	}
 	else
 	{
-		cmd_node->io_data.hd_list.tail->next = create_hd_node(lim);
-		if (!cmd_node->io_data.hd_list.tail->next)
+		cmd_node->hd_list.tail->next = create_hd_node(lim);
+		if (!cmd_node->hd_list.tail->next)
 			return (1);
-		cmd_node->io_data.hd_list.tail = cmd_node->io_data.hd_list.tail->next;
+			cmd_node->hd_list.tail = cmd_node->hd_list.tail->next;
 	}
-	read_heredoc_lines(mini, cmd_node, cmd_node->io_data.hd_list.tail);
+	cmd_node->hd_list.tail->file_node = file_node;
+	read_heredoc_lines(mini, cmd_node, cmd_node->hd_list.tail);
+	return (0);
+}
+
+int	create_heredoc_list(t_mini *mini)
+{
+	t_cmd_node	*cmd_node;
+	t_file_node	*file_node;
+
+	cmd_node = mini->cmd_list->head;
+	while (cmd_node)
+	{
+		file_node = cmd_node->files->head;
+		while (file_node)
+		{
+			if (file_node->redir_type == REDIR_HEREDOC)
+				create_heredoc(file_node->filename, mini, cmd_node, file_node);
+			file_node = file_node->next;
+		}
+		cmd_node = cmd_node->next;
+	}
 	return (0);
 }

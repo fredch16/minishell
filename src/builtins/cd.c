@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 19:12:31 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 02:37:08 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:34:01 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,6 @@ int	cd_builtin(t_env_list *env_list, char **args)
 	if (!cwd)
 		return (ft_putendl_fd("minishell: cd failed", STDERR_FILENO), 1);
 	gc_track(cwd, GC_EXEC);
-<<<<<<< HEAD
-<<<<<<< HEAD
-	return (set_env_var(env_list, "PWD", cwd), 0);
-=======
 	set_env_var(env_list, "PWD", cwd);
 	return (0);
->>>>>>> test-merge-v2
-=======
-	set_env_var(env_list, "PWD", cwd);
-	return (0);
->>>>>>> d942762a441ad445e8a5e5c638b54a301dedbc8f
 }

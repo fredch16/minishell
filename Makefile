@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/10 07:13:49 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/17 12:39:20 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/builtins/unset.c \
 			$(SRCD)/builtins/export.c \
 			$(SRCD)/builtins/cd.c \
+			$(SRCD)/builtins/exit_minishell.c \
 			$(SRCD)/execution/_execution.c \
 			$(SRCD)/execution/pipes.c \
 			$(SRCD)/execution/exec_pipes.c \

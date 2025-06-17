@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/16 23:54:01 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/17 02:26:19 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <termios.h>
-#define _POSIX_C_SOURCE 200809L
-
+# define _POSIX_C_SOURCE 200809L
 
 # include "libft/libft.h"
 # include "garbage_collector.h"
@@ -53,15 +52,5 @@
 # endif
 
 void			print_tokens(t_token_list *list);
-
-/**
- * Parameters for expansion functions
- */
-typedef struct s_expansion_params
-{
-	int				i;
-	t_quote_state	quote_state;
-	char			**new_content;
-}	t_expansion_params;
 
 #endif

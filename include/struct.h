@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/14 19:21:04 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/17 02:29:50 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_file_node
 {
 	t_redir_type		redir_type;
 	char				*filename;
-	char 				*lim;
+	char				*lim;
 	struct s_file_node	*next;
 }	t_file_node;
 
@@ -134,7 +134,7 @@ typedef enum e_quote_state
 	DOUBLE_QUOTED
 }	t_quote_state;
 
-typedef struct termios t_termios;
+typedef struct termios		t_termios;
 
 typedef struct s_t_t_settings
 {
@@ -189,5 +189,15 @@ typedef struct s_fd_list
 	t_fd_node			*tail;
 	size_t				size;
 }						t_fd_list;
+
+/**
+ * Parameters for expansion functions
+ */
+typedef struct s_expansion_params
+{
+	int				i;
+	t_quote_state	quote_state;
+	char			**new_content;
+}	t_expansion_params;
 
 #endif

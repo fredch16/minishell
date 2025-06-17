@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:05:40 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 14:08:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/17 02:34:38 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin_arr(char **array)
 	char	*result;
 	char	*temp;
 	int		i;
-	
+
 	if (!array || !array[0])
 		return (ft_strdup(""));
 	result = ft_strdup(array[0]);

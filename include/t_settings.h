@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_settings.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 07:18:00 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 07:25:10 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/17 02:30:08 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-void    restore_terminal(void);
-int     save_terminal_settings(void);
+void	restore_terminal(void);
+int		save_terminal_settings(void);
 
 #endif

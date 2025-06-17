@@ -4,9 +4,9 @@
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+          */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 16:35:11 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 19:10:43 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/14 00:45:52 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,21 @@ void	handle_sigint(int signo)
 void	heredoc_sigint_hanlder(int signo)
 {
 	(void)signo;
-	g_signal_recieved = 1;
+	
+	g_signal_recieved = SIGINT;
+	
+	write(STDOUT_FILENO, "\n", 1);
+	
+	rl_callback_handler_remove();
+	rl_done = 1;
 }
 
-/**
- * Set up signal handlers for when the shell is executing commands
- * This prevents the shell from reacting to signals meant for child processes
- */
 void	setup_parent_signals_for_execution(void)
 {
 	signal(SIGINT, SIG_IGN);  // Ignore SIGINT in the parent during execution
 	signal(SIGQUIT, SIG_IGN); // Continue ignoring SIGQUIT
 }
 
-/**
- * Reset signal handlers for when the shell is ready for input
- */
 void	reset_parent_signals(void)
 {
 	signal(SIGINT, handle_sigint);
@@ -51,6 +50,12 @@ void	reset_parent_signals(void)
 void	setup_heredoc_signals(void)
 {
 	signal(SIGINT, heredoc_sigint_hanlder);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	setup_heredoc_child_sig(void)
+{
+	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
 }
 

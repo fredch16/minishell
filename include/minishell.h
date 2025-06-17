@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 17:31:01 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/17 02:26:19 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <sys/wait.h>
 # include <sys/types.h>
+# include <sys/ioctl.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
@@ -27,8 +28,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-#define _POSIX_C_SOURCE 200809L
-
+# include <termios.h>
+# define _POSIX_C_SOURCE 200809L
 
 # include "libft/libft.h"
 # include "garbage_collector.h"
@@ -44,12 +45,12 @@
 # include "builtins.h"
 # include "signals.h"
 # include "redirects.h"
+# include "t_settings.h"
 
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
 
 void			print_tokens(t_token_list *list);
-
 
 #endif

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   t_settings.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/01 16:25:21 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 05:48:09 by apregitz         ###   ########.fr       */
+/*   Created: 2025/06/08 07:18:00 by apregitz          #+#    #+#             */
+/*   Updated: 2025/06/17 02:30:08 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef T_SETTINGS_H
+# define T_SETTINGS_H
 
-static void process_mode(int mode)
-{
-	if (mode == 0b0001)
-		gc_free_all();
-}
+# include "minishell.h"
 
-void	ft_error(int error_code, char *error_msg, int mode)
-{
-	process_mode(mode);
-	perror(error_msg);
-	exit(error_code);
-}
+void	restore_terminal(void);
+int		save_terminal_settings(void);
+
+#endif

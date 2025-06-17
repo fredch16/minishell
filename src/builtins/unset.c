@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:00:33 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/06 02:18:36 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/17 02:36:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	unset_builtin(t_env_list *env_list, char **args)
 	i = 1;
 	while (args[i])
 	{
-		printf("Unsetting |%s|\n", args[i]);
 		unset_env_var(env_list, args[i++]);
 	}
-	print_env(env_list);
 	return (0);
 }

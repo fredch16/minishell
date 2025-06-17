@@ -6,16 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:36:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:34:08 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:24:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
-
-int	get_single_char_len(char c)
-{
-	return (ft_strchr("|<>", c) != NULL);
-}
 
 static int	get_quote_len(char *cmd_line)
 {

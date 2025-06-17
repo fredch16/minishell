@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 23:49:09 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:55:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:24:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void			tokenize_input(t_token_list *token_list, char *input);
 bool			is_whitespace(char c);
 bool			is_operator_char(char c);
 bool			is_builtin(char *token);
+int				get_single_char_len(char c);
 
 // tokens.c
 

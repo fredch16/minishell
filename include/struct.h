@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/16 16:37:57 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:07:41 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,6 @@ typedef enum e_token_type
 	TK_S_QUOTES
 }						t_token_type;
 
-typedef struct s_hd_line
-{
-	char				*line;
-	struct s_hd_line	*next;
-}						t_hd_line;
-
-typedef struct s_hd_node
-{
-	t_file_node			*file_node;
-	t_hd_node			*next;
-	t_hd_line			*lines;
-	char				*lim;
-}						t_hd_node;
-
-typedef struct s_hd_list
-{
-	t_hd_node			*head;
-	t_hd_node			*tail;
-	size_t				size;
-}						t_hd_list;
-
 typedef struct s_exec_data
 {
 	int					input_file;
@@ -113,6 +92,27 @@ typedef struct s_file_list
 	t_file_node	*tail;
 	size_t		size;
 }	t_file_list;
+
+typedef struct s_hd_line
+{
+	char				*line;
+	struct s_hd_line	*next;
+}						t_hd_line;
+
+typedef struct s_hd_node
+{
+	t_file_node			*file_node;
+	struct s_hd_node	*next;
+	t_hd_line			*lines;
+	char				*lim;
+}						t_hd_node;
+
+typedef struct s_hd_list
+{
+	t_hd_node			*head;
+	t_hd_node			*tail;
+	size_t				size;
+}						t_hd_list;
 
 typedef struct s_env_node
 {

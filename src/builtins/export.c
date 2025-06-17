@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 02:36:31 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/17 02:37:06 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,16 @@ int	export_builtin(t_env_list *env_list, char **args)
 	int		i;
 	int		posequals;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 	int		posplusequals;
 	
 >>>>>>> test-merge-v2
+=======
+	int		posplusequals;
+	
+>>>>>>> d942762a441ad445e8a5e5c638b54a301dedbc8f
 	i = 1;
 	if (!args[i])
 		print_env(env_list);

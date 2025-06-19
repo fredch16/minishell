@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 05:34:17 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/17 12:47:49 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:03:05 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	execute_builtin_parent(t_cmd_node *cmd, t_mini *mini)
 	else if (ft_strcmp(cmd->cmd[0], "cd") == 0)
 		exit_code = cd_builtin(mini->env_list, cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)
-		exit_minishell(cmd);
+		exit_code = exit_minishell(cmd);
 	return (exit_code);
 }
 

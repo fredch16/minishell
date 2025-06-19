@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 12:33:21 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:23:23 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	trust_but_verify(char *arg)
 		i++;
 	if (arg[i] == '=' && arg[i + 1])
 		return (i);
-	return (-1);
+	return (0);
 }
 
 // in theory this should actually print them in alphabetical order 

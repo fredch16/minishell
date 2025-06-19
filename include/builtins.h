@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 00:31:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 12:38:33 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:02:28 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	env_builtin(t_env_list *env_list);
 int	unset_builtin(t_env_list *env_list, char **args);
 int	export_builtin(t_env_list *env_list, char **args);
 int	cd_builtin(t_env_list *env_list, char **args);
-void    exit_minishell(t_cmd_node *cmd_node);
+int exit_minishell(t_cmd_node *cmd_node);
 
 #endif

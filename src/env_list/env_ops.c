@@ -152,7 +152,7 @@ int	unset_env_var(t_env_list *list, char *variable)
 		return (0);
 		
 	// Check if it's the head node
-	if (ft_strncmp(list->head->variable, variable, ft_strlen(variable)) == 0)
+	if (ft_strcmp(list->head->variable, variable) == 0)
 	{
 		current = list->head;
 		list->head = current->next;
@@ -172,7 +172,7 @@ int	unset_env_var(t_env_list *list, char *variable)
 	current = list->head->next;
 	while (current)
 	{
-		if (ft_strncmp(current->variable, variable, ft_strlen(variable)) == 0)
+		if (ft_strcmp(current->variable, variable) == 0)
 		{
 			prev->next = current->next;
 			if (list->tail == current)
@@ -202,7 +202,6 @@ void	print_env(t_env_list *list)
 
 	if (!list)
 		return;
-		
 	current = list->head;
 	while (current)
 	{

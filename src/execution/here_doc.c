@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/17 10:29:09 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:01:28 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static int	read_heredoc_lines(t_mini *mini, t_hd_node *hd_node)
 		if (g_signal_recieved == SIGINT)
 		{
 			free(line);
+			printf("this is a testfor ctrl+c\n");
 			mini->exit_code = 130;
 			return (-1);
 		}

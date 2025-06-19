@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 12:01:57 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/17 13:16:58 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/18 09:59:42 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int valid_set(const char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!((str[i] >= '0' && str[i] <= '9') || str[i] == ' ' \
-		|| str[i] == '-' || str[i] == '+'))
+		if (!((str[i] >= '0' && str[i] <= '9') \
+		|| ( i == 0 && (str[i] == '-' || str[i] == '+'))))
 			return (1);
 		i++;
 	}
@@ -41,7 +41,7 @@ static int get_exit_code(const char *str)
 	return (exit_code);
 }
 
-void    exit_minishell(t_cmd_node *cmd_node)
+int    exit_minishell(t_cmd_node *cmd_node)
 {
     int i;
 
@@ -49,7 +49,7 @@ void    exit_minishell(t_cmd_node *cmd_node)
     while (cmd_node->cmd[i])
         i++;
     if (i > 2)
-        return (perror("too many struments"));
+        return (perror("too many struments"), 255);
 	if (i == 1)
 		exit(0);
     else if (valid_set(cmd_node->cmd[1]) == 1)

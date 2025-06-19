@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 16:35:11 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/15 13:31:11 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:15:17 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	heredoc_sigint_handler(int signo)
 	(void)signo;
 	g_signal_recieved = SIGINT;
 	write(STDOUT_FILENO, "\n", 1);
-	exit(130); // Exit with proper signal exit code
+	exit(130);
 }
 
 void	heredoc_child_sigint_handler(int signo)
@@ -36,7 +36,6 @@ void	heredoc_child_sigint_handler(int signo)
 	(void)signo;
 	g_signal_recieved = SIGINT;
 	write(STDOUT_FILENO, "\n", 1);
-	// Exit immediately to break out of readline
 	exit(130);
 }
 

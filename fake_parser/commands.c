@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 00:07:26 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:38:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:24:22 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,13 @@ void	add_arg_to_cmd(t_cmd_node *current_cmd, t_token_node *token)
 	char	**new_arr;
 
 	i = 0;
-	if (token->type != TK_CMD)
-		return ;
 	if (!current_cmd->cmd)
-	{
-		new_arr = (char **)malloc(sizeof(char *) * 2);
-		if (!new_arr)
-			return ;
-		gc_track(new_arr, GC_PARSE);
-	}
+		new_arr = (char **)gc_malloc(sizeof(char *) * 2, GC_PARSE);
 	else
 	{
 		while (current_cmd->cmd[i])
 			i++;
-		new_arr = (char **)malloc(sizeof(char *) * (i + 2));
-		gc_track(new_arr, GC_PARSE);
+		new_arr = (char **)gc_malloc(sizeof(char *) * (i + 2), GC_PARSE);
 		i = 0;
 		while (current_cmd->cmd[i])
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 16:35:11 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/19 15:15:17 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:58:16 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ void	handle_sigint(int signo)
 }
 
 void	heredoc_sigint_handler(int signo)
-{
-	(void)signo;
-	g_signal_recieved = SIGINT;
-	write(STDOUT_FILENO, "\n", 1);
-	exit(130);
-}
-
-void	heredoc_child_sigint_handler(int signo)
 {
 	(void)signo;
 	g_signal_recieved = SIGINT;
@@ -81,21 +73,6 @@ void	setup_heredoc_signals(void)
 	sigemptyset(&sa_quit.sa_mask);
 	sa_quit.sa_handler = SIG_IGN;
 	sa_quit.sa_flags = SA_RESTART;
-	sigaction(SIGQUIT, &sa_quit, NULL);
-}
-
-void	setup_heredoc_child_sig(void)
-{
-	struct sigaction	sa_int, sa_quit;
-
-	sigemptyset(&sa_int.sa_mask);
-	sa_int.sa_handler = heredoc_child_sigint_handler;
-	sa_int.sa_flags = 0; // Don't restart system calls
-	sigaction(SIGINT, &sa_int, NULL);
-
-	sigemptyset(&sa_quit.sa_mask);
-	sa_quit.sa_handler = SIG_IGN;
-	sa_quit.sa_flags = 0;
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 

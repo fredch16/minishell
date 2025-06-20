@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 21:35:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/20 15:21:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:21:21 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	finalize_command(t_cmd_node *cmd)
 
 	i = 0;
 	if (!cmd || !cmd->cmd || !cmd->cmd[0])
-		return;
+		return ;
 	while (cmd->cmd[0][i])
 	{
 		cmd->cmd[0][i] = ft_tolower(cmd->cmd[0][i]);

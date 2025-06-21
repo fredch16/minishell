@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/21 18:15:41 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/21 18:50:56 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,24 +127,24 @@ static int	read_from_child_and_store(t_hd_node *hd_node, int read_fd)
 	return (0);
 }
 
-int	get_hd_data_in_parrent(int *pipe_fd, t_hd_node *hd_node, pid_t child_pid, t_mini *mini)
-{
-	int	*status;
+// int	get_hd_data_in_parrent(int *pipe_fd, t_hd_node *hd_node, pid_t child_pid, t_mini *mini)
+// {
+// 	int	*status;
 
-	close(pipe_fd[1]);
-	if (read_from_child_and_store(hd_node, pipe_fd[0]) == -1)
-		return (close(pipe_fd[0]), waitpid(child_pid, &status, 0), -1);
-	close(pipe_fd[0]);
-	waitpid(child_pid, &status, 0);
-	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
-	{
-		mini->exit_code = 130;
-		return (-1);
-	}
-	if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
-		return (-1);
-	return (0);
-}
+// 	close(pipe_fd[1]);
+// 	if (read_from_child_and_store(hd_node, pipe_fd[0]) == -1)
+// 		return (close(pipe_fd[0]), waitpid(child_pid, &status, 0), -1);
+// 	close(pipe_fd[0]);
+// 	waitpid(child_pid, &status, 0);
+// 	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+// 	{
+// 		mini->exit_code = 130;
+// 		return (-1);
+// 	}
+// 	if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
+// 		return (-1);
+// 	return (0);
+// }
 
 static int	create_heredoc_with_child(char *delimiter, t_mini *mini, t_hd_node *hd_node)
 {
@@ -163,8 +163,23 @@ static int	create_heredoc_with_child(char *delimiter, t_mini *mini, t_hd_node *h
 	}
 	else
 	{
-		if (get_hd_data_in_parrent(pipe_fd, hd_node, child_pid, mini) == -1)
+		// if (get_hd_data_in_parrent(pipe_fd, hd_node, child_pid, mini) == -1)
+		// 	return (-1);
+		int	status;
+
+		close(pipe_fd[1]);
+		if (read_from_child_and_store(hd_node, pipe_fd[0]) == -1)
+			return (close(pipe_fd[0]), waitpid(child_pid, &status, 0), -1);
+		close(pipe_fd[0]);
+		waitpid(child_pid, &status, 0);
+		if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+		{
+			mini->exit_code = 130;
 			return (-1);
+		}
+		if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
+			return (-1);
+		return (0);
 	}
 	return (0);
 }

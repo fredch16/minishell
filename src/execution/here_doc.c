@@ -6,13 +6,15 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/19 15:01:28 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:15:57 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 extern volatile sig_atomic_t g_signal_recieved;
+
+// hd struct functions
 
 static t_hd_line	*create_hd_line(char *content)
 {
@@ -42,6 +44,8 @@ static t_hd_node	*create_hd_node(char *lim)
 	new->next = NULL;
 	return (new);
 }
+
+// hd functions
 
 static int	is_delimiter(char *line, char *delimiter)
 {
@@ -79,12 +83,10 @@ static int	read_heredoc_lines(t_mini *mini, t_hd_node *hd_node)
 	setup_heredoc_signals();
 	while (1)
 	{
-		line = readline("> ");
+		write(1, "> ", 2);
+		line = get_next_line(1);
 		if (!line)
-		{
-			ft_putstr_fd("minishell: warning: here-document delimited by end-of-file\n", 2);
 			break;
-		}
 		if (g_signal_recieved == SIGINT)
 		{
 			free(line);
@@ -107,6 +109,8 @@ static int	read_heredoc_lines(t_mini *mini, t_hd_node *hd_node)
 	reset_parent_signals();
 	return (0);
 }
+
+// hd fds functions
 
 static int	write_heredoc_to_pipe(t_hd_node *hd_node, int write_fd)
 {

@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/21 16:15:57 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/21 18:15:41 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,48 @@ static t_hd_node	*create_hd_node(char *lim)
 	return (new);
 }
 
-// hd functions
+// Child process functions for heredoc collection
 
 static int	is_delimiter(char *line, char *delimiter)
 {
+	int	len;
+
 	if (!line || !delimiter)
 		return (0);
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
 	return (ft_strcmp(line, delimiter) == 0);
+}
+
+static int	collect_heredoc_in_child(t_mini *mini, char *delimiter, int write_fd)
+{
+	char	*line;
+	char	*expanded_line;
+
+	setup_heredoc_signals();
+	while (1)
+	{
+		write(1, "> ", 2);
+		line = get_next_line(0);
+		if (!line)
+			break;
+		if (g_signal_recieved == SIGINT)
+			return (free(line), close(write_fd), exit(130), 1);
+		if (is_delimiter(line, delimiter))
+		{
+			free(line);
+			break;
+		}
+		expanded_line = expand_heredoc(mini, line);
+		free(line);
+		if (!expanded_line)
+			return (close(write_fd), exit(1), 1);
+		write(write_fd, expanded_line, ft_strlen(expanded_line));
+		write(write_fd, "\n", 1);
+		free(expanded_line);
+	}
+	return (close(write_fd), exit(0), 0);
 }
 
 static void	add_line_to_heredoc(t_hd_node *hd_node, char *line)
@@ -62,51 +97,75 @@ static void	add_line_to_heredoc(t_hd_node *hd_node, char *line)
 	new_line = create_hd_line(line);
 	if (!new_line)
 		return;
-	
 	if (!hd_node->lines)
 	{
 		hd_node->lines = new_line;
 		return;
 	}
-	
 	current = hd_node->lines;
 	while (current->next)
 		current = current->next;
 	current->next = new_line;
 }
 
-static int	read_heredoc_lines(t_mini *mini, t_hd_node *hd_node)
+static int	read_from_child_and_store(t_hd_node *hd_node, int read_fd)
 {
-	char		*line;
-	char		*expanded_line;
+	char	*line;
+	char	*processed_line;
 
-	setup_heredoc_signals();
-	while (1)
+	while ((line = get_next_line(read_fd)) != NULL)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(1);
-		if (!line)
-			break;
-		if (g_signal_recieved == SIGINT)
-		{
-			free(line);
-			printf("this is a testfor ctrl+c\n");
-			mini->exit_code = 130;
-			return (-1);
-		}
-		if (is_delimiter(line, hd_node->lim))
-		{
-			free(line);
-			break;
-		}
-		expanded_line = expand_heredoc(mini, line);
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
+		processed_line = ft_strdup(line);
+		if (!processed_line)
+			return (free(line), -1);
+		gc_track(processed_line, GC_EXEC);
+		add_line_to_heredoc(hd_node, processed_line);
 		free(line);
-		if (!expanded_line)
-			return (-1);
-		
-		add_line_to_heredoc(hd_node, expanded_line);
 	}
-	reset_parent_signals();
+	return (0);
+}
+
+int	get_hd_data_in_parrent(int *pipe_fd, t_hd_node *hd_node, pid_t child_pid, t_mini *mini)
+{
+	int	*status;
+
+	close(pipe_fd[1]);
+	if (read_from_child_and_store(hd_node, pipe_fd[0]) == -1)
+		return (close(pipe_fd[0]), waitpid(child_pid, &status, 0), -1);
+	close(pipe_fd[0]);
+	waitpid(child_pid, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+	{
+		mini->exit_code = 130;
+		return (-1);
+	}
+	if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
+		return (-1);
+	return (0);
+}
+
+static int	create_heredoc_with_child(char *delimiter, t_mini *mini, t_hd_node *hd_node)
+{
+	int		pipe_fd[2];
+	pid_t	child_pid;
+
+	if (pipe(pipe_fd) == -1)
+		return (-1);
+	child_pid = fork();
+	if (child_pid == -1)
+		return (close(pipe_fd[0]), close(pipe_fd[1]), -1);
+	if (child_pid == 0)
+	{
+		close(pipe_fd[0]);
+		collect_heredoc_in_child(mini, delimiter, pipe_fd[1]);
+	}
+	else
+	{
+		if (get_hd_data_in_parrent(pipe_fd, hd_node, child_pid, mini) == -1)
+			return (-1);
+	}
 	return (0);
 }
 
@@ -135,10 +194,8 @@ int	create_heredoc_fd(t_hd_node *hd_node)
 
 	if (pipe(pipe_fd) == -1)
 		return (-1);
-	
 	write_heredoc_to_pipe(hd_node, pipe_fd[1]);
 	close(pipe_fd[1]);
-	
 	return (pipe_fd[0]);
 }
 
@@ -162,7 +219,7 @@ int	create_heredoc(char *lim, t_mini *mini, t_cmd_node *cmd_node, t_file_node *f
 		cmd_node->hd_list.tail = new_hd;
 		cmd_node->hd_list.size++;
 	}
-	if (read_heredoc_lines(mini, new_hd) == -1)
+	if (create_heredoc_with_child(lim, mini, new_hd) == -1)
 		return (-1);
 	return (0);
 }

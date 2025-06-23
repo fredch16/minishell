@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:31:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 00:04:08 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:58:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	safe_ft_strjoin(char **s3, char *s1, char *s2)
 {
 	*s3 = ft_strjoin(s1, s2);
 	if (!*s3)
-		return (-1); // pack exit strategy in this return
+		destroy_minishell(999);
 	gc_track(*s3, GC_PARSE);
 	return (0);
 }
@@ -25,7 +25,7 @@ int	safe_ft_charjoin(char **s3, char *s1, char s2)
 {
 	*s3 = ft_charjoin(s1, s2);
 	if (!*s3)
-		return (-1); // pack exit strategy in this return
+		destroy_minishell(999);
 	gc_track(*s3, GC_PARSE);
 	return (1);
 }
@@ -34,7 +34,7 @@ int	safe_ft_strdup(char **s1, char *s2)
 {
 	*s1 = ft_strdup(s2);
 	if (!*s1)
-		return (-1);
+		destroy_minishell(999);
 	gc_track(*s1, GC_PARSE);
 	return (1);
 }

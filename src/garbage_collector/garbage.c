@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:39:48 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 18:34:43 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:48:45 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	*gc_malloc(size_t size, t_gc_type type)
 	llist = get_gc_data();
 	ptr = malloc(size);
 	if (!ptr)
-		return (NULL);
+		destroy_minishell(999);
 	new_node = malloc(sizeof(t_garbage_node));
 	if (!new_node)
-		return (free(ptr), NULL);
+		destroy_minishell(999);
 	new_node->ptr = ptr;
 	new_node->next = NULL;
 	new_node->type = type;
@@ -64,7 +64,7 @@ int	gc_track(void *ptr, t_gc_type type)
 		return (0);
 	new_node = malloc(sizeof(t_garbage_node));
 	if (!new_node)
-		return (0);
+		destroy_minishell(999);
 	new_node->ptr = ptr;
 	new_node->next = NULL;
 	new_node->type = type;

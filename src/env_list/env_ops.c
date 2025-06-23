@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:25:20 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/23 16:08:11 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:51:44 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	update_env_var(t_env_node *existing, char *value)
 	{
 		new_value = ft_strdup(value);
 		if (!new_value)
-			return (-1);
+			destroy_minishell(999);
 		gc_track(new_value, GC_ENV);
 		if (existing->value)
 			gc_free(existing->value);

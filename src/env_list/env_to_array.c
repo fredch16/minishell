@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 22:45:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/07 18:15:52 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:06:53 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ char	**env_list_to_array(t_env_list *list)
 	if (!list)
 		return (NULL);
 	env_array = (char **)gc_malloc(sizeof(char *) * (list->size + 1), GC_ENV);
-	if (!env_array)
-		return (NULL);
 	current = list->head;
 	i = 0;
 	while (current)

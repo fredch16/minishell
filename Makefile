@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
+#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/17 12:39:20 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/23 16:08:40 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/env_list/init_env.c \
 			$(SRCD)/env_list/env_to_array.c \
 			$(SRCD)/env_list/env_ops.c \
+			$(SRCD)/env_list/env_ops2.c \
 			$(SRCD)/garbage_collector/garbage.c \
 			$(SRCD)/builtins/echo.c \
 			$(SRCD)/builtins/pwd.c \

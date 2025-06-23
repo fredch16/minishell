@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:41:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/05 14:45:21 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:07:38 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,15 @@ t_env_node	*create_env_node(char *variable, char *value)
 	t_env_node	*new_node;
 
 	new_node = (t_env_node *)gc_malloc(sizeof(t_env_node), GC_ENV);
-	if (!new_node)
-		return (NULL);
 	new_node->variable = ft_strdup(variable);
 	if (!new_node->variable)
-	{
-		gc_free(new_node);
-		return (NULL);
-	}
+		return (gc_free(new_node), NULL);
 	gc_track(new_node->variable, GC_ENV);
 	if (value)
 	{
 		new_node->value = ft_strdup(value);
 		if (!new_node->value)
-		{
-			gc_free(new_node->variable);
-			gc_free(new_node);
 			return (NULL);
-		}
 		gc_track(new_node->value, GC_ENV);
 	}
 	else

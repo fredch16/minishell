@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 17:05:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 15:26:06 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:43:01 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,12 @@ bool	g2g(t_token_list *list)
 	if (list->error_code)
 		return (false);
 	return (true);
+}
+
+
+void	destroy_minishell(int exit_code)
+{
+	reverting_stds();
+	gc_free_all();
+	exit(exit_code);
 }

@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/23 16:08:40 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/23 20:36:41 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME :=		minishell
 
 CC :=		cc
 CFLAGS :=	-Wall -Wextra -Werror -g
-LDFLAGS :=	-lreadline -fsanitize=address,undefined
+LDFLAGS :=	-lreadline
 LIBFT :=	include/libft/libft.a
 
 INC :=		-Iinclude -Iinclude/libft
@@ -45,6 +45,8 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/env_list/env_ops.c \
 			$(SRCD)/env_list/env_ops2.c \
 			$(SRCD)/garbage_collector/garbage.c \
+			$(SRCD)/garbage_collector/garbage2.c \
+			$(SRCD)/garbage_collector/garbage3.c \
 			$(SRCD)/builtins/echo.c \
 			$(SRCD)/builtins/pwd.c \
 			$(SRCD)/builtins/env.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 00:00:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/04 05:14:46 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/23 19:55:34 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include "minishell.h"
 
 typedef enum e_gc_type	t_gc_type;
+typedef struct s_garbage_list	t_garbage_list;
+
+
+t_garbage_list	*get_gc_data(void);
 
 /**
  * Allocate memory and track it for automatic cleanup

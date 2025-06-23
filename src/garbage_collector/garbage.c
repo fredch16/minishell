@@ -6,12 +6,15 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:39:48 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/23 17:48:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 20:36:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+/**
+ * Get the global garbage collector list
+ */
 t_garbage_list	*get_gc_data(void)
 {
 	static t_garbage_list	llist = {NULL, NULL, 0};
@@ -20,192 +23,78 @@ t_garbage_list	*get_gc_data(void)
 }
 
 /**
+ * Create a new garbage collection node
+ * @param ptr Pointer to track
+ * @param type Type of memory
+ * @return New garbage node or NULL on failure
+ */
+static t_garbage_node	*create_gc_node(void *ptr, t_gc_type type)
+{
+	t_garbage_node	*new_node;
+
+	new_node = malloc(sizeof(t_garbage_node));
+	if (!new_node)
+		destroy_minishell(999);
+	new_node->ptr = ptr;
+	new_node->next = NULL;
+	new_node->type = type;
+	return (new_node);
+}
+
+/**
+ * Add a node to the garbage collection list
+ * @param node Node to add to the list
+ */
+static void	add_gc_node(t_garbage_node *node)
+{
+	t_garbage_list	*llist;
+
+	llist = get_gc_data();
+	if (!llist->head)
+	{
+		llist->head = node;
+		llist->tail = node;
+	}
+	else
+	{
+		llist->tail->next = node;
+		llist->tail = node;
+	}
+	llist->size++;
+}
+
+/**
  * Allocate memory and track it for automatic cleanup
  * @param size Size of memory to allocate
+ * @param type Type of memory for selective cleanup
  * @return Pointer to allocated memory or NULL on failure
  */
 void	*gc_malloc(size_t size, t_gc_type type)
 {
 	void			*ptr;
 	t_garbage_node	*new_node;
-	t_garbage_list	*llist;
 
-	llist = get_gc_data();
 	ptr = malloc(size);
 	if (!ptr)
 		destroy_minishell(999);
-	new_node = malloc(sizeof(t_garbage_node));
-	if (!new_node)
-		destroy_minishell(999);
-	new_node->ptr = ptr;
-	new_node->next = NULL;
-	new_node->type = type;
-	if (!llist->head)
-	{
-		llist->head = new_node;
-		llist->tail = new_node;
-	}
-	else
-	{
-		llist->tail->next = new_node;
-		llist->tail = new_node;
-	}
-	llist->size++;
+	new_node = create_gc_node(ptr, type);
+	add_gc_node(new_node);
 	return (ptr);
 }
 
+/**
+ * Track an existing pointer in the garbage collector
+ * @param ptr Pointer to track
+ * @param type Memory type for selective cleanup
+ * @return 1 on success, 0 on failure
+ */
 int	gc_track(void *ptr, t_gc_type type)
 {
 	t_garbage_node	*new_node;
-	t_garbage_list	*llist;
 
-	llist = get_gc_data();
 	if (!ptr)
 		return (0);
-	new_node = malloc(sizeof(t_garbage_node));
-	if (!new_node)
-		destroy_minishell(999);
-	new_node->ptr = ptr;
-	new_node->next = NULL;
-	new_node->type = type;
-	if (!llist->head)
-	{
-		llist->head = new_node;
-		llist->tail = new_node;
-	}
-	else
-	{
-		llist->tail->next = new_node;
-		llist->tail = new_node;
-	}
-	llist->size++;
+	new_node = create_gc_node(ptr, type);
+	add_gc_node(new_node);
 	return (1);
-}
-
-/**
- * Free a specific pointer from the garbage collection list
- * @param ptr Pointer to free
- * @return 1 if freed, 0 if not found
- */
-int	gc_free(void *ptr)
-{
-	t_garbage_node	*current;
-	t_garbage_node	*prev;
-	t_garbage_list	*llist;
-
-	llist = get_gc_data();
-	if (!ptr || !llist->head)
-		return (0);
-	if (llist->head->ptr == ptr)
-	{
-		current = llist->head;
-		llist->head = llist->head->next;
-		if (!llist->head)
-			llist->tail = NULL;
-		llist->size--;
-		return (free(current->ptr), free(current), 1);
-	}
-	prev = llist->head;
-	current = llist->head->next;
-	while (current)
-	{
-		if (current->ptr == ptr)
-		{
-			prev->next = current->next;
-			if (current == llist->tail)
-				llist->tail = prev;
-			llist->size--;
-			return (free(current->ptr), free(current), 1);
-		}
-		prev = current;
-		current = current->next;
-	}
-	return (0);
-}
-
-/**
- * Free all allocated memory in the garbage collection list
- */
-void	gc_free_all(void)
-{
-	t_garbage_node	*tmp;
-	t_garbage_node	*curr;
-	t_garbage_list	*llist;
-
-	llist = get_gc_data();
-	curr = llist->head;
-	while (curr)
-	{
-		tmp = curr;
-		curr = curr->next;
-		free(tmp->ptr);
-		free(tmp);
-	}
-	llist->head = NULL;
-	llist->tail = NULL;
-	llist->size = 0;
-}
-
-/**
- * Free a garbage node and update pointers
- * @param prev Previous node in the list or NULL if at head
- * @param node Node to free
- * @return Next node to process
- */
-t_garbage_node	*free_gc_node(t_garbage_node *prev, t_garbage_node *node)
-{
-	t_garbage_node	*next;
-	t_garbage_list	*llist;
-
-	llist = get_gc_data();
-	next = node->next;
-	if (prev)
-		prev->next = next;
-	else
-		llist->head = next;
-	if (node == llist->tail)
-		llist->tail = prev;
-	free(node->ptr);
-	free(node);
-	llist->size--;
-	return (next);
-}
-
-// /**
-//  * Skip to the next node in the list
-//  * @param prev Pointer to update with current node
-//  * @param current Current node to advance from
-//  * @return Next node to process
-//  */
-// static t_garbage_node	*skip_gc_node(t_garbage_node **prev,
-// 									t_garbage_node *current)
-// {
-// 	*prev = current;
-// 	return (current->next);
-// }
-
-/**
- * Free all garbage collection nodes of specified type
- * @param type Type of memory to free
- */
-void	gc_free_by_type(t_gc_type type)
-{
-	t_garbage_node	*current;
-	t_garbage_node	*prev;
-	t_garbage_list	*llist;
-
-	llist = get_gc_data();
-	current = llist->head;
-	prev = NULL;
-	
-	while (current)
-	{
-		if (current->type == type)
-			current = free_gc_node(prev, current);
-		else
-		{
-			prev = current;
-			current = current->next;
-		}
-	}
 }

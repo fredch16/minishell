@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 19:12:31 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 12:34:01 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/23 15:54:54 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	cd_builtin(t_env_list *env_list, char **args)
 	if (ft_strcmp(args[1], "-") == 0)
 		return (go_to_old_pwd(env_list));
 	oldpwd = getcwd(NULL, 0);
-	if (!oldpwd)
-		return (ft_putendl_fd("minishell: cd failed", STDERR_FILENO), 1);
 	gc_track(oldpwd, GC_EXEC);
 	if (!args[1])
 		path = get_env_value(env_list, "HOME");
@@ -52,7 +50,5 @@ int	cd_builtin(t_env_list *env_list, char **args)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return (ft_putendl_fd("minishell: cd failed", STDERR_FILENO), 1);
-	gc_track(cwd, GC_EXEC);
-	set_env_var(env_list, "PWD", cwd);
-	return (0);
+	return (gc_track(cwd, GC_EXEC), set_env_var(env_list, "PWD", cwd), 0);
 }

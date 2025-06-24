@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/23 16:01:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:52:08 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	trust_but_verify(char *arg)
 	}
 	while (arg[i] && arg[i] != '=')
 		i++;
-	if (arg[i] == '=' && arg[i + 1])
+	if (arg[i] == '=' && arg[i + 1])  // This condition requires something after the =
 		return (i);
-	return (0);
+	return (i);  // This return allows the function to work correctly even if there's an empty value
 }
 
 /**
@@ -123,10 +123,7 @@ int	export_builtin(t_env_list *env_list, char **args)
 	int	exit_status;
 
 	if (!args[1])
-	{
-		print_env(env_list);
-		return (0);
-	}
+		return (export_no_arg(env_list));
 	i = 1;
 	exit_status = 0;
 	while (args[i])

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:38:14 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:49:42 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ t_cmd_list	*init_cmd_list(t_mini *mini, char *input)
 
 	(void)input;
 	list = gc_malloc(sizeof(t_cmd_list), GC_PARSE);
-	if (!list)
-		return (NULL);
 	list->head = NULL;
 	list->tail = NULL;
 	list->size = 0;
@@ -35,7 +33,7 @@ t_cmd_node	*new_cmd(void)
 
 	new_cmd = (t_cmd_node *)ft_calloc(1, sizeof(t_cmd_node));
 	if (new_cmd == NULL)
-		return (perror("New cmd failed to malloc\n"), NULL);
+		destroy_minishell(999);
 	gc_track(new_cmd, GC_PARSE);
 	return (new_cmd);
 }

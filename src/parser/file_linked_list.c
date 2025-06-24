@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 00:14:50 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 22:39:12 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:50:17 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_file_list	*init_file_list(void)
 	t_file_list	*list;
 
 	list = gc_malloc(sizeof(t_file_list), GC_PARSE);
-	if (!list)
-		return (NULL);
 	list->head = NULL;
 	list->tail = NULL;
 	list->size = 0;
@@ -31,7 +29,7 @@ t_file_node	*new_file(void)
 
 	new_file = (t_file_node *)ft_calloc(1, sizeof(t_file_node));
 	if (new_file == NULL)
-		return (perror("New file failed to malloc\n"), NULL);
+		destroy_minishell(999);
 	gc_track(new_file, GC_PARSE);
 	return (new_file);
 }

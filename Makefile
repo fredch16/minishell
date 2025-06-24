@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/23 16:08:40 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/24 12:48:19 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,8 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/builtins/exit_minishell.c \
 			$(SRCD)/execution/_execution.c \
 			$(SRCD)/execution/pipes.c \
+			$(SRCD)/execution/heredoc_utils.c \
+			$(SRCD)/execution/heredoc_struct_utils.c \
 			$(SRCD)/execution/exec_pipes.c \
 			$(SRCD)/execution/pipes_utils.c \
 			$(SRCD)/execution/execute_commands.c \

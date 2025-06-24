@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/17 10:39:43 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:18:22 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ char		*get_command_path(t_cmd_node *cmd_node, t_mini *mini);
 int	        create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, t_file_node *file_node);
 int     	create_heredoc_list(t_mini *mini);
 int         create_heredoc_fd(t_hd_node *hd_node);
+
+// heredoc utils
+int			is_delimiter(char *line, char *delimiter);
+int			check_exit_status(pid_t child_pid, t_mini *mini);
+int			create_heredoc_fd(t_hd_node *hd_node);
+int			write_heredoc_to_pipe(t_hd_node *hd_node, int write_fd);
+
+// heredoc struct utils
+void		add_line_to_heredoc(t_hd_node *hd_node, char *line);
+t_hd_node	*create_hd_node(char *lim);
+t_hd_line	*create_hd_line(char *content);
 
 // redirection_cases.c
 int			handle_heredoc_redir(char *delimiter, t_mini *mini,

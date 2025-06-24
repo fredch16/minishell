@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 10:39:50 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:39:53 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,15 @@ typedef struct s_fd_list
 	t_fd_node			*tail;
 	size_t				size;
 }						t_fd_list;
+
+typedef struct s_temp_redir_in_data
+{
+	t_mini				*mini;
+	t_cmd_node			*cmd_node;
+	t_file_node			*file_node;
+	int					*last_input_fd;
+	int					buildins;
+}						 t_temp_redir_in_data;
 
 /**
  * Parameters for expansion functions

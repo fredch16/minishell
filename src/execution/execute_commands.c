@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/18 10:01:21 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:48:23 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	wait_for_children(pid_t *pids, int cmd_count)
 			else if (WIFSIGNALED(status))
 			{
 				exit_code = 128 + WTERMSIG(status);
-				
 				if (WTERMSIG(status) == SIGINT)
 					write(STDOUT_FILENO, "\n", 1);
 			}

@@ -6,13 +6,13 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:25:21 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/08 05:48:09 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:30:04 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void process_mode(int mode)
+static void	process_mode(int mode)
 {
 	if (mode == 0b0001)
 		gc_free_all();

@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/24 15:51:35 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/24 16:56:09 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,8 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/builtins/exit_minishell.c \
 			$(SRCD)/execution/_execution.c \
 			$(SRCD)/execution/pipes.c \
+			$(SRCD)/execution/heredoc_utils.c \
+			$(SRCD)/execution/heredoc_struct_utils.c \
 			$(SRCD)/execution/exec_pipes.c \
 			$(SRCD)/execution/pipes_utils.c \
 			$(SRCD)/execution/execute_commands.c \

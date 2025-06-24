@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/23 20:45:01 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:56:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,13 @@ int	non_interactive(t_mini *mini)
 	}
 	return (0);
 }
+
+// int	create_env(char **env)
+// {
+// 	if (env)
+// 		return (env);
+	
+// }
 
 int	main(int ac, char **av, char **env)
 {

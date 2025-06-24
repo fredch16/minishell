@@ -6,13 +6,14 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:11:05 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/17 10:29:37 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/24 12:52:25 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static t_hd_node	*find_heredoc_node(t_cmd_node *cmd_node, t_file_node *file_node)
+static t_hd_node	*find_heredoc_node(t_cmd_node *cmd_node,
+	t_file_node *file_node)
 {
 	t_hd_node	*current;
 
@@ -26,20 +27,21 @@ static t_hd_node	*find_heredoc_node(t_cmd_node *cmd_node, t_file_node *file_node
 	return (NULL);
 }
 
-int	handle_heredoc_redir(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, int builtins)
+int	handle_heredoc_redir(char *delimiter, t_mini *mini, t_cmd_node *cmd_node,
+	int builtins)
 {
 	t_file_node	*file_node;
 	t_hd_node	*hd_node;
-	
+
 	(void)delimiter;
 	(void)mini;
 	(void)builtins;
 	file_node = cmd_node->files->head;
 	while (file_node)
 	{
-		if (file_node->redir_type == REDIR_HEREDOC && 
-			ft_strcmp(file_node->filename, delimiter) == 0)
-			break;
+		if (file_node->redir_type == REDIR_HEREDOC \
+			&& ft_strcmp(file_node->filename, delimiter) == 0)
+			break ;
 		file_node = file_node->next;
 	}
 	if (!file_node)

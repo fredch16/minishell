@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 18:20:04 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/24 16:43:23 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:57:36 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,11 @@ int	dup_fd(int last_input_fd)
 	return (0);
 }
 
-int	setup_handle_redirenctions(t_cmd_node *cmd_node, int *last_input_fd,
-	t_file_node *file_node)
+int	setup_handle_redirenctions(t_cmd_node *cmd_node, int *last_input_fd)
 {
 	if (!cmd_node->files || !cmd_node->files->head)
 		return (0);
 	*last_input_fd = -1;
-	file_node = cmd_node->files->head;
 	return (1);
 }
 
@@ -125,7 +123,7 @@ int	handle_redirections(t_cmd_node *cmd_node, t_mini *mini, int builtins)
 	temp_data.last_input_fd = &last_input_fd;
 	temp_data.mini = mini;
 	file_node = cmd_node->files->head;
-	if (setup_handle_redirenctions(cmd_node, &last_input_fd, file_node) == 0)
+	if (setup_handle_redirenctions(cmd_node, &last_input_fd) == 0)
 		return (0);
 	while (file_node)
 	{

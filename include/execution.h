@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:53 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/23 18:18:22 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:49:36 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ t_fd_list	*get_fd_list(void);
 char		*get_command_path(t_cmd_node *cmd_node, t_mini *mini);
 
 // here_doc.c
-int	        create_heredoc(char *delimiter, t_mini *mini, t_cmd_node *cmd_node, t_file_node *file_node);
-int     	create_heredoc_list(t_mini *mini);
-int         create_heredoc_fd(t_hd_node *hd_node);
+int			create_heredoc(char *delimiter, t_mini *mini,
+				t_cmd_node *cmd_node, t_file_node *file_node);
+int			create_heredoc_list(t_mini *mini);
+int			create_heredoc_fd(t_hd_node *hd_node);
 
 // heredoc utils
 int			is_delimiter(char *line, char *delimiter);
@@ -91,6 +92,6 @@ int			cleanup_pipeline(int **pipes, pid_t *pids, int pipe_count,
 int			finalize_pipeline(int **pipes, pid_t *pids, t_mini *mini,
 				int pipe_count);
 
-int	        reverting_stds(void);
+int			reverting_stds(void);
 
 #endif

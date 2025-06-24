@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 16:45:50 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:04:38 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	increase_shlvl(t_mini *mini)
 	{
 		if (ft_strcmp(node->variable, "SHLVL") == 0)
 		{
-			gc_free(node->value);
 			lvl = ft_atoi(node->value);
+			gc_free(node->value);
 			node->value = ft_itoa(++lvl);
 			if (!node->next)
 				ft_error(1, "malloc", EC_FD | EC_GC);

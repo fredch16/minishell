@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
+#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/24 16:45:49 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/24 16:56:09 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/builtins/env.c \
 			$(SRCD)/builtins/unset.c \
 			$(SRCD)/builtins/export.c \
+			$(SRCD)/builtins/export2.c \
 			$(SRCD)/builtins/cd.c \
 			$(SRCD)/builtins/exit_minishell.c \
 			$(SRCD)/execution/_execution.c \

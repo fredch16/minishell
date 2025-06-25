@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 16:52:08 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:36:00 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	trust_but_verify(char *arg)
 	}
 	while (arg[i] && arg[i] != '=')
 		i++;
-	if (arg[i] == '=' && arg[i + 1])  // This condition requires something after the =
+	if (arg[i] == '=' && arg[i + 1])
 		return (i);
-	return (i);  // This return allows the function to work correctly even if there's an empty value
+	return (i);
 }
 
 /**

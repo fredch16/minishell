@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:28 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 16:50:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:39:42 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static t_env_node	**create_sorted_env_array(t_env_list *env_list)
 	size_t		j;
 
 	sorted = gc_malloc(sizeof(t_env_node *) * (env_list->size + 1), GC_EXEC);
-	if (!sorted)
-		return (NULL);
 	node = env_list->head;
 	i = 0;
 	while (node)
@@ -50,21 +48,16 @@ static t_env_node	**create_sorted_env_array(t_env_list *env_list)
 		node = node->next;
 	}
 	sorted[i] = NULL;
-	
-	// Bubble sort the array by variable name
-	i = 0;
-	while (i < env_list->size - 1)
+	i = -1;
+	while (++i < env_list->size - 1)
 	{
-		j = 0;
-		while (j < env_list->size - i - 1)
+		j = -1;
+		while (++j < env_list->size - i - 1)
 		{
 			if (ft_strcmp(sorted[j]->variable, sorted[j + 1]->variable) > 0)
 				swap_nodes(sorted, j, j + 1);
-			j++;
 		}
-		i++;
 	}
-	
 	return (sorted);
 }
 
@@ -76,13 +69,10 @@ static void	print_declare_format(t_env_node *node)
 {
 	ft_putstr_fd("declare -x ", STDOUT_FILENO);
 	ft_putstr_fd(node->variable, STDOUT_FILENO);
-	
-	// Always print the equals sign and quotes, even for empty values
 	ft_putstr_fd("=\"", STDOUT_FILENO);
 	if (node->value)
 		ft_putstr_fd(node->value, STDOUT_FILENO);
 	ft_putstr_fd("\"", STDOUT_FILENO);
-	
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 

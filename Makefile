@@ -6,7 +6,7 @@
 #    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/25 11:07:21 by apregitz         ###   ########.fr        #
+#    Updated: 2025/06/25 11:32:38 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/execution/get_path.c \
 			$(SRCD)/execution/init.c \
 			$(SRCD)/redirect/redirections.c \
+			$(SRCD)/redirect/redirections_utils.c \
 			$(SRCD)/redirect/reverting_stds.c \
 			$(SRCD)/redirect/redirection_cases.c \
 			$(SRCD)/redirect/expand_heredoc.c \

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/25 11:08:57 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:22:06 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-volatile sig_atomic_t g_signal_recieved = 0;
+volatile sig_atomic_t	g_signal_recieved = 0;
 
 void	handle_input(t_mini *mini, char *line)
 {
@@ -92,13 +92,6 @@ int	non_interactive(t_mini *mini)
 	return (0);
 }
 
-// int	create_env(char **env)
-// {
-// 	if (env)
-// 		return (env);
-	
-// }
-
 int	main(int ac, char **av, char **env)
 {
 	char			*line;
@@ -119,14 +112,14 @@ int	main(int ac, char **av, char **env)
 	{
 		line = readline("\033[35mminishell $> \033[0m");
 		if (!line)
-			break;
+			break ;
 		if (line[0] != '\0')
 			add_history(line);
 		gc_track(line, GC_PARSE);
 		if (!ft_strcmp(line, "exit"))
 		{
 			gc_free_all();
-			break;
+			break ;
 		}
 		handle_input(&mini, line);
 	}

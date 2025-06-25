@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 23:28:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 15:39:53 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:15:05 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ typedef struct s_temp_redir_in_data
 	t_file_node			*file_node;
 	int					*last_input_fd;
 	int					buildins;
-}						 t_temp_redir_in_data;
+}						t_temp_redir_in_data;
 
 /**
  * Parameters for expansion functions

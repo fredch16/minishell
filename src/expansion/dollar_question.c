@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:57:42 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/16 23:56:31 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:43:06 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	process_char(t_token_list *token_list, char *content,
 		*(params->new_content) = ft_strjoin(*(params->new_content), expansion);
 		if (!*(params->new_content))
 			return (tk_err(token_list, EC_MALLOC), 0);
+		gc_track(*(params->new_content), GC_PARSE);
 		params->i += 2;
 	}
 	else

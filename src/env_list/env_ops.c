@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:25:20 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 16:26:27 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:49:08 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,16 @@ static int	update_env_var(t_env_node *existing, char *value)
 {
 	char	*new_value;
 
-	// Free existing value if present
 	if (existing->value)
 		gc_free(existing->value);
-		
-	// If value is NULL, create an empty string
 	if (!value)
 		new_value = ft_strdup("");
 	else
 		new_value = ft_strdup(value);
-		
-	// Handle allocation failure
 	if (!new_value)
 		destroy_minishell(999);
-		
-	// Track and assign the new value
 	gc_track(new_value, GC_ENV);
 	existing->value = new_value;
-	
 	return (0);
 }
 
@@ -83,34 +75,21 @@ static int	add_new_env_var(t_env_list *list, char *variable, char *value)
 	char		*var_copy;
 	char		*val_copy;
 
-	// Create copies of variable and value
 	var_copy = ft_strdup(variable);
 	if (!var_copy)
-		return (-1);
+		destroy_minishell(999);
 	gc_track(var_copy, GC_ENV);
-	
-	// If value is NULL, create an empty string
 	if (!value)
 		val_copy = ft_strdup("");
 	else
 		val_copy = ft_strdup(value);
-		
 	if (!val_copy)
-	{
-		gc_free(var_copy);
-		return (-1);
-	}
+		destroy_minishell(999);
 	gc_track(val_copy, GC_ENV);
-	
-	// Create and add the new node
 	new_node = gc_malloc(sizeof(t_env_node), GC_ENV);
-	if (!new_node)
-		return (-1);
-		
 	new_node->variable = var_copy;
 	new_node->value = val_copy;
 	new_node->next = NULL;
-	
 	add_env_node(list, new_node);
 	return (0);
 }

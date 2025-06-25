@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 01:31:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 15:34:05 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:24:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int	process_var_char(t_token_list *token_list, char *content,
 		varname = extract_var(token_list, &content[pm->i]);
 		if (varname)
 		{
+			printf("varname is |%s|\n", varname);
 			vaexp = get_env_value(token_list->env, varname);
 			if (vaexp)
 				safe_ft_strjoin(pm->new_content, *(pm->new_content), vaexp);

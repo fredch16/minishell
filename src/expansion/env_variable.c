@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 15:23:06 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 15:33:19 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:30:07 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*extract_var(t_token_list *tlist, char *content)
 	if (*content != '$')
 		return (NULL);
 	content++;
-	if (!(ft_isalpha(content[0]) && content[0] != '_'))
+	if (!ft_isalpha(content[0]) && content[0] != '_')
 		return (NULL);
 	while (content[i] && (ft_isalnum(content[i]) || content[i] == '_'))
 		i++;

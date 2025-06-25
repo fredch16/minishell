@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 17:07:28 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/23 17:47:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:02:44 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ int		check_syntax_errors(t_token_list *token_list);
 bool	g2g(t_token_list *list);
 void	tk_err(t_token_list *token_list, int error_code);
 void	destroy_minishell(int exit_code);
+
+int		increase_shlvl(t_mini *mini);
 
 #endif

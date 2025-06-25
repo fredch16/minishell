@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/25 11:22:06 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:33:07 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,6 @@ void	handle_non_interactive(t_mini *mini, int ac, char **av)
 	handle_input(mini, line);
 }
 
-int	increase_shlvl(t_mini *mini)
-{
-	t_env_node	*node;
-	int			lvl;
-
-	node = mini->env_list->head;
-	while (node)
-	{
-		if (ft_strcmp(node->variable, "SHLVL") == 0)
-		{
-			lvl = ft_atoi(node->value);
-			gc_free(node->value);
-			node->value = ft_itoa(++lvl);
-			if (!node->next)
-				ft_error(1, "malloc", EC_FD | EC_GC);
-			gc_track(node->value, GC_ENV);
-			return (0);
-		}
-		node = node->next;
-	}
-	return (1);
-}
-
 int	non_interactive(t_mini *mini)
 {
 	char	*line;	
@@ -92,20 +69,40 @@ int	non_interactive(t_mini *mini)
 	return (0);
 }
 
+int	prep_it(t_mini *mini, int ac, char **av, char **env)
+{
+	char	*cwd;
+
+	(void)av;
+	(void)ac;
+	mini->exit_code = 0;
+	mini->error_code = 0;
+	mini->env_list = env_array_to_list(env);
+	if (!env[0])
+	{
+		cwd = getcwd(NULL, 0);
+		if (!cwd)
+			destroy_minishell(999);
+		gc_track(cwd, GC_ENV);
+		set_env_var(mini->env_list, "OLDPWD", "");
+		set_env_var(mini->env_list, "PWD", cwd);
+		set_env_var(mini->env_list, "SHLVL", "1");
+	}
+	else
+		increase_shlvl(mini);
+	if (!mini->env_list)
+		destroy_minishell(999);
+	if (non_interactive(mini))
+		return (mini->exit_code);
+	return (-50);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char			*line;
 	t_mini			mini;
 
-	(void)av;
-	(void)ac;
-	mini.exit_code = 0;
-	mini.error_code = 0;
-	mini.env_list = env_array_to_list(env);
-	if (!mini.env_list)
-		return (1);
-	increase_shlvl(&mini);
-	if (non_interactive(&mini))
+	if (prep_it(&mini, ac, av, env) != -50)
 		return (mini.exit_code);
 	setup_signals();
 	while (1)

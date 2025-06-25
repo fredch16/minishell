@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:46:28 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/25 11:39:42 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:52:10 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ static void	print_declare_format(t_env_node *node)
 {
 	ft_putstr_fd("declare -x ", STDOUT_FILENO);
 	ft_putstr_fd(node->variable, STDOUT_FILENO);
-	ft_putstr_fd("=\"", STDOUT_FILENO);
 	if (node->value)
+	{
+		ft_putstr_fd("=\"", STDOUT_FILENO);
 		ft_putstr_fd(node->value, STDOUT_FILENO);
-	ft_putstr_fd("\"", STDOUT_FILENO);
+		ft_putstr_fd("\"", STDOUT_FILENO);
+	}
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 

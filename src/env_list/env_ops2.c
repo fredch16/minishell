@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:08:21 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 16:48:00 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:39:39 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	print_env(t_env_list *list)
 	current = list->head;
 	while (current)
 	{
-		if (current->value && ft_strcmp(current->value, ""))
+		if (current->value)
 			printf("%s=%s\n", current->variable, current->value);
 		current = current->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:49:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/25 11:36:00 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:23:24 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	find_append(char *arg)
 		return (-1);
 	}
 	if ((!ft_isalpha(arg[i]) && (arg[i] != '_') && (arg[i] != '+')))
-	{
-		ft_printf("export: not valid in this context PLUSEQALS: %c\n", arg[i]);
 		return (-1);
-	}
 	while (arg[i] && arg[i] != '=' && !(arg[i] == '+' && arg[i + 1] == '='))
 		i++;
 	if (arg[i] == '+' && arg[i + 1] == '=')
@@ -51,9 +48,21 @@ int	trust_but_verify(char *arg)
 	}
 	while (arg[i] && arg[i] != '=')
 		i++;
-	if (arg[i] == '=' && arg[i + 1])
-		return (i);
 	return (i);
+}
+
+int	has_equals(char *arg)
+{
+	int	i;
+	
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] == '=')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 /**
@@ -83,6 +92,15 @@ static int	handle_export_append(t_env_list *env_list, char *arg)
 	return (1);
 }
 
+void	assign_empty_var(t_env_list *env_list, char *arg)
+{
+	char	*var;
+
+	var = NULL;
+	safe_ft_strdup(&var, arg);
+	set_env_var(env_list, var, NULL);
+}
+
 /**
  * Handle a single export argument for normal assignment
  * @param env_list Environment list
@@ -96,8 +114,10 @@ static int	handle_export_assign(t_env_list *env_list, char *arg)
 	int		posequals;
 
 	posequals = trust_but_verify(arg);
-	if (posequals < 0)
+	if (posequals <= 0)
 		return (1);
+	if (posequals > 0 && has_equals(arg) < 0)
+		return (assign_empty_var(env_list, arg), 0);
 	var = ft_substr(arg, 0, posequals);
 	if (!var)
 		return (ft_printf("Malloc failed\n"), 2);

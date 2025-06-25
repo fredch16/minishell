@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/25 12:33:07 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:15:20 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	prep_it(t_mini *mini, int ac, char **av, char **env)
 		if (!cwd)
 			destroy_minishell(999);
 		gc_track(cwd, GC_ENV);
-		set_env_var(mini->env_list, "OLDPWD", "");
+		set_env_var(mini->env_list, "OLDPWD", NULL);
 		set_env_var(mini->env_list, "PWD", cwd);
 		set_env_var(mini->env_list, "SHLVL", "1");
 	}

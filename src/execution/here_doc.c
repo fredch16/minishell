@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:39 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/23 18:19:02 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:52:29 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static int	collect_heredoc_in_child(t_mini *mini, char *delimiter,
 	setup_heredoc_signals();
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
+		line = readline("> ");
 		if (!line)
 			break ;
 		if (g_signal_recieved == SIGINT)

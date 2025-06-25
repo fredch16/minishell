@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/06/24 16:56:09 by fredchar         ###   ########.fr        #
+#    Updated: 2025/06/25 11:07:21 by apregitz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,6 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/execution/here_doc.c \
 			$(SRCD)/execution/error.c \
 			$(SRCD)/signals.c \
-			$(SRCD)/debug.c \
 			$(SRCD)/t_settings.c
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
@@ -107,10 +106,6 @@ $(OBJD)/%.o: $(SRCD)/%.c
 	@$(eval PERCENT := $(shell echo $$(($(PROGRESS)*100/$(TOTAL)))))
 	@$(call progress_bar,$(PERCENT))
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-# debug rule 
-d:
-	@$(MAKE) fclean all CFLAGS="$(CFLAGS) -D DEBUG=1"
 
 clean:
 	@$(MAKE) -C include/libft clean

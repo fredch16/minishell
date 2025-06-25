@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:38:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/17 02:26:19 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:07:53 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@
 # include "signals.h"
 # include "redirects.h"
 # include "t_settings.h"
-
-# ifndef DEBUG
-#  define DEBUG 0
-# endif
 
 void			print_tokens(t_token_list *list);
 

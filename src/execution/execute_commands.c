@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 06:06:15 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/23 17:48:23 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:09:21 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,6 @@ void	execute_external(t_cmd_node *cmd, t_mini *mini)
 	env_array = env_list_to_array(mini->env_list);
 	if (!env_array)
 		ft_error(1, "Failed to convert environment", 0);
-	if (DEBUG)
-	{
-		ft_putstr_fd("\n\nExecuting command: ", STDERR_FILENO);
-		ft_putstr_fd(cmd_path, STDERR_FILENO);
-		ft_putstr_fd("\n\n\n", STDERR_FILENO);
-	}
 	execve(cmd_path, cmd->cmd, env_array);
 	ft_error(127, "execve failed", 0);
 }

@@ -6,7 +6,7 @@
 /*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/24 17:20:27 by apregitz         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:08:57 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,15 @@ void	handle_input(t_mini *mini, char *line)
 	tokenize_input(mini->token_list, line);
 	if (!mini->token_list->head)
 		return ;
-	if (DEBUG)
-	{
-		print_tokens(mini->token_list);
-		printf("\n%s=== EXPANSION STAGE ===%s\n", COLOR_BLUE, COLOR_RESET);
-	}
 	expansion(mini->token_list);
 	if (handle_error(mini))
 		return ;
-	if (DEBUG)
-		print_tokens(mini->token_list);	
 	mini->cmd_list = init_cmd_list(mini, line);
 	if (build_cmd_list(mini->token_list, mini->cmd_list))
 	{
 		handle_error(mini);
 		return ;
 	}
-	if (DEBUG)
-		print_cmd_list(mini->cmd_list);
 	mini->exit_code = execution(mini);
 	reverting_stds();
 	gc_free_by_type(GC_PARSE);

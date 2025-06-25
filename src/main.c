@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 21:58:05 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/25 16:15:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 16:46:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,6 @@ void	handle_input(t_mini *mini, char *line)
 	mini->exit_code = execution(mini);
 	reverting_stds();
 	gc_free_by_type(GC_PARSE);
-}
-
-void	handle_non_interactive(t_mini *mini, int ac, char **av)
-{
-	char	*line;
-
-	(void)ac;
-	line = ft_strjoin_arr(&av[1]);
-	gc_track(line, GC_PARSE);
-	handle_input(mini, line);
 }
 
 int	non_interactive(t_mini *mini)

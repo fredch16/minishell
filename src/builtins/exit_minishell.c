@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: apregitz <apregitz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 12:01:57 by apregitz          #+#    #+#             */
-/*   Updated: 2025/06/24 15:31:21 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/25 10:48:37 by apregitz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,17 @@ int	exit_minishell(t_cmd_node *cmd_node)
 	i = 0;
 	while (cmd_node->cmd[i])
 		i++;
-	if (i > 2)
-		return (perror("too many struments"), 255);
 	if (i == 1)
 		exit(0);
 	else if (valid_set(cmd_node->cmd[1]) == 1)
 	{
+		perror("numeric argument required");
 		reverting_stds();
 		gc_free_all();
 		exit(255);
 	}
+	if (i > 2)
+		return (perror("too many arguments"), 255);
 	i = get_exit_code(cmd_node->cmd[1]);
 	reverting_stds();
 	gc_free_all();
